@@ -2,7 +2,7 @@
       <div class="page flex-1 p-4">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-5">
           <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">
-            Welcome to KasiPlay
+            Team
           </h1>
           <p class="text-gray-600 dark:text-gray-300">
             This is your responsive dashboard layout. The sidebar adapts to
@@ -24,6 +24,5 @@
         </div>
       </div>
 </template>
-
-
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>

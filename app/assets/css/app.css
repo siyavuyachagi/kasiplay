@@ -1,2 +1,33 @@
-@import 'tailwindcss'
+@import "tailwindcss";
 
+
+/* Make dark: utilities activate when [data-theme="dark"] is present */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+
+/* BASE COLORS */
+@theme {
+  --color-gold-50: #FFFEF7;
+  --color-gold-100: #FFFBEB;
+  --color-gold-200: #FFF4C7;
+  --color-gold-300: #FFED94;
+  --color-gold-400: #FFE666;
+  --color-gold-500: #FFD700;
+  --color-gold-600: #E6C200;
+  --color-gold-700: #CC9E00;
+  --color-gold-800: #997700;
+  --color-gold-900: #664F00;
+  --color-gold-950: #332800;
+
+  --color-navy-50: #F0F4F8;
+  --color-navy-100: #E1E8F0;
+  --color-navy-200: #C3D1E0;
+  --color-navy-300: #99B3CC;
+  --color-navy-400: #6699B8;
+  --color-navy-500: #337FA3;
+  --color-navy-600: #1A5A7A;
+  --color-navy-700: #144A66;
+  --color-navy-800: #0D3552;
+  --color-navy-900: #001F3F;
+  --color-navy-950: #00172B;
+}

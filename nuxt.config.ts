@@ -6,8 +6,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@nuxt/image', '@pinia/nuxt',
-    '@nuxtjs/sitemap', '@nuxt/fonts', '@nuxt/icon'
+    '@nuxt/image','@nuxt/fonts', '@nuxt/icon',
+    '@pinia/nuxt',
+    '@nuxtjs/sitemap', 
   ],
 
   css: ['@/assets/css/app.css'],
@@ -30,13 +31,11 @@ export default defineNuxtConfig({
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { charset: "utf-8" },
         { name: "theme-color", content: "#000000" },
-        { name: "apple-mobile-web-app-capable", content: "yes" },
         { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
       ],
       link: [
         { rel: "icon", type: "image/jpeg", href: "/favicon.png" },
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
-        { rel: "manifest", href: "/site.webmanifest" },
       ],
     }
   }

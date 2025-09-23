@@ -1,334 +1,274 @@
 <template>
-  <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-    <div id="app">
-      <div class="flex h-screen bg-gray-100 dark:bg-gray-900">
-        <!-- Mobile Sidebar Overlay -->
-        <div
-          v-if="mobileMenuOpen"
-          @click="mobileMenuOpen = false"
-          class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
-        ></div>
+  <div class="layout flex min-h-screen" :class="{ dark: isDark }">
+    <!-- Overlay for mobile when sidebar is open -->
+    <div
+      v-if="isSidebarOpen && isMobile"
+      class="fixed inset-0 bg-black/50 z-40 lg:hidden"
+      @click="closeSidebar"
+    ></div>
 
-        <!-- Sidebar -->
-        <aside
-          :class="[
-            'fixed lg:static inset-y-0 left-0 z-50 transition-all duration-300 bg-slate-900 dark:bg-gray-800 text-white',
-            mobileMenuOpen
-              ? 'translate-x-0'
-              : '-translate-x-full lg:translate-x-0',
-            sidebarCollapsed ? 'w-16' : 'w-64',
-          ]"
+    <!-- Sidebar -->
+    <aside
+      class="sidebar dark:bg-gray-800 text-white transition-all duration-300 z-50"
+      :class="sidebarClasses"
+    >
+      <!-- Logo -->
+      <div
+        class="logo flex items-center p-4 transition-all duration-300"
+        :class="{ 'justify-center': isCollapsed && !isMobile }"
+      >
+        <nuxt-img
+          src="/favicon.png"
+          alt="KasiPlay Logo"
+          class="w-8 h-8 rounded transition-all duration-300"
+          :class="{
+            'mr-0': isCollapsed && !isMobile,
+            'mr-3': !isCollapsed || isMobile,
+          }"
+        />
+        <h1
+          class="text-xl font-bold whitespace-nowrap overflow-hidden transition-all duration-300"
+          :class="{
+            'w-0 opacity-0': isCollapsed && !isMobile,
+            'w-auto opacity-100': !isCollapsed || isMobile,
+          }"
         >
-          <!-- Header with Logo and Toggle -->
-          <div class="p-4 border-b border-slate-700 dark:border-gray-700">
-            <div class="flex items-center justify-between">
-              <div v-if="!sidebarCollapsed" class="flex items-center space-x-3">
-                <div class="bg-blue-600 p-2 rounded-lg">
-                  <img src="/favicon.png" alt="KasiPlay Logo" class="w-6 h-6" />
-                </div>
-                <h1 class="text-xl font-bold">KasiPlay</h1>
-              </div>
-
-              <!-- Sidebar Toggle Button -->
-              <button
-                @click="sidebarCollapsed = !sidebarCollapsed"
-                class="p-1.5 hover:bg-slate-700 dark:hover:bg-gray-600 rounded-lg transition-colors"
-              >
-                <Icon name="ph:list-bold" size="20" />
-              </button>
-            </div>
-          </div>
-
-          <nav class="mt-6">
-            <div class="px-3 space-y-1">
-              <a
-                href="#"
-                @click="setActiveTab('dashboard')"
-                :class="getSidebarLinkClass('dashboard')"
-              >
-                <icon name="ph:house-duotone" size="20" />
-                <span v-if="!sidebarCollapsed">Dashboard</span>
-              </a>
-
-              <a
-                href="#"
-                @click="setActiveTab('my-team')"
-                :class="getSidebarLinkClass('my-team')"
-              >
-                <icon name="ph:users-duotone" size="20" />
-                <span v-if="!sidebarCollapsed">My Team</span>
-              </a>
-
-              <a
-                href="#"
-                @click="setActiveTab('squad')"
-                :class="getSidebarLinkClass('squad')"
-              >
-                <icon name="ph:users-three-duotone" size="20" />
-                <span v-if="!sidebarCollapsed">Squad</span>
-              </a>
-
-              <a
-                href="#"
-                @click="setActiveTab('fixtures')"
-                :class="getSidebarLinkClass('fixtures')"
-              >
-                <icon name="ph:calendar-duotone" size="20" />
-                <span v-if="!sidebarCollapsed">Fixtures</span>
-              </a>
-
-              <a
-                href="#"
-                @click="setActiveTab('training')"
-                :class="getSidebarLinkClass('training')"
-              >
-                <icon name="ph:traffic-cone-duotone" size="20" />
-                <span v-if="!sidebarCollapsed">Training</span>
-              </a>
-
-              <a
-                href="#"
-                @click="setActiveTab('tactics')"
-                :class="getSidebarLinkClass('tactics')"
-              >
-                <icon name="ph:chalkboard-teacher-duotone" size="20" />
-                <span v-if="!sidebarCollapsed">Tactics</span>
-              </a>
-
-              <a
-                href="#"
-                @click="setActiveTab('reports')"
-                :class="getSidebarLinkClass('reports')"
-              >
-                <icon name="ph:chart-line-up-duotone" size="20" />
-                <span v-if="!sidebarCollapsed">Reports</span>
-              </a>
-            </div>
-          </nav>
-
-          <!-- Theme Toggle at Bottom -->
-          <div class="absolute bottom-4 left-3 right-3">
-            <button
-              @click="toggleTheme"
-              class="w-full flex items-center justify-center px-3 py-2 bg-slate-800 dark:bg-gray-700 hover:bg-slate-700 dark:hover:bg-gray-600 rounded-lg transition-colors"
-            >
-              <icon name="ph:moon-duotone" size="20" v-if="isDark" />
-              <icon name="ph:sun-duotone" size="20" v-else />
-              <span v-if="!sidebarCollapsed" class="ml-2 text-sm"
-                >{{ isDark ? "Light" : "Dark" }} Mode</span
-              >
-            </button>
-          </div>
-        </aside>
-
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-          <!-- Header -->
-          <default-header />
-
-          <!-- Main Content Area -->
-          <main
-            class="flex-1 overflow-x-hidden overflow-y-auto p-4 lg:p-6 bg-gray-50 dark:bg-gray-900"
-          >
-            <NuxtPage />
-          </main>
-        </div>
+          KasiPlay
+        </h1>
       </div>
 
-      <!-- Click outside handler for dropdowns -->
+      <!-- Navigation -->
+      <nav class="menu p-4">
+        <ul class="space-y-2">
+          <li v-for="(item, index) in menuItems" :key="index">
+            <nuxt-link
+              :to="item.link" v-on="{ click: isMobile ? closeSidebar : null }"
+              class="flex items-center p-2 rounded hover:bg-navy-100 dark:hover:bg-gray-700 transition-colors"
+              active-class="bg-gray-600 font-semibold"
+              :class="{ 'justify-center': isCollapsed && !isMobile }"
+              ,
+              :title="isCollapsed && !isMobile ? item.label : ''"
+            >
+              <div class="w-5 h-5 flex items-center justify-center">
+                <icon :name="item.icon" size="20" />
+              </div>
+              <span
+                class="whitespace-nowrap overflow-hidden transition-all duration-300"
+                :class="{
+                  'w-0 ml-0 opacity-0': isCollapsed && !isMobile,
+                  'w-auto ml-3 opacity-100': !isCollapsed || isMobile,
+                }"
+              >
+                {{ item.label }}
+              </span>
+            </nuxt-link>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Theme Toggle -->
       <div
-        v-if="showMessages || showNotifications || showProfile"
-        @click="closeAllDropdowns()"
-        class="fixed inset-0 z-30"
-      ></div>
-    </div>
-  </body>
+        class="p-4 mt-auto transition-all duration-300"
+        :class="{ 'flex justify-center': isCollapsed && !isMobile }"
+      >
+        <button
+          @click="toggleTheme"
+          class="flex items-center p-2 rounded hover:bg-blue-700 dark:hover:bg-gray-700 transition-colors"
+          :class="{ 'justify-center': isCollapsed && !isMobile }"
+          :title="isCollapsed && !isMobile ? 'Toggle Theme' : ''"
+        >
+          <div class="w-5 h-5 flex items-center justify-center">
+            <icon name="ph:moon-duotone" size="20" v-if="!isDark" />
+            <icon name="ph:sun-duotone" size="20" v-if="isDark" />
+          </div>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main
+      class="main flex-1 flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors"
+    >
+      <!-- Header -->
+      <header
+        class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700"
+      >
+        <div class="flex items-center justify-between p-4">
+          <!-- Left side with toggle and title -->
+          <div class="flex items-center">
+            <button
+              @click="toggleSidebar"
+              class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors mr-4"
+            >
+              <icon name="ph:list-bold" size="20" class="dark:text-white" />
+            </button>
+            <h6
+              class="hidden md:flex font-semibold text-gray-800 dark:text-white"
+            >
+              Dashboard
+            </h6>
+          </div>
+
+          <!-- Right side with notifications and profile -->
+          <div class="flex items-center space-x-4">
+            <!-- Notifications -->
+            <button
+              class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors relative"
+            >
+              <icon name="ph:bell-duotone" size="20" class="dark:text-white" />
+              <span
+                class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
+              ></span>
+            </button>
+
+            <!-- Messages -->
+            <nuxt-link
+              to="/chats"
+              class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors relative"
+            >
+              <icon name="ph:chat-duotone" size="20" class="dark:text-white" />
+              <span
+                class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full"
+              ></span>
+            </nuxt-link>
+
+            <!-- Profile Dropdown -->
+            <div class="relative" ref="profileDropdown">
+              <button
+                @click="toggleProfileDropdown"
+                class="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face"
+                  alt="Profile"
+                  class="w-8 h-8 rounded-full object-cover"
+                />
+                <span class="hidden sm:flex items-center space-x-2">
+                  <span
+                    class="hidden sm:block text-gray-700 dark:text-gray-200 font-medium"
+                    >Siyavuya Chagi</span
+                  >
+
+                  <icon
+                    name="ph:caret-down-bold"
+                    size="16"
+                    class="dark:text-white transition-all duration-300"
+                    :class="{ 'rotate-180': isProfileOpen }"
+                  />
+                </span>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div
+                v-show="isProfileOpen"
+                class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50"
+              >
+                <div class="p-3 border-b border-gray-200 dark:border-gray-700">
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">
+                    Siyavuya Chagi
+                  </p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    @siyavuyachagi
+                  </p>
+                </div>
+                <nav class="p-2">
+                  <nuxt-link
+                    v-for="(item, index) in profileMenuItems"
+                    :key="index"
+                    :to="item.link"
+                    class="flex items-center w-full p-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  >
+                    <!-- <component :is="item.icon" class="w-4 h-4 mr-3" /> -->
+                    <icon :name="item.icon" size="16" class="mr-3" />
+                    {{ item.label }}
+                  </nuxt-link>
+                  <button
+                    class="flex items-center w-full p-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  >
+                    <icon name="ph:sign-out" size="16" class="mr-3" />
+                    Sign out
+                  </button>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <nuxt-page />
+
+      <!-- Footer -->
+      <Footer />
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import Footer from "~/components/footer.vue";
 
 // Reactive state
-const activeTab = ref("dashboard");
-const sidebarCollapsed = ref(false);
-const mobileMenuOpen = ref(false);
+const isSidebarOpen = ref(false);
+const isProfileOpen = ref(false);
 const isDark = ref(false);
-const showMessages = ref(false);
-const showNotifications = ref(false);
-const showProfile = ref(false);
-
-// My Team Data (Coach's team)
-const myTeam = ref({
-  name: "Kaizer Chiefs",
-  players: 28,
-  wins: 15,
-  draws: 6,
-  losses: 3,
-  points: 51,
-  position: "2nd",
-});
-
-// My Squad (Coach's players)
-const mySquad = ref([
-  {
-    id: 1,
-    name: "Khama Billiat",
-    age: 32,
-    position: "Forward",
-    goals: 12,
-    status: "Active",
-    avatar: "https://via.placeholder.com/48x48/4F46E5/FFFFFF?text=KB",
-  },
-  {
-    id: 2,
-    name: "Keagan Dolly",
-    age: 30,
-    position: "Midfielder",
-    goals: 6,
-    status: "Active",
-    avatar: "https://via.placeholder.com/48x48/7C3AED/FFFFFF?text=KD",
-  },
-  {
-    id: 3,
-    name: "Itumeleng Khune",
-    age: 36,
-    position: "Goalkeeper",
-    goals: 0,
-    status: "Injured",
-    avatar: "https://via.placeholder.com/48x48/059669/FFFFFF?text=IK",
-  },
-  {
-    id: 4,
-    name: "Yusuf Maart",
-    age: 28,
-    position: "Midfielder",
-    goals: 3,
-    status: "Active",
-    avatar: "https://via.placeholder.com/48x48/DC2626/FFFFFF?text=YM",
-  },
-  {
-    id: 5,
-    name: "Ashley Du Preez",
-    age: 26,
-    position: "Forward",
-    goals: 8,
-    status: "Active",
-    avatar: "https://via.placeholder.com/48x48/EA580C/FFFFFF?text=AD",
-  },
-  {
-    id: 6,
-    name: "Sifiso Hlanti",
-    age: 33,
-    position: "Defender",
-    goals: 1,
-    status: "Active",
-    avatar: "https://via.placeholder.com/48x48/8B5CF6/FFFFFF?text=SH",
-  },
-]);
-
-// Upcoming fixtures for coach's team
-const upcomingFixtures = ref([
-  {
-    id: 1,
-    opponent: "vs Orlando Pirates",
-    date: "Sep 25, 15:00",
-    venue: "FNB Stadium",
-    type: "home",
-  },
-  {
-    id: 2,
-    opponent: "vs Mamelodi Sundowns",
-    date: "Oct 2, 19:30",
-    venue: "Loftus Stadium",
-    type: "away",
-  },
-  {
-    id: 3,
-    opponent: "vs SuperSport United",
-    date: "Oct 9, 15:00",
-    venue: "FNB Stadium",
-    type: "home",
-  },
-]);
-
-// Messages
-const messages = ref([
-  {
-    id: 1,
-    from: "Technical Director",
-    content: "Team meeting scheduled for tomorrow at 10 AM",
-    time: "2 hours ago",
-    read: false,
-    avatar: "https://via.placeholder.com/32x32/4F46E5/FFFFFF?text=TD",
-  },
-  {
-    id: 2,
-    from: "Khama Billiat",
-    content: "Coach, I need to discuss my training schedule",
-    time: "4 hours ago",
-    read: false,
-    avatar: "https://via.placeholder.com/32x32/059669/FFFFFF?text=KB",
-  },
-  {
-    id: 3,
-    from: "Medical Team",
-    content: "Injury report for this week is ready",
-    time: "1 day ago",
-    read: true,
-    avatar: "https://via.placeholder.com/32x32/DC2626/FFFFFF?text=MT",
-  },
-]);
-
-// Notifications/Alarms
-const notifications = ref([
-  {
-    id: 1,
-    type: "training",
-    title: "Training Session Reminder",
-    message: "Team training starts in 30 minutes",
-    time: "25 min ago",
-  },
-  {
-    id: 2,
-    type: "injury",
-    title: "Player Injury Update",
-    message: "Itumeleng Khune cleared for light training",
-    time: "2 hours ago",
-  },
-  {
-    id: 3,
-    type: "match",
-    title: "Match Preparation",
-    message: "Submit team sheet by 6 PM today",
-    time: "3 hours ago",
-  },
-  {
-    id: 4,
-    type: "system",
-    title: "System Update",
-    message: "New features available in tactical board",
-    time: "1 day ago",
-  },
-]);
-
-const nextMatch = ref({
-  days: 3,
-});
+const screenWidth = ref();
 
 // Computed properties
-const unreadMessages = computed(() => {
-  return messages.value.filter((m) => !m.read).length;
+const isMobile = computed(() => screenWidth.value < 1024);
+const isCollapsed = computed(() => !isSidebarOpen.value && !isMobile.value);
+
+const sidebarClasses = computed(() => {
+  if (isMobile.value) {
+    return {
+      "fixed inset-y-0 left-0 w-64 transform transition-transform": true,
+      "-translate-x-full": !isSidebarOpen.value,
+      "translate-x-0": isSidebarOpen.value,
+    };
+  } else {
+    return {
+      "relative flex flex-col": true,
+      "w-16": isCollapsed.value,
+      "w-60": !isCollapsed.value,
+    };
+  }
 });
 
-const unreadNotifications = computed(() => {
-  return notifications.value.length;
-});
+// Menu items
+const menuItems = [
+  {
+    label: "Dashboard",
+    icon: "ph:house-duotone",
+    link: "/",
+  },
+  { label: "My team", icon: "ph:users-duotone", link: "/teams" },
+  { label: "Squad", icon: "ph:users-three-duotone", link: "/squads" },
+  { label: "Fixtures", icon: "ph:calendar-duotone", link: "/fixtures" },
+  { label: "Training", icon: "ph:traffic-cone-duotone", link: "/trainings" },
+  { label: "Tactics", icon: "ph:chalkboard-teacher-duotone", link: "/tactics" },
+  { label: "Reports", icon: "ph:chart-line-up-duotone", link: "/reports" },
+];
+
+const profileMenuItems = [
+  { label: "Profile", icon: "ph:user", link: "/account" },
+  { label: "Settings", icon: "ph:gear", link: "/account/settings" },
+  { label: "Help", icon: "ph:question-mark", link: "/help" },
+];
+
+// Refs
+const profileDropdown = ref(null);
 
 // Methods
-const setActiveTab = (tab: string) => {
-  activeTab.value = tab;
-  mobileMenuOpen.value = false;
-  closeAllDropdowns();
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value;
+};
+
+const closeSidebar = () => {
+  isSidebarOpen.value = false;
+};
+
+const toggleProfileDropdown = () => {
+  isProfileOpen.value = !isProfileOpen.value;
 };
 
 const toggleTheme = () => {
@@ -342,79 +282,59 @@ const toggleTheme = () => {
   }
 };
 
-const closeAllDropdowns = () => {
-  showMessages.value = false;
-  showNotifications.value = false;
-  showProfile.value = false;
+const handleResize = () => {
+  screenWidth.value = window.innerWidth;
+  if (!isMobile.value) {
+    isProfileOpen.value = false;
+  }
 };
 
-const getSidebarLinkClass = (tab: string) => {
-  return [
-    "flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors",
-    activeTab.value === tab
-      ? "bg-blue-600 text-white"
-      : "hover:bg-slate-800 dark:hover:bg-gray-700",
-  ];
+const handleClickOutside = (event: MouseEvent) => {
+  if (profileDropdown.value && !profileDropdown.value.contains(event.target)) {
+    isProfileOpen.value = false;
+  }
 };
 
-const getPlayerStatusColor = (status: string) => {
-  const colors: Record<string, string> = {
-    Active: "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200",
-    Injured: "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200",
-    Suspended:
-      "bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200",
-  };
-  return (
-    colors[status] ||
-    "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
-  );
-};
-
-const getNotificationColor = (type: string) => {
-  const colors: Record<string, string> = {
-    training: "bg-blue-500",
-    injury: "bg-red-500",
-    match: "bg-green-500",
-    system: "bg-purple-500",
-  };
-  return colors[type] || "bg-gray-500";
-};
-
-const getNotificationIcon = (type: string) => {
-  const icons: Record<string, string> = {
-    training: "fa-dumbbell",
-    injury: "fa-user-injured",
-    match: "fa-futbol",
-    system: "fa-cog",
-  };
-  return icons[type] || "fa-bell";
-};
-
-// Lifecycle hook
+// Lifecycle hooks
 onMounted(() => {
   // Check for saved theme preference
   const savedTheme = localStorage.getItem("theme");
-  if (
-    savedTheme === "dark" ||
-    (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
+  if (savedTheme === "dark") {
     isDark.value = true;
     document.documentElement.classList.add("dark");
   }
 
-  // Close dropdowns on escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeAllDropdowns();
-      mobileMenuOpen.value = false;
-    }
-  });
+  // Add event listeners
+  window.addEventListener("resize", handleResize);
+  document.addEventListener("click", handleClickOutside);
 
-  // Close mobile menu on window resize
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 1024) {
-      mobileMenuOpen.value = false;
-    }
-  });
+  screenWidth.value = window.innerWidth;
+});
+
+onUnmounted(() => {
+  // Remove event listeners
+  window.removeEventListener("resize", handleResize);
+  document.removeEventListener("click", handleClickOutside);
 });
 </script>
+
+<style scoped>
+/* Custom scrollbar for sidebar */
+.sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+</style>

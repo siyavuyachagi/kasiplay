@@ -1,0 +1,3 @@
+<template>
+    Tactics
+</template>

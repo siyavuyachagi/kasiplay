@@ -158,7 +158,7 @@ KasiPlay features a mobile-first design with:
 - **Error Tracking** - Comprehensive error monitoring
 - **Performance Metrics** - Real-time system health
 
-## 🤝 Contributing
+<!-- ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
@@ -167,7 +167,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 2. Create a feature branch
 3. Make your changes
 4. Add tests if applicable
-5. Submit a pull request
+5. Submit a pull request -->
 
 ## 📄 License
 

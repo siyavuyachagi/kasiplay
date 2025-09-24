@@ -34,7 +34,7 @@ export const useThemeStore = defineStore("sc812-theme", () => {
     }
   }
 
-  function initTheme() {
+  function init() {
     if (import.meta.client) {
       try {
         const saved = localStorage.getItem("sc812-theme")
@@ -55,6 +55,6 @@ export const useThemeStore = defineStore("sc812-theme", () => {
     isDark,
     theme,
     toggleTheme,
-    initTheme,
+    init,
   }
 })

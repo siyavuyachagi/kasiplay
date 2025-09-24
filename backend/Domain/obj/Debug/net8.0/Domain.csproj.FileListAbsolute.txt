@@ -1,0 +1,6 @@
+C:\Users\Within Reach\Desktop\kasiplay\backend\Domain\obj\Debug\net8.0\Domain.csproj.AssemblyReference.cache
+C:\Users\Within Reach\Desktop\kasiplay\backend\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Within Reach\Desktop\kasiplay\backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\Users\Within Reach\Desktop\kasiplay\backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\Users\Within Reach\Desktop\kasiplay\backend\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\Within Reach\Desktop\kasiplay\backend\Domain\obj\Debug\net8.0\Domain.sourcelink.json

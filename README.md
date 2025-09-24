@@ -1,6 +1,5 @@
 # KasiPlay ⚽
-
-> **Comprehensive Sports Team Management Platform**
+**Comprehensive Sports Team Management Platform**
 
 KasiPlay is a modern SaaS platform designed to streamline sports team management, from player registration and squad formation to real-time communication and public content sharing. Built for managers, coaches, and players at all levels.
 

@@ -8,6 +8,7 @@ KasiPlay is a modern SaaS platform designed to streamline sports team management
 ### Core Management
 - **Player Registration & Management** - Complete player database with profiles and statistics
 - **Team Creation & Squad Management** - Build and organize teams with flexible roster management
+- **Content/Media Sharing** - Share media with the fans/public for engagement
 - **Role-Based Access Control** - Different permission levels for managers, coaches, and players
 - **Multi-Tenant Architecture** - Isolated team spaces with custom branding
 

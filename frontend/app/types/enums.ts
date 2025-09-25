@@ -1,4 +1,87 @@
 // Enums for better type safety
+
+
+//#region C
+export enum ClubDivision {
+  FIRST = 'first',
+  SECOND = 'second',
+  THIRD = 'third',
+}
+
+export enum ContractType {
+  PERMANENT = 'permanent',
+  LOAN = 'loan',
+  TRIAL = 'trial',
+  YOUTH = 'youth'
+}
+//#endregion
+
+
+
+//#region F
+export enum FinancialTransactionType {
+  INCOME = 'income',
+  EXPENSE = 'expense',
+  OTHER = 'other'
+}
+//#endregion
+
+
+
+
+//#region I
+export enum InjuryType {
+  MUSCLE = 'muscle',
+  BONE = 'bone',
+  LIGAMENT = 'ligament',
+  CONCUSSION = 'concussion',
+  OTHER = 'other'
+}
+
+export enum InjurySeverity {
+  MINOR = 'minor',
+  MODERATE = 'moderate',
+  MAJOR = 'major',
+  CAREER_THREATENING = 'career_threatening'
+}
+//#endregion
+
+
+
+
+//#region M
+export enum MatchOfficialRole {
+  REFEREE = "referee",
+  ASSISTANT_REFEREE = "assistant_referee",
+  FOURTH_OFFICIAL = "fourth_official",
+  VIDEO_ASSISTANT_REFEREE = "video_assistant_referee",
+}
+
+export enum MatchType {
+  LEAGUE = 'league',
+  CUP = 'cup',
+  FRIENDLY = 'friendly',
+}
+
+export enum MatchStatus {
+  SCHEDULED = 'scheduled',
+  LIVE = 'live',
+  COMPLETED = 'completed',
+  POSTPONED = 'postponed',
+  CANCELLED = 'cancelled'
+}
+//#endregion
+
+
+
+//#region P
+export enum PaymentFrequency {
+  DAILY = "daily",
+  WEEKLY = "weekly",
+  MONTHLY = "monthly",
+  YEARLY = "yearly",
+}
+
 export enum PlayerPosition {
   GOALKEEPER = 'GK',
   RIGHT_BACK = 'RB',
@@ -21,28 +104,11 @@ export enum PlayerStatus {
   RETIRED = 'retired',
   RELEASED = 'released'
 }
+//#endregion
 
-export enum ContractType {
-  PERMANENT = 'permanent',
-  LOAN = 'loan',
-  TRIAL = 'trial',
-  YOUTH = 'youth'
-}
 
-export enum MatchType {
-  LEAGUE = 'league',
-  CUP = 'cup',
-  FRIENDLY = 'friendly',
-}
 
-export enum MatchStatus {
-  SCHEDULED = 'scheduled',
-  LIVE = 'live',
-  COMPLETED = 'completed',
-  POSTPONED = 'postponed',
-  CANCELLED = 'cancelled'
-}
-
+//#region T
 export enum TrainingType {
   FITNESS = 'fitness',
   TECHNICAL = 'technical',
@@ -51,19 +117,11 @@ export enum TrainingType {
   MATCH_PREPARATION = 'match_preparation'
 }
 
-export enum InjuryType {
-  MUSCLE = 'muscle',
-  BONE = 'bone',
-  LIGAMENT = 'ligament',
-  CONCUSSION = 'concussion',
-  OTHER = 'other'
-}
-
-export enum InjurySeverity {
-  MINOR = 'minor',
-  MODERATE = 'moderate',
-  MAJOR = 'major',
-  CAREER_THREATENING = 'career_threatening'
+export enum TransferStatus {
+  PENDING = 'pending',
+  COMPLETED = 'completed',
+  FAILED = 'failed',
+  CANCELLED = 'cancelled'
 }
 
 export enum TransferType {
@@ -74,19 +132,27 @@ export enum TransferType {
   FREE_TRANSFER = 'free_transfer',
   RELEASE = 'release'
 }
+//#endregion
 
 
-export enum PAYMENT_FREQUENCY {
-  DAILY = "daily",
-  WEEKLY = "weekly",
-  MONTHLY = "monthly",
-  YEARLY = "yearly",
-}
 
 
-export enum SPONSOR_TYPE {
+
+
+
+//#region S
+export enum SponsorshipType {
   MAIN = "main",
   KIT = "kit",
   TRAINING = "training",
   PARTNER = "partner",
 }
+
+export enum SocialPlatform {
+  WEBSITE = "website",
+  FACEBOOK = "facebook",
+  TWITTER = "twitter",
+  INSTAGRAM = "instagram",
+  YOUTUBE = "youtube",
+}
+//#endregion

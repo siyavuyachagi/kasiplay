@@ -6,10 +6,14 @@ import type {
     MatchType,
     PlayerPosition,
     PlayerStatus,
-    PAYMENT_FREQUENCY,
     TransferType,
     TrainingType,
-    SPONSOR_TYPE
+    PaymentFrequency,
+    SponsorshipType,
+    SocialPlatform,
+    FinancialTransactionType,
+    TransferStatus,
+    MatchOfficialRole,
 } from "./enums";
 
 
@@ -23,11 +27,11 @@ export interface Announcement {
     id: string;
     title: string;
     content: string;
-    type: 'general' | 'urgent' | 'training' | 'match' | 'transfer';
-    targetAudience: ('players' | 'staff' | 'public')[];
+    // type: 'general' | 'urgent' | 'training' | 'match' | 'transfer';
     publishDate: Date;
     expiryDate?: Date;
     authorId: string;
+    author: ApplicationUser;
     isPublished: boolean;
     attachments?: string[];
     createdAt: Date;
@@ -54,6 +58,20 @@ export interface ApplicationUser {
 
 
 
+//#region B
+export interface Branding {
+    id: string;
+    logoUrl: string;
+    banner?: string;
+    primaryColor: string;
+    secondaryColor: string;
+    accentColor?: string;
+    merchandiseUrl?: string;
+    //metadata
+    createdAt: Date;
+    updatedAt: Date;
+}
+//#endregion
 
 
 
@@ -61,22 +79,19 @@ export interface ApplicationUser {
 // Main Team/Club interface
 export interface Club {
     id: string;
-
     // Basic information
     name: string;
     shortName: string;
     nickname?: string;
     foundedYear: number;
-    colors: {
-        primary: string;
-        secondary: string;
-        accent?: string;
-    };
-    logo: string;
+
+    // Branding and identity
+    branding: ClubBranding;
 
     // Location and facilities
-    homeVenue: string;
+    venue: string;
     address: PhysicalAddress;
+
     // facilities: Facility[];
 
     // Organizational structure
@@ -133,16 +148,10 @@ export interface Club {
 
     // Communication and media
     announcements: Announcement[];
-    mediaLibrary: MediaItem[];
+    mediaLibrary: MediaPost[];
 
     // Social media and marketing
-    socialMedia?: {
-        website?: string;
-        facebook?: string;
-        twitter?: string;
-        instagram?: string;
-        youtube?: string;
-    };
+    socialMedia?: SocialLink[];
 
     // Partnerships and sponsorships
     sponsors?: {
@@ -169,6 +178,12 @@ export interface Club {
     updatedAt: Date;
     isActive: boolean;
 }
+
+export interface ClubBranding extends Branding {
+    clubId: string;
+    club: Club;
+}
+
 
 export interface Contact {
     email?: string;
@@ -230,14 +245,56 @@ export interface Injury {
 
 
 
+//#region L
+export interface League {
+    id: string;
+    name: string;
+    startDate: Date;
+    endDate: Date;
+    country: string;
+    division: string;
+    season: string;
+    clubs: Club[];
+    matches: Match[];
+    // standings: {
+    //     clubId: string;
+    //     played: number;
+    //     won: number;
+    //     drawn: number;
+    //     lost: number;
+    //     goalsFor: number;
+    //     goalsAgainst: number;
+    //     points: number;
+    //     position: number;
+    // }[];
+    // topScorers: {
+    //     playerId: string;
+    //     goals: number;
+    //     assists: number;
+    //     appearances: number;
+    //     clubId: string;
+    // }[];
+    fixtures: Match[];
+    results: Match[];
+    //metadata
+    createdAt: Date,
+    updatedAt: Date,
+}
+
+export interface LeagueStanding {
+}
+//#endregion
+
 
 
 //#region M
 // Match and Competition interfaces
 export interface Match {
     id: string;
-    homeTeam: string;
-    awayTeam: string;
+    homeTeamId: string;
+    homeTeam: Club;
+    awayTeamId: string;
+    awayTeam: Club;
     competition: string;
     matchType: MatchType;
     status: MatchStatus;
@@ -290,6 +347,13 @@ export interface Match {
     updatedAt: Date;
 }
 
+
+export interface MatchOfficial {
+    id: string;
+    Official: ApplicationUser;
+    role: MatchOfficialRole;
+}
+
 // Medical and Fitness interfaces
 export interface MedicalRecord {
     id: string;
@@ -326,6 +390,7 @@ export interface FitnessData {
 
 //#region P
 export interface PhysicalAddress {
+    id: string;
     street: string;
     city: string;
     state: string;
@@ -418,7 +483,7 @@ export interface Salary {
     id: string;
     userId: string;
     amount: number;
-    frequency: PAYMENT_FREQUENCY
+    frequency: PaymentFrequency;
 }
 
 
@@ -456,11 +521,17 @@ export interface ScoutingReport {
     updatedAt: Date;
 }
 
+export interface SocialLink {
+    id: string;
+    parentEntityId: string; // e.g., Club ID, Player ID, Sponsor ID
+    platform: SocialPlatform;
+    url: string;
+}
 
-export interface Sponsor {
+export interface Sponsorship {
     id: string;
     name: string;
-    type: SPONSOR_TYPE;
+    type: SponsorshipType;
     contract: Contract;
     value: number;
     logoUrl?: string;
@@ -470,12 +541,13 @@ export interface Sponsor {
     updatedAt: Date;
 }
 
-export interface StartingXI {
-    id: string;
-    clubId: string;
-    club: Club;
-    players: Player[]
-}
+// export interface StartingXI {
+//     id: string;
+//     clubId: string;
+//     club: Club;
+//     players: Player[]
+// }
+
 //#endregion
 
 
@@ -498,93 +570,70 @@ export interface TrainingSession {
     objectives: string[];
 
     // Staff involved
-    coaches: string[]; // staff IDs
 
     // Players involved
-    playersAttended: string[];
-    playersAbsent?: {
-        playerId: string;
-        reason: string;
-    }[];
+    playersAttended: Player[];
+    playersAbsent?: Player[];
 
-    // Training content
-    exercises: {
-        name: string;
-        duration: number; // minutes
-        intensity: 'low' | 'medium' | 'high';
-        description?: string;
-    }[];
-
-    // Individual performance notes
-    playerNotes?: {
-        playerId: string;
-        notes: string;
-        rating?: number;
-    }[];
-
+    notes?: string;
     createdAt: Date;
     updatedAt: Date;
 }
-//#endregion
+
 
 // Transfer and Scouting interfaces
 export interface Transfer {
     id: string;
     playerId: string;
+    player: Player;
     type: TransferType;
-    fromClub: string;
-    toClub: string;
+    fromClubId: string;
+    toClubId: string;
     transferDate: Date;
     fee?: number;
     loanDuration?: number; // months, if applicable
     buyBackClause?: number;
     sellOnClause?: number; // percentage
-    status: 'pending' | 'completed' | 'cancelled';
-    negotiations?: {
-        date: Date;
-        notes: string;
-        proposedFee?: number;
-    }[];
+    status: TransferStatus;
+    negotiations?: TransferNegotiation[];
+    //metadata
     createdAt: Date;
     updatedAt: Date;
 }
 
+export interface TransferNegotiation {
+    id: string;
+    transferId: string;
+    date: Date;
+    notes: string;
+    proposedFee?: number;
+    //metadata
+    createdAt: Date;
+    updatedAt: Date;
+}
+//#endregion
+
+
 // Financial interfaces
 export interface FinancialTransaction {
     id: string;
-    date: Date;
-    // category: FinancialCategory;
-    type: 'income' | 'expense';
+    type: FinancialTransactionType;
     amount: number;
     description: string;
     reference?: string; // invoice number, etc.
     paymentMethod?: string;
     approvedBy?: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-export interface Budget {
-    id: string;
-    season: string;
-    categories: {
-        // category: FinancialCategory;
-        budgetedAmount: number;
-        spentAmount: number;
-        remainingAmount: number;
-    }[];
-    totalBudget: number;
-    totalSpent: number;
+    timestamp: Date;
     createdAt: Date;
     updatedAt: Date;
 }
 
 
 
-export interface MediaItem {
+export interface MediaPost {
     id: string;
     title: string;
-    type: 'photo' | 'video' | 'document';
+    type: "text" | 'photo' | 'video' | 'document';
     url: string;
     description?: string;
     tags: string[];

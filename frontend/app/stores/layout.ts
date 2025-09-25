@@ -6,11 +6,18 @@ const LAYOUT_STORAGE_KEY = "sc812-layout"
 
 export const useLayoutStore = defineStore("layout", () => {
   // Sidebar state
+  const header = ref({
+  })
+  
   const sidebar = ref({
     isOpen: false,
   })
 
-  // Toggle sidebar manually
+
+  /**
+   * Sidebar toggle function.
+   * @param force - If true, open the sidebar; if false, close it; if null, toggle it.
+   */
   function toggleSidebar(force: boolean | null = null) {
     if (force !== null) {
       sidebar.value.isOpen = force
@@ -20,7 +27,6 @@ export const useLayoutStore = defineStore("layout", () => {
     saveState()
   }
 
-  // Initialize store from localStorage
   function init() {
     if (import.meta.client) {
       const saved = localStorage.getItem(LAYOUT_STORAGE_KEY)

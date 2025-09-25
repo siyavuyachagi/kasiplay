@@ -6,7 +6,7 @@
       <!-- Left side with toggle and title -->
       <div class="flex items-center">
         <button
-          @click="toggleSidebar"
+          @click="layoutStore.toggleSidebar()"
           class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors mr-4"
         >
           <icon name="ph:list-bold" size="20" class="dark:text-white" />
@@ -43,7 +43,7 @@
         <div class="relative" ref="profileDropdown">
           <button
             @click="toggleProfileDropdown"
-            class="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            class="flex items-center sm:space-x-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
           >
             <img
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face"
@@ -104,8 +104,8 @@
 </template>
 
 <script setup lang="ts">
+const layoutStore = useLayoutStore();
 const searchQuery = ref("");
-const isSidebarOpen = ref(false);
 const isProfileOpen = ref(false);
 
 const profileMenuItems = [
@@ -116,9 +116,5 @@ const profileMenuItems = [
 
 const toggleProfileDropdown = () => {
   isProfileOpen.value = !isProfileOpen.value;
-};
-
-const toggleSidebar = () => {
-  isSidebarOpen.value = !isSidebarOpen.value;
 };
 </script>

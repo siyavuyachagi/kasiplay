@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TkcjVRcY9hA=",
+  "dgSpecHash": "Dm7Dx6MHsWE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Within Reach\\Desktop\\kasiplay\\backend\\Api\\Api.csproj",
+  "projectFilePath": "C:\\Users\\Within Reach\\Desktop\\kasiplay\\backend\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Within Reach\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\Within Reach\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

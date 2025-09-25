@@ -422,6 +422,41 @@ export interface Salary {
 }
 
 
+
+export interface ScoutingReport {
+    id: string;
+    playerName: string;
+    currentClub: string;
+    position: PlayerPosition;
+    age: number;
+    nationality: string;
+
+    // Scouting details
+    scoutedBy: string; // staff ID
+    scoutingDate: Date;
+    matchWatched?: string;
+
+    // Player evaluation
+    technicalRating: number; // 1-10
+    physicalRating: number;
+    mentalRating: number;
+    potentialRating: number;
+    overallRating: number;
+
+    // Detailed assessment
+    strengths: string[];
+    weaknesses: string[];
+
+    // Recommendation
+    recommendation: 'highly_recommend' | 'recommend' | 'maybe' | 'not_recommend';
+    estimatedMarketValue: number;
+    notes: string;
+
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+
 export interface Sponsor {
     id: string;
     name: string;
@@ -442,6 +477,13 @@ export interface StartingXI {
     players: Player[]
 }
 //#endregion
+
+
+
+
+
+
+
 
 //#region T
 // Training interfaces
@@ -503,39 +545,6 @@ export interface Transfer {
         notes: string;
         proposedFee?: number;
     }[];
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-export interface ScoutingReport {
-    id: string;
-    playerName: string;
-    currentClub: string;
-    position: PlayerPosition;
-    age: number;
-    nationality: string;
-
-    // Scouting details
-    scoutedBy: string; // staff ID
-    scoutingDate: Date;
-    matchWatched?: string;
-
-    // Player evaluation
-    technicalRating: number; // 1-10
-    physicalRating: number;
-    mentalRating: number;
-    potentialRating: number;
-    overallRating: number;
-
-    // Detailed assessment
-    strengths: string[];
-    weaknesses: string[];
-
-    // Recommendation
-    recommendation: 'highly_recommend' | 'recommend' | 'maybe' | 'not_recommend';
-    estimatedMarketValue: number;
-    notes: string;
-
     createdAt: Date;
     updatedAt: Date;
 }

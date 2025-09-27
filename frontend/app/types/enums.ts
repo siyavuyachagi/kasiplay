@@ -52,6 +52,22 @@ export enum ContractType {
   SHORT_TERM_ENGAGEMENT = "short_term_engagement"
 }
 
+export enum CupBracketStyle {
+  TRADITIONAL = 'traditional',          // Vertical progression
+  MIRRORED = 'mirrored',               // Left/right converging to center
+  LADDER = 'ladder'                    // Step-ladder format
+}
+
+export enum CupFormat {
+  SINGLE_ELIMINATION = 'single-elimination',
+  DOUBLE_ELIMINATION = 'double-elimination',
+}
+
+export enum CupRoundBracketSide {
+  RIGHT = "right",
+  LEFT = "left",
+  CENTER = "center"
+}
 //#endregion
 
 
@@ -72,14 +88,17 @@ export enum CardType {
 
 
 //#region G
-export enum GoalMatchEventType {
-  OPEN_PLAY = "open_play",         // regular goals
-  PENALTY = "penalty",             // in-game penalty kick
-  OWN_GOAL = "own_goal",           // against own team
-  FREE_KICK = "free_kick",         // direct or indirect
-  HEADER = "header",               // scored with head
-  VOLLEY = "volley",               // shot in the air
-  PENALTY_SHOOTOUT = "penalty_shootout" // in tie-breakers
+export enum GoverningBodyMembershipStatus {
+  PENDING = "pending",
+  ACTIVE = "active",
+  REJECTED = "rejected",
+  SUSPENDED = "suspended"
+}
+
+export enum GoverningBodyMembershipType {
+  FULL = "full",
+  ASSOCIATE = "associate",
+  PROVISIONAL = "provisional"
 }
 
 //#endregion
@@ -131,6 +150,11 @@ export enum MatchEventType {
   VIDEO_ASSIST_DECISION = "var_decision", // VAR/Video review events
 }
 
+export enum MatchLegs {
+  SINGLE_LEG = 'single-leg',           // 1 game decides winner
+  TWO_LEG = 'two-leg',                 // Home & away (aggregate)
+}
+
 export enum MatchResult { //Optional until match is COMPLETED
   WIN = "win",
   LOSS = "loss",
@@ -176,6 +200,12 @@ export enum OfficialRole {
   OTHER = "other"
 }
 
+export enum OrganizationType {
+  LEAGUE = "league",
+  FEDERATION = "federation",
+  ASSOCIATION = "association",
+  CONFEDERATION = "confederation"
+}
 //#endregion
 
 //#region P
@@ -208,7 +238,15 @@ export enum PlayerStatus {
   RETIRED = 'retired',
   RELEASED = 'released'
 }
+
+export enum PreferredFoot {
+  Left = "left",
+  Right = "right",
+  Both = "both"
+}
 //#endregion
+
+
 
 
 
@@ -249,13 +287,6 @@ export enum SocialPlatform {
   TWITTER = "twitter",
   INSTAGRAM = "instagram",
   YOUTUBE = "youtube",
-}
-
-export enum SponsorshipType {
-  MAIN = "main",
-  KIT = "kit",
-  TRAINING = "training",
-  PARTNER = "partner",
 }
 
 export enum StaffRole {

@@ -11,7 +11,6 @@ export interface Injury {
     actualRecoveryDate?: Date;
     treatmentPlan: string;
     isActive: boolean;
-    medicalRecords: MedicalRecord[];
     //system metadata
     createdAt: Date,
     updatedAt: Date,

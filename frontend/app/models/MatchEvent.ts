@@ -1,11 +1,16 @@
 import type { InjurySeverity, InjuryType, MatchEventType } from "~/types/enums";
-import type { Player } from "./ApplicationUsers";
+import type { Player } from "./Player";
+import type { Club } from "./Club";
 
 export interface MatchEvent {
     id: string;
     minute: number;
     type: MatchEventType;
-    description?: string;  
+    description?: string;
+
+    // Team context
+    teamId?: string;         // the team this event belongs to (for/against)
+    team?: Club;
 
     // Players involved
     playerId?: string;

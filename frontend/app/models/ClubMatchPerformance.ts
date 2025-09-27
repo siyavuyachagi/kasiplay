@@ -1,10 +1,10 @@
-import type { Player } from "./ApplicationUsers";
 import type { Club } from "./Club";
 import type { Match } from "./Match";
+import type { Player } from "./Player";
 
 export interface ClubMatchPerformance {
   clubId: string;
-  club: Club;
+  club?: Club;
   matchId: string;
   match: Match;
 

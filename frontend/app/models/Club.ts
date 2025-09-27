@@ -1,78 +1,44 @@
-import type { Official } from "./ApplicationUsers";
+import type { Announcement } from "./Announcement";
+import type { Cup } from "./Cup";
+import type { GoverningBody_Club } from "./GoverningBody_Club";
+import type { League } from "./League";
+import type { MatchRecord } from "./MatchRecord";
+import type { Organization } from "./Organization";
 import type { PhysicalAddress } from "./PhysicalAddress";
+import type { Player } from "./Player";
+import type { Tournament } from "./Tournament";
 
-export interface Club {
+export interface Club extends Organization {
     id: string;
-    // Basic information
-    name: string;
-    shortName: string;
-    nickname?: string;
-    foundedYear: number;
-
-    // Branding and identity
-    logoUrl: string;
-    primaryColor: string;
-    secondaryColor: string;
-    banner?: string;
-    accentColor?: string;
-    merchandiseUrl?: string;
 
     // Location and facilities
     venue: string;
     address: PhysicalAddress;
 
-    // facilities: Facility[];
-
-    // Organizational structure
-    owner?: string;
-    president?: string;
-
-    // People
-    Officials: Official[]
+    // Organizational structure / People
     players: Player[];
 
+    // Governance and memberships
+    memberships: GoverningBody_Club[];
+
     // Competition and performance
-    league: string;
-    currentSeason: string;
-    matches: Match[];
-    seasonStats: {
-        played: number;
-        won: number;
-        drawn: number;
-        lost: number;
-        goalsFor: number;
-        goalsAgainst: number;
-        points: number;
-        position?: number;
-    };
+    leagues: League[];
+    tournaments: Tournament[];
+    cups: Cup[];
+    matchRecords: MatchRecord[];
 
     // Training and development
-    trainingSessions: TrainingSession[];
-    youthAcademy?: {
-        ageGroups: string[];
-        facilities: string[];
-        coaches: string[];
-    };
-
-    // Business operations
+    // trainingSessions: TrainingSession[];
 
     // Transfers and scouting
     transfers: Transfer[];
     scoutingReports: ScoutingReport[];
-    transferBudget: number;
-
-    // Equipment and resources
-    // equipment: Equipment[];
 
     // Communication and media
     announcements: Announcement[];
     mediaLibrary: MediaPost[];
 
-    // Social media and marketing
-    socialMedia?: SocialLink[];
-
     // Partnerships and sponsorships
-    sponsors?: Sponsorship[];
 
     // Club culture and values
     motto?: string;
@@ -84,9 +50,4 @@ export interface Club {
             description?: string;
         }[];
     };
-
-    // System metadata
-    createdAt: Date;
-    updatedAt: Date;
-    isActive: boolean;
 }

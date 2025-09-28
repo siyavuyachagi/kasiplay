@@ -6,8 +6,7 @@ import type { PlayerClubRecord } from "./PlayerClubRecord";
 import type { PlayerMatchPerformance } from "./PlayerMatchPerformance";
 import type { Injury } from "./Injury";
 import type { PlayerFitnessRecord } from "./PlayerFitnessRecord";
-
-
+import type { Player_TrainingSession } from "./Player_TrainingSession";
 
 
 export interface Player extends ApplicationUser {
@@ -35,4 +34,7 @@ export interface Player extends ApplicationUser {
     // Medical and fitness
     injuries: Injury[];
     fitnessRecords: PlayerFitnessRecord[];
+
+    // Training sessions attended
+    trainingRecords?: Player_TrainingSession[];  // many-to-many with TrainingSession
 }

@@ -1,6 +1,7 @@
 import type { OfficialRole, StaffRole } from '~/types/enums';
 import type { Contact } from './Contact';
 import type { PhysicalAddress } from './PhysicalAddress';
+import type { Achievement } from './Achievement';
 
 //#region A
 export interface ApplicationUser {
@@ -14,6 +15,7 @@ export interface ApplicationUser {
     physicalAddress: PhysicalAddress;
     contact: Contact;
     profileImage?: string; //Personal account profile image
+    achievements?: Achievement[];
     //metadata
     createdAt: Date;
     updatedAt: Date;

@@ -79,9 +79,11 @@ export enum FinancialTransactionType {
   OTHER = 'other'
 }
 
-export enum CardType {
-  YELLOW_CARD = "yellow_card",
-  RED_CARD = "red_card"
+export enum FinancialTransactionStatus {
+  pending = "pending",
+  completed = "completed",
+  failed = "failed",
+  refunded = "refunded"
 }
 //#endregion
 
@@ -123,6 +125,10 @@ export enum InjurySeverity {
 
 
 //#region M
+export enum MatchCardType {
+  YELLOW_CARD = "yellow_card",
+  RED_CARD = "red_card"
+}
 export enum MatchEventType {
   KICK_OFF = "kick_off",
   GOAL = "goal",
@@ -239,6 +245,14 @@ export enum PlayerStatus {
   RELEASED = 'released'
 }
 
+export enum PlayerTransferType {
+  PURCHASE = 'purchase',
+  SALE = 'sale',
+  LOAN_IN = 'loan_in',
+  LOAN_OUT = 'loan_out',
+  FREE_TRANSFER = 'free_transfer',
+  RELEASE = 'release'
+}
 export enum PreferredFoot {
   Left = "left",
   Right = "right",
@@ -249,9 +263,42 @@ export enum PreferredFoot {
 
 
 
+//#region R
+export enum ReportType {
+  // Player-focused
+  PLAYER_PERFORMANCE = "player_performance",       // stats, goals, assists, match ratings
+  PLAYER_FITNESS = "player_fitness",               // fitness tests, injuries, VO2 max, endurance
+  PLAYER_TRAINING = "player_training",             // attendance & performance in sessions
+  PLAYER_CONTRACTS = "player_contracts",           // current contracts, expiries, loans
+  PLAYER_TRANSFERS = "player_transfers",           // historical and recent transfers
+
+  // Club-focused
+  CLUB_PERFORMANCE = "club_performance",           // wins, draws, losses, league standings
+  CLUB_FINANCIALS = "club_financials",             // revenue, expenses, transfer fees
+  CLUB_TRAINING = "club_training",                 // aggregated training sessions & attendance
+  CLUB_SCOUTING = "club_scouting",                 // scouting reports summary
+  CLUB_INJURIES = "club_injuries",                 // injury summaries, recovery stats
+
+  // Competition-focused
+  LEAGUE_STANDINGS = "league_standings",           // full league table
+  CUP_PROGRESS = "cup_progress",                   // round-by-round progress, fixtures
+  TOURNAMENT_STATS = "tournament_stats",           // group & knockout stats, winners
+
+  // Governance / Tenant-focused
+  TENANT_MEMBERSHIP = "tenant_membership",         // member clubs, active/inactive status
+  TENANT_FINANCIALS = "tenant_financials",         // subscription revenue, payments
+  TENANT_ACTIVITIES = "tenant_activities",         // competitions managed, events hosted
+
+  // Multi-purpose / General
+  CUSTOM = "custom"                                // user-defined or ad-hoc reports
+}
+
+//#endregion
+
+
 
 //#region T
-export enum TrainingType {
+export enum TrainingSessionType {
   FITNESS = 'fitness',
   TECHNICAL = 'technical',
   TACTICAL = 'tactical',
@@ -259,21 +306,13 @@ export enum TrainingType {
   MATCH_PREPARATION = 'match_preparation'
 }
 
-export enum TransferStatus {
+export enum TransferNegotiationStatus {
   PENDING = 'pending',
   COMPLETED = 'completed',
   FAILED = 'failed',
   CANCELLED = 'cancelled'
 }
 
-export enum TransferType {
-  PURCHASE = 'purchase',
-  SALE = 'sale',
-  LOAN_IN = 'loan_in',
-  LOAN_OUT = 'loan_out',
-  FREE_TRANSFER = 'free_transfer',
-  RELEASE = 'release'
-}
 //#endregion
 
 

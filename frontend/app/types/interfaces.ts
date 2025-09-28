@@ -1,9 +1,6 @@
 import type {
     PlayerPosition,
-    TransferType,
-    TrainingType,
     FinancialTransactionType,
-    TransferStatus,
 } from "./enums";
 
 
@@ -69,74 +66,13 @@ export interface ScoutingReport {
 
 //#region T
 // Training interfaces
-export interface TrainingSession {
-    id: string;
-    date: Date;
-    startTime: Date;
-    endTime: Date;
-    type: TrainingType;
-    location: string;
-    description: string;
-    objectives: string[];
-
-    // Staff involved
-
-    // Players involved
-    playersAttended: Player[];
-    playersAbsent?: Player[];
-
-    notes?: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
 
 
-// Transfer and Scouting interfaces
-export interface Transfer {
-    id: string;
-    playerId: string;
-    player: Player;
-    type: TransferType;
-    fromClubId: string;
-    toClubId: string;
-    transferDate: Date;
-    fee?: number;
-    loanDuration?: number; // months, if applicable
-    buyBackClause?: number;
-    sellOnClause?: number; // percentage
-    status: TransferStatus;
-    negotiations?: TransferNegotiation[];
-    //metadata
-    createdAt: Date;
-    updatedAt: Date;
-}
 
-export interface TransferNegotiation {
-    id: string;
-    transferId: string;
-    date: Date;
-    notes: string;
-    proposedFee?: number;
-    //metadata
-    createdAt: Date;
-    updatedAt: Date;
-}
 //#endregion
 
 
 // Financial interfaces
-export interface FinancialTransaction {
-    id: string;
-    type: FinancialTransactionType;
-    amount: number;
-    description: string;
-    reference?: string; // invoice number, etc.
-    paymentMethod?: string;
-    approvedBy?: string;
-    timestamp: Date;
-    createdAt: Date;
-    updatedAt: Date;
-}
 
 
 

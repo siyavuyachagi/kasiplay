@@ -46,7 +46,7 @@ KasiPlay is a modern SaaS platform designed to streamline sports team management
 - **Nuxt.js** - Vue.js application framework
 - **TypeScript** - Type-safe JavaScript
 - **Tailwind CSS v4** - Utility-first CSS framework
-- **Phosphor Icons** - Modern icon library
+- **Nuxt Icons** - (`@nuxt/icon` plugin) Has so many modern icon libraries
 
 ### Features
 - **Composition API** - Modern Vue.js development
@@ -57,23 +57,42 @@ KasiPlay is a modern SaaS platform designed to streamline sports team management
 
 ## 🎯 Target Users
 
-### 👔 Managers
-- Full platform access
-- Team and financial management
-- Player contracts and transfers
-- Strategic oversight
+### 🏢 Federations / Regulatory Bodies
 
-### 🏃‍♂️ Coaches
-- Tactical planning and analysis
-- Training session management
-- Player performance tracking
-- Match preparation
+* **Role**: Tenant with top-level access
+* **Responsibilities**:
 
-### ⚽ Players
-- Personal statistics and progress
-- Team communications
-- Schedule and availability updates
-- Limited administrative access
+  * Create and manage competitions (Leagues, Cups, Tournaments)
+  * Register and approve member clubs
+  * Monitor competition standings and statistics
+  * Manage federation-wide reporting and analytics
+* **Access**: Full administrative control over competitions and member organizations
+
+### 🏟️ Clubs
+
+* **Role**: Tenant or sub-entity under a federation
+* **Responsibilities**:
+
+  * Manage club infrastructure, teams, and staff
+  * Track players’ statistics, fitness, and match performance
+  * Handle transfers, scouting, and internal operations
+  * Participate in federation competitions
+* **Access**: Scoped to club-level operations; limited to their own entities
+
+### 👔 Club Managers / Admins (Users)
+
+* Full access to the club’s operations, finances, and strategic planning
+
+### 🏃‍♂️ Coaches (Users)
+
+* Tactical planning, training sessions, and match preparation
+* Player performance monitoring
+
+### ⚽ Players (Users)
+
+* View personal statistics and progress
+* Communicate with team and staff
+* Update schedule and availability
 
 ## 🏗️ Architecture
 
@@ -84,34 +103,6 @@ KasiPlay is a modern SaaS platform designed to streamline sports team management
 - Node.js 18+ 
 - SQL Server or PostgreSQL
 - Azure account (for deployment)
-
-### Backend Setup
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/kasiplay.git
-cd kasiplay/backend
-
-# Restore dependencies
-dotnet restore
-
-# Update database
-dotnet ef database update
-
-# Run the application
-dotnet run
-```
-
-### Frontend Setup
-```bash
-# Navigate to frontend directory
-cd ../frontend
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
 
 ## 📱 Responsive Design
 

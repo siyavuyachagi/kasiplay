@@ -1,3 +1,4 @@
+import type { Achievement } from "./Achievement";
 import type { Announcement } from "./Announcement";
 import type { Cup } from "./Cup";
 import type { GoverningBody_Club } from "./GoverningBody_Club";
@@ -6,6 +7,7 @@ import type { MatchRecord } from "./MatchRecord";
 import type { Organization } from "./Organization";
 import type { PhysicalAddress } from "./PhysicalAddress";
 import type { Player } from "./Player";
+import type { PlayerTransferRecord } from "./PlayerTransferRecord";
 import type { Tournament } from "./Tournament";
 
 export interface Club extends Organization {
@@ -31,23 +33,17 @@ export interface Club extends Organization {
     // trainingSessions: TrainingSession[];
 
     // Transfers and scouting
-    transfers: Transfer[];
-    scoutingReports: ScoutingReport[];
+    transfers: PlayerTransferRecord[];
+    // scoutingReports: ScoutingReport[];
 
     // Communication and media
     announcements: Announcement[];
-    mediaLibrary: MediaPost[];
+    // mediaLibrary: MediaPost[];
 
     // Partnerships and sponsorships
 
     // Club culture and values
     motto?: string;
     values?: string[];
-    history?: {
-        majorAchievements: {
-            title: string;
-            year: number;
-            description?: string;
-        }[];
-    };
+    achievements?: Achievement[];
 }

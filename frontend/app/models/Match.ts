@@ -1,7 +1,7 @@
 import type { MatchResult, MatchStatus, MatchType } from "~/types/enums";
 import type { ClubMatchPerformance } from "./ClubMatchPerformance";
-import type { Official } from "./ApplicationUsers";
 import type { MatchEvent } from "./MatchEvent";
+import type { Official } from "./Official";
 
 export interface Match {
     id: string;

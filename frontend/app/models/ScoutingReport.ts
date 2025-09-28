@@ -1,12 +1,12 @@
 import type { Player } from "./Player";
 import type { Club } from "./Club";
-import type { Scout } from "./Scout";
+import type { Staff } from "./Staff";
 
 export interface ScoutingReport {
     id: string;
 
     scoutId: string;
-    scout?: Scout;
+    scout?: Staff;
 
     playerId: string;
     player?: Player;

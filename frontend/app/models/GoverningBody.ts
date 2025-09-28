@@ -3,6 +3,8 @@ import type { GoverningBody_Club } from "./GoverningBody_Club";
 import type { Organization } from "./Organization";
 
 export interface GoverningBody extends Organization {
+    // Management/Staff/etc
+
     // Simple extensions for competition organizers
     jurisdiction?: string;          // "England", "Europe", "Global", etc.
 

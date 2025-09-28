@@ -1,6 +1,21 @@
 // Enums for better type safety
 
 //#region A
+export enum AdminRole {
+  // System-level (your organization)
+  SYSTEM = "system",                       // You
+  SYSTEM_ADMIN = "system_admin",           // Senior administrators
+  SYSTEM_MANAGER = "system_manager",       // Department managers
+
+  // Customer organizations
+  FEDERATION_PRESIDENT = "federation_president",
+  FEDERATION_SECRETARY = "federation_secretary",
+  FEDERATION_TREASURER = "federation_treasurer",
+  CLUB_PRESIDENT = "club_president",
+  CLUB_DIRECTOR = "club_director",
+  CLUB_MANAGER = "club_manager"
+}
+
 export enum AnnouncementAudience {
   ALL = "all",             // Everyone
   PLAYERS = "players",     // All players
@@ -90,6 +105,12 @@ export enum FinancialTransactionStatus {
 
 
 //#region G
+export enum GoverningBodyType {
+  LEAGUE = "league",
+  FEDERATION = "federation",
+  ASSOCIATION = "association",
+  CONFEDERATION = "confederation"
+}
 export enum GoverningBodyMembershipStatus {
   PENDING = "pending",
   ACTIVE = "active",
@@ -102,7 +123,6 @@ export enum GoverningBodyMembershipType {
   ASSOCIATE = "associate",
   PROVISIONAL = "provisional"
 }
-
 //#endregion
 
 
@@ -253,6 +273,12 @@ export enum PlayerTransferType {
   FREE_TRANSFER = 'free_transfer',
   RELEASE = 'release'
 }
+
+export enum PlayerType {
+  SENIOR = "senior",
+  YOUTH = "youth"
+}
+
 export enum PreferredFoot {
   Left = "left",
   Right = "right",
@@ -326,15 +352,43 @@ export enum SocialPlatform {
   TWITTER = "twitter",
   INSTAGRAM = "instagram",
   YOUTUBE = "youtube",
+  LINKEDIN = "linkedin",
 }
 
 export enum StaffRole {
-  TRAINER = "trainer",              // fitness & conditioning
+  // --- Club staff (sports-related) ---
+  TRAINER = "trainer",                     // fitness & conditioning
   PHYSIOTHERAPIST = "physiotherapist",
   MEDICAL_DOCTOR = "medical_doctor",
   ANALYST = "analyst",
   KIT_MANAGER = "kit_manager",
   MEDIA_OFFICER = "media_officer",
+  HEAD_COACH = "head_coach",
+  ASSISTANT_COACH = "assistant_coach",
+  GOALKEEPER_COACH = "goalkeeper_coach",
+  SCOUT = "scout",
+  TEAM_MANAGER = "team_manager",
+  DIRECTOR_OF_FOOTBALL = "director_of_football",
+
+  // --- Customer organization staff (non-sports, admin/management) ---
+  PRESIDENT = "president",
+  CHAIRMAN = "chairman",
+  ACADEMY_MANAGER = "academy_manager",
+  EVENT_COORDINATOR = "event_coordinator",
+  MARKETING_MANAGER = "marketing_manager",
+  SPONSORSHIP_MANAGER = "sponsorship_manager",
+
+  // --- System staff (platform employees) ---
+  PLATFORM_DEVELOPER = "platform_developer",
+  PRODUCT_MANAGER = "product_manager",
+  CUSTOMER_SUCCESS = "customer_success",
+  SUPPORT_AGENT = "support_agent",
+  CONTENT_MODERATOR = "content_moderator",
+  DATA_ANALYST = "data_analyst",
+  SALES_REP = "sales_rep",
+  SYSTEM_ADMIN = "system_admin",
+
+  // --- Miscellaneous ---
   OTHER = "other"
 }
 
@@ -345,5 +399,14 @@ export enum SubstitutionReason {
   DISCIPLINARY = "disciplinary", // punishment, e.g. bad attitude
   STRATEGIC = "strategic",       // e.g. penalty specialist, late-game tactic
   OTHER = "other"                // fallback for unexpected cases
+}
+
+export enum SystemUserType {
+  SYSTEM_ADMINISTRATOR = "system_administrator",
+  ADMINISTRATOR = "administrator",
+  OFFICIAL = "official",
+  PLAYER = "player",
+  STAFF = "staff",
+  FAN = "fan"
 }
 //#endregion

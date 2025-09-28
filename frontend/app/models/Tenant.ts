@@ -13,6 +13,11 @@ export interface Tenant {
     billingId: string;
     billing?: Billing;
 
+    // The person who created and pays for this tenant - HAS INITIAL AUTHORITY
+    creatorId: string;
+    creator?: ApplicationUser;
+    subscriptionApplicationId?: string; // Tracks back application
+
     // Subscription / plan info
     subscriptionPlan?: string;     // e.g., "basic", "pro", "enterprise"
     isActive: boolean;             // active subscription

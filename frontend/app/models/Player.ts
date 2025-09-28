@@ -1,4 +1,4 @@
-import type { PlayerPosition, PlayerStatus, PreferredFoot } from "~/types/enums";
+import type { PlayerPosition, PlayerStatus, PlayerType, PreferredFoot } from "~/types/enums";
 import type { ApplicationUser } from "./ApplicationUsers";
 import type { Contract } from "./Contract";
 import type { Club } from "./Club";
@@ -7,6 +7,7 @@ import type { PlayerMatchPerformance } from "./PlayerMatchPerformance";
 import type { Injury } from "./Injury";
 import type { PlayerFitnessRecord } from "./PlayerFitnessRecord";
 import type { Player_TrainingSession } from "./Player_TrainingSession";
+import type { EmergencyContact } from "./EmergencyContact";
 
 
 export interface Player extends ApplicationUser {
@@ -16,22 +17,22 @@ export interface Player extends ApplicationUser {
     status: PlayerStatus;
     avatar: string;
     marketValue: number;
+    type: PlayerType;
+    guardianContact?: EmergencyContact;
 
+    // Employment and Contracts
     contract: Contract[];
 
     // Static physical attributes
     height: number;          // cm
     preferredFoot: PreferredFoot;
 
-    // Career info
+    // Career & performance
     clubId?: string;
     club?: Club;
+    contracts: Contract[];
     careerHistory?: PlayerClubRecord[];
-
-    // Performance
     matchPerformances: PlayerMatchPerformance[];
-
-    // Medical and fitness
     injuries: Injury[];
     fitnessRecords: PlayerFitnessRecord[];
 

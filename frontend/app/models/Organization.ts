@@ -3,9 +3,15 @@ import type { Director } from "./Director";
 import type { Manager } from "./Manager";
 import type { President } from "./President";
 import type { SocialLink } from "./SocialLink";
+import type { Tenant } from "./Tenant";
 
 export interface Organization {
     id: string;
+
+    //Tenant reference
+    tenantId: string;
+    tenant?: Tenant;
+
     // Basic information
     name: string;           // "Union of European Football Associations"
     shortName: string;          // "UEFA"

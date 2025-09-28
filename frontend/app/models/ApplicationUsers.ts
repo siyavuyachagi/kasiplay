@@ -2,33 +2,34 @@ import type { OfficialRole, StaffRole } from '~/types/enums';
 import type { Contact } from './Contact';
 import type { PhysicalAddress } from './PhysicalAddress';
 import type { Achievement } from './Achievement';
+import type { Tenant } from './Tenant';
+import type { EmergencyContact } from './EmergencyContact';
 
-//#region A
+
+/**\
+ * SYSTEM CREATOR
+ * System role - Has access to everything
+ */
 export interface ApplicationUser {
     id: string;
+
+    tenantId: string;
+    tenant?: Tenant;
+
+    // subscriptionApplicationId?: string; // Audit trail
+
+    // Basic info
     username: string;
     emailAddress: string;
+    phoneNumber?: string;
     firstName: string;
     lastName: string;
     dateOfBirth: Date;
-    nationality: string;
     physicalAddress: PhysicalAddress;
-    contact: Contact;
     profileImage?: string; //Personal account profile image
-    achievements?: Achievement[];
-    //metadata
+    emergencyContact?: EmergencyContact;
+
+    // System metadata
     createdAt: Date;
     updatedAt: Date;
 }
-//#endregion
-
-
-
-//#region S
-export interface Staff extends ApplicationUser {
-    role: StaffRole;
-    startDate?: Date;
-    endDate?: Date;
-}
-
-//#endregion

@@ -91,7 +91,7 @@
             </span>
           </label>
           <nuxt-link
-            to="/auth/forgot-password"
+            to="/auth/forgotPassword"
             class="text-sm text-blue-600 dark:text-blue-400 hover:underline"
           >
             Forgot password?

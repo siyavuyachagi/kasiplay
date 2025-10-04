@@ -6,9 +6,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@nuxt/image','@nuxt/fonts', '@nuxt/icon',
+    '@nuxt/image', '@nuxt/fonts', '@nuxt/icon',
     '@pinia/nuxt',
-    '@nuxtjs/sitemap', 
+    '@nuxtjs/sitemap',
   ],
 
   css: ['@/assets/css/app.css'],
@@ -23,8 +23,25 @@ export default defineNuxtConfig({
     port: 8080,
   },
 
+  site: {
+    url: 'https://kasiplay.com', // your live site
+    gzip: true, // generates sitemap.xml.gz
+  },
+  sitemap: {
+    urls: ['/auth/login', 'auth/register'],
+    defaults: {
+      changefreq: 'weekly',
+      priority: 0.7,
+    },
+    autoLastmod: true,
+    xsl: false
+  },
+
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'en-za' // Set your language/region here - google accessibility
+      },
       title: "Kasiplay | Your Ultimate Local Entertainment",
       meta: [
         { name: "description", content: "Kasiplay - Your Ultimate Entertainment Hub" },

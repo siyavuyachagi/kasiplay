@@ -140,26 +140,13 @@
 
           <!-- Logout -->
           <div class="py-1">
-            <a
-              href="#"
-              @click="isOpen = false"
-              class="flex items-center px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            <button
+              @click="authStore.signOut(), (isOpen = false)"
+              class="flex w-full items-center px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
-              <svg
-                class="w-5 h-5 mr-3 flex-shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                />
-              </svg>
+              <icon name="lucide:log-out" size="16" class="mr-3" />
               Logout
-            </a>
+            </button>
           </div>
         </div>
       </Transition>
@@ -168,27 +155,29 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
-const isOpen = ref(false)
+const authStore = useAuthStore();
 
-const userName = computed(() => 'Siyavuya Chagi')
-const userHandle = computed(() => '@siyavuyachagi')
-const userEmail = computed(() => 'syavuya08@gmail.com')
-const userInitials = computed(() => 'SC')
+const isOpen = ref(false);
+
+const userName = computed(() => "Siyavuya Chagi");
+const userHandle = computed(() => "@siyavuyachagi");
+const userEmail = computed(() => "syavuya08@gmail.com");
+const userInitials = computed(() => "SC");
 
 // Close dropdown when clicking outside
 const handleClickOutside = (event) => {
-  if (!event.target.closest('.relative')) {
-    isOpen.value = false
+  if (!event.target.closest(".relative")) {
+    isOpen.value = false;
   }
-}
+};
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
+  document.addEventListener("click", handleClickOutside);
+});
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>

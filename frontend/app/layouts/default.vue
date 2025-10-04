@@ -10,21 +10,13 @@
         <div class="flex items-center space-x-3">
           <button
             @click="sidebarOpen = !sidebarOpen"
-            class="p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-200"
+            class="flex justify-center p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-200"
           >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
+            <icon
+              name="lucide:menu"
+              size="20"
+              class="text-gray-400 dark:text-gray-300"
+            />
           </button>
 
           <div class="hidden md:flex items-center space-x-2">
@@ -174,21 +166,13 @@
 
           <!-- Messages Icon -->
           <button
-            class="relative p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+            class="flex justify-center relative p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
           >
-            <svg
-              class="w-5 h-5 text-gray-600 dark:text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-              ></path>
-            </svg>
+            <icon
+              name="lucide:message-circle-more"
+              size="20"
+              class="text-gray-600 dark:text-gray-400"
+            />
             <span
               class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
               >3</span
@@ -197,21 +181,13 @@
 
           <!-- Notifications Bell -->
           <button
-            class="relative p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+            class="flex justify-center relative p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
           >
-            <svg
-              class="w-5 h-5 text-gray-600 dark:text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              ></path>
-            </svg>
+            <icon
+              name="lucide:bell"
+              size="20"
+              class="text-gray-700 dark:text-gray-400"
+            />
             <span
               class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
               >5</span
@@ -220,57 +196,19 @@
 
           <button
             @click="toggleTheme"
-            class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+            class="flex justify-center p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
           >
-            <svg
+            <icon
               v-if="isDark"
-              class="w-5 h-5 text-yellow-500"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"
-              />
-            </svg>
-            <svg
-              v-else
-              class="w-5 h-5 text-gray-600"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"
-                clip-rule="evenodd"
-              />
-            </svg>
+              name="lucide:sun"
+              size="20"
+              class="text-yellow-500"
+            />
+
+            <icon v-else name="lucide:moon" size="20" class="text-gray-400" />
           </button>
 
-          <!-- User Profile -->
-          <div
-            class="flex items-center space-x-3 pl-4 border-l border-gray-200 dark:border-gray-700"
-          >
-            <div class="relative">
-              <div
-                class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center"
-              >
-                <span class="text-white text-sm font-medium">{{
-                  userInitials
-                }}</span>
-              </div>
-              <div
-                class="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"
-              ></div>
-            </div>
-            <div class="hidden xl:block">
-              <p class="font-medium text-gray-900 dark:text-white text-sm">
-                {{ userName }}
-              </p>
-              <p class="text-xs text-gray-500 dark:text-gray-400">
-                {{ userHandle }}
-              </p>
-            </div>
-          </div>
+          <user-profile-dropdown />
         </div>
       </div>
     </header>
@@ -284,246 +222,7 @@
       ></div>
 
       <!-- Sidebar - FIXED Z-INDEX -->
-      <aside
-        class="fixed inset-y-0 left-0 z-50 w-64 sm:w-72 lg:w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 lg:z-auto shadow-xl lg:shadow-none overflow-hidden flex flex-col lg:mt-0"
-        :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-        style="top: 65px"
-      >
-        <!-- Desktop Sidebar Header -->
-        <!-- <div class="hidden lg:flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span class="text-white text-lg font-semibold">⚽</span>
-            </div>
-            <span class="text-xl font-semibold text-gray-900 dark:text-white">KasiPlay</span>
-          </div>
-        </div> -->
-
-        <!-- Mobile Sidebar Header with Close Button -->
-        <div
-          class="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0"
-        >
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center"
-            >
-              <span class="text-white text-sm font-semibold">⚽</span>
-            </div>
-            <span class="text-lg font-semibold text-gray-900 dark:text-white"
-              >KasiPlay</span
-            >
-          </div>
-          <button
-            @click="sidebarOpen = false"
-            class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-          >
-            <svg
-              class="w-5 h-5 text-gray-500 dark:text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Scrollable Content -->
-        <div
-          class="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent"
-        >
-          <!-- Team Overview Card -->
-          <div class="p-4 lg:p-6 flex-shrink-0">
-            <div class="bg-blue-600 rounded-lg p-4 text-white">
-              <p class="text-blue-100 text-sm font-medium">Active Team</p>
-              <p class="text-2xl font-bold mt-1">{{ activeTeam }}</p>
-              <div class="flex space-x-2 mt-4">
-                <button
-                  class="flex-1 bg-white/20 hover:bg-white/30 rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200"
-                >
-                  Players
-                </button>
-                <button
-                  class="flex-1 bg-white/20 hover:bg-white/30 rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200"
-                >
-                  Matches
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Navigation -->
-          <nav class="px-4 lg:px-6 pb-6 space-y-1">
-            <div
-              v-for="item in navItems"
-              :key="item.name"
-              @click="selectNav(item.name)"
-              class="group cursor-pointer rounded-lg p-3 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-              :class="
-                activeNav === item.name
-                  ? 'bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600'
-                  : ''
-              "
-            >
-              <div class="flex items-center space-x-3">
-                <div
-                  class="w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-200"
-                  :class="
-                    activeNav === item.name
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
-                  "
-                >
-                  <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="flex-1 min-w-0">
-                  <h3
-                    class="font-medium transition-colors duration-200 truncate"
-                    :class="
-                      activeNav === item.name
-                        ? 'text-blue-900 dark:text-blue-100'
-                        : 'text-gray-900 dark:text-gray-100'
-                    "
-                  >
-                    {{ item.name }}
-                  </h3>
-                  <p
-                    class="text-sm transition-colors duration-200 truncate"
-                    :class="
-                      activeNav === item.name
-                        ? 'text-blue-700 dark:text-blue-200'
-                        : 'text-gray-500 dark:text-gray-400'
-                    "
-                  >
-                    {{ item.description }}
-                  </p>
-                </div>
-                <div
-                  v-if="item.badge"
-                  class="px-2 py-1 text-xs font-bold rounded-full"
-                  :class="
-                    item.badge === 'HOT'
-                      ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
-                      : item.badge === 'NEW'
-                      ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
-                      : 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
-                  "
-                >
-                  {{ item.badge }}
-                </div>
-              </div>
-            </div>
-          </nav>
-
-          <!-- Recent Activities -->
-          <div class="px-4 lg:px-6 pb-6 space-y-4">
-            <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
-              <h4
-                class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3"
-              >
-                Recent Activities
-              </h4>
-              <div class="space-y-2">
-                <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                  <p
-                    class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                  >
-                    Training Session Completed
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
-                    Full squad attended morning training
-                  </p>
-                </div>
-                <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                  <p
-                    class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                  >
-                    Match Report Uploaded
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
-                    Pirates vs Chiefs match analysis
-                  </p>
-                </div>
-                <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                  <p
-                    class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                  >
-                    Player Stats Updated
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
-                    Individual performance metrics
-                  </p>
-                </div>
-                <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                  <p
-                    class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                  >
-                    Team Meeting Scheduled
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
-                    Strategy discussion for next match
-                  </p>
-                </div>
-                <div class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                  <p
-                    class="text-sm font-medium text-gray-900 dark:text-gray-100"
-                  >
-                    Media Interview
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
-                    Coach press conference completed
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- User Profile - Fixed at bottom -->
-        <div
-          class="flex-shrink-0 p-4 lg:p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
-        >
-          <div
-            class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
-          >
-            <div class="relative">
-              <div
-                class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center"
-              >
-                <span class="text-white font-medium">{{ userInitials }}</span>
-              </div>
-              <div
-                class="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-700"
-              ></div>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-medium text-gray-900 dark:text-white truncate">
-                {{ userName }}
-              </p>
-              <p class="text-sm text-gray-500 dark:text-gray-400 truncate">
-                {{ userHandle }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </aside>
+       <federation-sidebar />
 
       <!-- Main Content -->
       <main class="flex-1 lg:ml-0 min-h-0 overflow-hidden">
@@ -574,98 +273,11 @@
             </div>
           </div>
 
-          <!-- Content Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-            <!-- Upcoming Matches -->
-            <div
-              class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
-            >
-              <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-                  Upcoming Matches
-                </h2>
-                <div class="flex items-center space-x-2">
-                  <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span class="text-sm font-medium text-green-600"
-                    >{{ upcomingMatches.length }} Scheduled</span
-                  >
-                </div>
-              </div>
-              <div class="space-y-3">
-                <div
-                  v-for="match in upcomingMatches"
-                  :key="match.id"
-                  class="p-4 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-blue-300 dark:hover:border-blue-600 transition-colors duration-200 cursor-pointer"
-                >
-                  <div class="flex items-center justify-between mb-2">
-                    <span
-                      class="px-2 py-1 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-xs font-medium rounded"
-                      >{{ match.status }}</span
-                    >
-                    <span class="text-sm text-gray-500 dark:text-gray-400">{{
-                      match.date
-                    }}</span>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h3 class="font-semibold text-gray-900 dark:text-white">
-                        {{ match.opponent }}
-                      </h3>
-                      <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ match.venue }}
-                      </p>
-                    </div>
-                    <div class="text-right">
-                      <div class="text-lg font-bold text-blue-600">
-                        {{ match.time }}
-                      </div>
-                      <div class="text-xs text-gray-500">
-                        {{ match.competition }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Team Announcements -->
-            <div
-              class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
-            >
-              <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6">
-                Team Announcements
-              </h2>
-              <div class="space-y-4">
-                <div
-                  v-for="announcement in teamAnnouncements"
-                  :key="announcement.id"
-                  class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800"
-                >
-                  <div class="flex items-center space-x-2 mb-2">
-                    <span class="font-bold text-blue-600 dark:text-blue-400">{{
-                      announcement.priority
-                    }}</span>
-                  </div>
-                  <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                    {{ announcement.title }}
-                  </h3>
-                  <p class="text-sm text-gray-600 dark:text-gray-400">
-                    {{ announcement.message }}
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-500 mt-2">
-                    {{ announcement.date }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <!-- Main Content Area -->
-          <div
-            class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 min-h-[400px]"
-          >
-            <slot />
-          </div>
+          <main>
+            <slot></slot>
+          </main>
+
         </div>
       </main>
     </div>

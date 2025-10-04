@@ -27,6 +27,7 @@ export const useAuthStore = defineStore("auth", () => {
     const user = ref<User | null>(null);
     const accessToken = ref<string | null>(null);
     const refreshToken = ref<string | null>(null);
+    const router = useRouter();
 
     const isAuthenticated = computed(() => !!user.value && !!accessToken.value);
 
@@ -55,7 +56,7 @@ export const useAuthStore = defineStore("auth", () => {
         refreshToken.value = responseData.refreshToken;
     }
 
-    function signOut() {
+    function signOut(returnUrl: string = "/auth/login") {
         // Clear the user data in the store
         user.value = null;
         accessToken.value = null;
@@ -69,6 +70,8 @@ export const useAuthStore = defineStore("auth", () => {
             // Optionally, set the cookie expiry date to the past to ensure it gets deleted
             //   userCookie.value = new Date(0);
         }
+
+        router.push(returnUrl);
     }
 
     function init() {

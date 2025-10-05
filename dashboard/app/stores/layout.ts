@@ -5,18 +5,14 @@ import { ref, computed, watch } from "vue"
 const LAYOUT_STORAGE_KEY = "sc812-layout"
 
 export const useLayoutStore = defineStore("layout", () => {
-  // Sidebar state
-  const header = ref({
-  })
-  
+
   const sidebar = ref({
     isOpen: false,
   })
 
-
   /**
    * Sidebar toggle function.
-   * @param force - If true, open the sidebar; if false, close it; if null, toggle it.
+   * @param force - `true`, open the sidebar | `false`, close it; | `null`, toggle it.
    */
   function toggleSidebar(force: boolean | null = null) {
     if (force !== null) {

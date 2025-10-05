@@ -4,6 +4,8 @@
 /* Make dark: utilities activate when [data-theme="dark"] is present */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/* PRIMARY COLORS */
+/* All shades of purple,blue, green */
 
 /* BASE COLORS */
 @theme {

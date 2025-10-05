@@ -1,0 +1,16 @@
+PostgreSQL (Recommended)
+Why it's faster:
+
+Superior indexing (GiST, GIN, BRIN, partial indexes)
+Better concurrent read/write performance
+More efficient query planner
+Native JSON support (faster than SQL Server's implementation)
+Open-source and free (no licensing costs)
+
+EF Core Support:
+
+Npgsql.EntityFrameworkCore.PostgreSQL - rock solid
+Full feature parity with SQL Server provider
+Easy migration from SQL Server concepts
+
+Learning curve: Minimal! If you know SQL Server, you'll adapt quickly. Syntax is 95% the same.

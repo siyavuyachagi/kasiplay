@@ -3,9 +3,9 @@ import { defineStore } from "pinia"
 import { ref, computed } from "vue"
 
 export const useThemeStore = defineStore("sc812-theme", () => {
-
   const isDark = ref(false)
   const theme = computed(() => (isDark.value ? "dark" : "light"))
+  const isInitialized = ref(false)
 
   function toggleTheme() {
     isDark.value = !isDark.value
@@ -17,8 +17,10 @@ export const useThemeStore = defineStore("sc812-theme", () => {
     if (import.meta.client) {
       const html = document.documentElement
       if (isDark.value) {
+        html.classList.add("dark")
         html.setAttribute("data-theme", "dark")
       } else {
+        html.classList.remove("dark")
         html.removeAttribute("data-theme")
       }
     }
@@ -35,7 +37,7 @@ export const useThemeStore = defineStore("sc812-theme", () => {
   }
 
   function init() {
-    if (import.meta.client) {
+    if (import.meta.client && !isInitialized.value) {
       try {
         const saved = localStorage.getItem("sc812-theme")
         if (saved) {
@@ -48,6 +50,7 @@ export const useThemeStore = defineStore("sc812-theme", () => {
         isDark.value = window.matchMedia("(prefers-color-scheme: dark)").matches
       }
       applyTheme()
+      isInitialized.value = true
     }
   }
 

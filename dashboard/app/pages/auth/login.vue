@@ -1,6 +1,8 @@
 <template>
   <div class="max-w-md mx-auto">
-    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div
+      class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+    >
       <!-- Header -->
       <div class="p-8 pb-6">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -15,11 +17,13 @@
       <div class="px-8 pb-6">
         <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-1 flex">
           <button
-            @click="organizationType = 'club'"
+            @click="changeOrganization(OrganizationType.CLUB)"
             class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all"
-            :class="organizationType === 'club' 
-              ? 'bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 shadow-sm' 
-              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'"
+            :class="
+              route.query.orgtype === OrganizationType.CLUB
+                ? 'bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+            "
           >
             <div class="flex items-center justify-center space-x-2">
               <icon name="lucide:building-2" size="16" />
@@ -27,11 +31,13 @@
             </div>
           </button>
           <button
-            @click="organizationType = 'federation'"
+            @click="changeOrganization(OrganizationType.GOVERNING_BODY)"
             class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all"
-            :class="organizationType === 'federation' 
-              ? 'bg-white dark:bg-gray-800 text-purple-600 dark:text-purple-400 shadow-sm' 
-              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'"
+            :class="
+              route.query.orgtype === OrganizationType.GOVERNING_BODY
+                ? 'bg-white dark:bg-gray-800 text-purple-600 dark:text-purple-400 shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+            "
           >
             <div class="flex items-center justify-center space-x-2">
               <icon name="lucide:shield" size="16" />
@@ -44,7 +50,9 @@
       <!-- Form -->
       <form @submit.prevent="handleLogin" class="px-8 pb-8 space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >
             Email Address
           </label>
           <input
@@ -57,7 +65,9 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          >
             Password
           </label>
           <div class="relative">
@@ -102,9 +112,11 @@
           type="submit"
           :disabled="loading"
           class="w-full py-3 px-4 rounded-lg font-medium text-white transition-all"
-          :class="organizationType === 'club'
-            ? 'bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-500/50'
-            : 'bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-500/50'"
+          :class="
+            route.query.orgtype === OrganizationType.CLUB
+              ? 'bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-500/50'
+              : 'bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-500/50'
+          "
         >
           <span v-if="!loading">Sign In</span>
           <span v-else class="flex items-center justify-center space-x-2">
@@ -115,12 +127,18 @@
       </form>
 
       <!-- Footer -->
-      <div class="px-8 py-6 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-600">
+      <div
+        class="px-8 py-6 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-600"
+      >
         <p class="text-center text-sm text-gray-600 dark:text-gray-400">
           Don't have an account?
           <nuxt-link
             to="/auth/register"
-            :class="organizationType === 'club' ? 'text-blue-600 dark:text-blue-400' : 'text-purple-600 dark:text-purple-400'"
+            :class="
+              route.query.orgtype === OrganizationType.CLUB
+                ? 'text-blue-600 dark:text-blue-400'
+                : 'text-purple-600 dark:text-purple-400'
+            "
             class="font-medium hover:underline ml-1"
           >
             Apply now
@@ -132,36 +150,76 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: 'auth'
+const enum OrganizationType {
+  CLUB = "club",
+  GOVERNING_BODY = "governing_body",
+}
+useHead({
+  title: 'Kasiplay | Login'
 })
+definePageMeta({
+  layout: "auth",
+  middleware: (to) => {
+    const queries: Record<string, any> = { ...to.query };
+    let isModified = false;
 
-const email = ref('')
-const password = ref('')
-const rememberMe = ref(false)
-const showPassword = ref(false)
-const loading = ref(false)
-const organizationType = ref<'club' | 'federation'>('club')
+    if (!queries.return_url) {
+      queries.return_url = "/";
+      isModified = true;
+    }
+
+    if (!queries.orgtype) {
+      queries.orgtype = OrganizationType.CLUB;
+      isModified = true;
+    }
+
+    // Only navigate if we actually modified something
+    if (isModified) {
+      return navigateTo({
+        path: to.path,
+        query: queries,
+      });
+    }
+  },
+});
+
+const route = useRoute();
+const router = useRouter();
+const email = ref("");
+const password = ref("");
+const rememberMe = ref(false);
+const showPassword = ref(false);
+const loading = ref(false);
+const organizationType = ref<"club" | "federation">("club");
 
 const handleLogin = async () => {
-  loading.value = true
+  loading.value = true;
   try {
     // TODO: Implement actual login logic
-    console.log('Login:', { email: email.value, organizationType: organizationType.value })
-    
+    console.log("Login:", {
+      email: email.value,
+      organizationType: organizationType.value,
+    });
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
     // Navigate based on organization type
-    if (organizationType.value === 'club') {
-      navigateTo('/dashboard')
+    if (organizationType.value === "club") {
+      navigateTo("/dashboard");
     } else {
-      navigateTo('/dashboard') // Will show federation dashboard
+      navigateTo("/dashboard"); // Will show federation dashboard
     }
   } catch (error) {
-    console.error('Login error:', error)
+    console.error("Login error:", error);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
+
+const changeOrganization = (type: OrganizationType) => {
+  router.push({
+    query: { ...route.query, orgtype: type },
+  });
+};
 </script>

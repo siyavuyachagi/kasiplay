@@ -1,1 +1,7 @@
-All backend code will go here.
+My Recommendation
+Since you're proficient in both and work primarily with Vue.js/Nuxt.js:
+
+Quick MVPs, real-time apps, or microservices: Node.js + Express
+Complex business logic, enterprise apps, or data-heavy applications: C# + EF Core
+
+You could also consider building a C# Web API (ASP.NET Core) for the backend while keeping your Vue.js/Nuxt.js frontend - you get the best of both worlds: strong backend architecture with a modern JavaScript frontend.

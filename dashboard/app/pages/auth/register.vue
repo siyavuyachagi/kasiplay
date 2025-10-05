@@ -132,6 +132,10 @@
 </template>
 
 <script setup lang="ts">
+
+useHead({
+  title: 'Kasiplay | Register'
+})
 definePageMeta({
   layout: "auth",
 });

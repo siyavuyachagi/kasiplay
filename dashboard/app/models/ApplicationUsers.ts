@@ -1,7 +1,4 @@
-import type { OfficialRole, StaffRole } from '~/types/enums';
-import type { Contact } from './Contact';
 import type { PhysicalAddress } from './PhysicalAddress';
-import type { Achievement } from './Achievement';
 import type { Tenant } from './Tenant';
 import type { EmergencyContact } from './EmergencyContact';
 

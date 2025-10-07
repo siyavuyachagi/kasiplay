@@ -1,7 +1,4 @@
-import type { Coach } from "./Coach";
-import type { Director } from "./Director";
-import type { Manager } from "./Manager";
-import type { President } from "./President";
+import type { Official } from "./Official";
 import type { SocialLink } from "./SocialLink";
 import type { Tenant } from "./Tenant";
 
@@ -23,14 +20,7 @@ export interface Organization {
     establishedDate?: Date;
 
     // Officials
-    // presidentId?: string;
-    // president?: President;
-    // managerId?: string;
-    // manager?: Manager;
-    // directorId?: string;
-    // director?: Director;
-    // coachId?: string;
-    // coach?: Coach;
+    officials: Official[];
 
     // Branding and identity
     logoUrl: string;

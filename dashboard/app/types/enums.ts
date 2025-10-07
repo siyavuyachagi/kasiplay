@@ -202,7 +202,6 @@ export enum MatchType {
   CUP = 'cup',
   FRIENDLY = 'friendly',
 }
-
 //#endregion
 
 //#region O

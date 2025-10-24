@@ -24,7 +24,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: 'https://kasiplay.com', // your live site
+    url: 'https://dashboard.kasiplay.com', // your live site
     gzip: true, // generates sitemap.xml.gz
   },
   sitemap: {
@@ -50,10 +50,13 @@ export default defineNuxtConfig({
         { name: "theme-color", content: "#000000" },
         { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
       ],
+
       link: [
-        { rel: "icon", type: "image/jpeg", href: "/favicon.png" },
-        { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+        { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
+        { rel: "shortcut icon", href: "/favicon.ico" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       ],
+
     }
   }
 })

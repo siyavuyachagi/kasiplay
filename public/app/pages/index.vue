@@ -1,17 +1,99 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
-    <!-- Top Live Match Banner -->
-    <div
-      class="sticky top-0 z-40 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 shadow-lg">
+    <!-- Top Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-14">
+          <!-- Left: Logo & Menu Toggle -->
+          <div class="flex items-center space-x-3">
+            <!-- Mobile: Sidebar Toggle -->
+            <button
+              @click="leftSidebarOpen = !leftSidebarOpen"
+              class="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+              <icon name="lucide:menu" size="20" class="text-gray-700 dark:text-gray-300" />
+            </button>
+
+            <!-- Logo -->
+            <nuxt-link to="/" class="flex items-center space-x-2">
+              <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <span class="text-white text-lg font-bold">⚽</span>
+              </div>
+              <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hidden sm:inline">
+                KasiPlay
+              </span>
+            </nuxt-link>
+          </div>
+
+          <!-- Center: Search Bar (Desktop) -->
+          <div class="hidden md:flex flex-1 max-w-xl mx-4">
+            <div class="relative w-full">
+              <icon name="lucide:search" size="18" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search teams, players, matches..."
+                class="w-full pl-10 pr-4 py-2 bg-gray-100 dark:bg-gray-700 border border-transparent focus:border-blue-500 rounded-lg text-sm text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none transition-colors">
+            </div>
+          </div>
+
+          <!-- Right: Actions -->
+          <div class="flex items-center space-x-2">
+            <!-- Mobile: Search Toggle -->
+            <button
+              class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+              <icon name="lucide:search" size="20" class="text-gray-700 dark:text-gray-300" />
+            </button>
+
+            <!-- Theme Toggle -->
+            <button
+              @click="toggleTheme"
+              class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+              <icon v-if="isDark" name="lucide:sun" size="20" class="text-yellow-500" />
+              <icon v-else name="lucide:moon" size="20" class="text-gray-600 dark:text-gray-400" />
+            </button>
+
+            <!-- Notifications (Guest) -->
+            <button class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors relative">
+              <icon name="lucide:bell" size="20" class="text-gray-700 dark:text-gray-300" />
+              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
+            </button>
+
+            <!-- Mobile: Right Sidebar Toggle -->
+            <button
+              @click="rightSidebarOpen = !rightSidebarOpen"
+              class="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+              <icon name="lucide:panel-right" size="20" class="text-gray-700 dark:text-gray-300" />
+            </button>
+
+            <!-- Sign In Button (Desktop) -->
+            <nuxt-link
+              to="/auth/login"
+              class="hidden md:inline-flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors text-sm">
+              <icon name="lucide:log-in" size="18" />
+              <span>Sign In</span>
+            </nuxt-link>
+
+            <!-- Account Menu Toggle (When Logged In - Future) -->
+            <!-- <button class="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-sm font-semibold">
+                SC
+              </div>
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Live Match Banner -->
+    <div class="sticky top-14 z-40 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 shadow-lg">
       <div class="container mx-auto flex items-center justify-between">
         <div class="flex items-center space-x-3">
           <span class="relative flex h-2.5 w-2.5">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
           </span>
           <span class="font-semibold text-sm">LIVE</span>
-          <span class="text-sm">Chiefs FC 2-1 Pirates United • 67'</span>
+          <span class="text-sm hidden sm:inline">Chiefs FC 2-1 Pirates United • 67'</span>
+          <span class="text-sm sm:hidden">Chiefs 2-1 Pirates • 67'</span>
         </div>
         <nuxt-link
           to="/matches/live/1"
@@ -25,7 +107,21 @@
     <div class="container mx-auto px-4 py-6">
       <div class="grid lg:grid-cols-12 gap-6">
         <!-- Left Sidebar -->
-        <aside class="lg:col-span-3 space-y-4">
+        <aside
+          :class="[
+            'lg:col-span-3 space-y-4',
+            'fixed lg:static inset-y-0 left-0 z-30 w-64 lg:w-auto bg-gray-50 dark:bg-gray-900 lg:bg-transparent overflow-y-auto transition-transform duration-300',
+            leftSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+          ]"
+          style="top: 112px; height: calc(100vh - 112px);">
+          <!-- Close Button (Mobile) -->
+          <div class="lg:hidden flex justify-end p-4">
+            <button
+              @click="leftSidebarOpen = false"
+              class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+              <icon name="lucide:x" size="20" class="text-gray-700 dark:text-gray-300" />
+            </button>
+          </div>
           <!-- Quick Navigation -->
           <div
             class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden sticky top-20">
@@ -318,7 +414,21 @@
         </main>
 
         <!-- Right Sidebar -->
-        <aside class="lg:col-span-3 space-y-4">
+        <aside
+          :class="[
+            'lg:col-span-3 space-y-4',
+            'fixed lg:static inset-y-0 right-0 z-30 w-80 lg:w-auto bg-gray-50 dark:bg-gray-900 lg:bg-transparent overflow-y-auto transition-transform duration-300',
+            rightSidebarOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'
+          ]"
+          style="top: 112px; height: calc(100vh - 112px);">
+          <!-- Close Button (Mobile) -->
+          <div class="lg:hidden flex justify-end p-4">
+            <button
+              @click="rightSidebarOpen = false"
+              class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+              <icon name="lucide:x" size="20" class="text-gray-700 dark:text-gray-300" />
+            </button>
+          </div>
           <!-- Announcements -->
           <div
             class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden sticky top-20">

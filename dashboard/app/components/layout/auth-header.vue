@@ -5,11 +5,11 @@
     <div class="container mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
         <nuxt-link to="/" class="flex items-center space-x-3">
-          <nuxt-img
+          <!-- <nuxt-img
             src="/favicon.png"
             alt="KasiPlay Logo"
             class="w-10 h-auto"
-          />
+          /> -->
           <span
             class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
           >
@@ -17,7 +17,7 @@
           </span>
         </nuxt-link>
 
-        <lazy-client-only>
+        <!-- <lazy-client-only>
           <button
             @click="toggleTheme"
             class="flex p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
@@ -30,7 +30,7 @@
             />
             <icon v-else name="lucide:moon" size="20" class="!text-gray-500" />
           </button>
-        </lazy-client-only>
+        </lazy-client-only> -->
       </div>
     </div>
   </header>

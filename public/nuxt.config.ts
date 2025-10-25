@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@pinia/nuxt',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@vite-pwa/nuxt'
   ],
 
   devServer: {
@@ -49,13 +50,24 @@ export default defineNuxtConfig({
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { charset: "utf-8" },
         { name: "theme-color", content: "#000000" },
+
+        // iOS PWA support
+        { name: "apple-mobile-web-app-capable", content: "yes" },
         { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+        { name: "apple-mobile-web-app-title", content: "KasiPlay" },
+        { name: "mobile-web-app-capable", content: "yes" },
       ],
 
       link: [
+        // Favicon links
         { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
         { rel: "shortcut icon", href: "/favicon.ico" },
-        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+
+        // iOS home screen icons (required for Add to Home Screen)
+        { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
+
+        // Manifest for PWA
+        { rel: "manifest", href: "/manifest.webmanifest" },
       ],
 
       script: [
@@ -86,5 +98,48 @@ export default defineNuxtConfig({
         }
       ]
     }
-  }
+  },
+
+
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'KasiPlay',
+      short_name: 'KasiPlay',
+      description: 'Your ultimate sports and tournaments platform',
+      theme_color: '#ffffff',
+      background_color: '#000000',
+      display: 'standalone',
+      start_url: '/',
+      orientation: 'portrait',
+      icons: [
+        {
+          src: '/icons/web-app-manifest-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          src: '/icons/web-app-manifest-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+        {
+          src: '/icons/web-app-manifest-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'maskable',
+        },
+      ],
+    },
+
+    // Adds automatic service worker generation
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}'],
+      globIgnores: ["**\/node_modules\/**\/*"]
+    },
+
+    devOptions: {
+      enabled: true, // allows testing PWA in dev mode
+    },
+  },
 })

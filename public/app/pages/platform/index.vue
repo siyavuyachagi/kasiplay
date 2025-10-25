@@ -14,12 +14,12 @@
         <div class="max-w-4xl mx-auto text-center space-y-6 lg:space-y-8">
           <!-- Badge -->
           <nuxt-link
-            to="/platform"
+            to="/"
             class="inline-flex items-center space-x-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 hover:bg-white/20 transition-all duration-200">
             <span
               class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
             <span class="text-sm font-medium"
-              >Explore the KasiPlay Platform</span
+              >Explore the KasiPlay platform</span
             >
           </nuxt-link>
 
@@ -267,7 +267,7 @@
             </nuxt-link>
           </div>
           <p class="text-sm text-blue-100">
-            No credit card required • 14-day free trial • Cancel anytime
+            No credit card required • 30-day free trial • Cancel anytime
           </p>
         </div>
       </div>
@@ -277,7 +277,7 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: "public",
+  // layout: "public",
 });
 
 interface Feature {

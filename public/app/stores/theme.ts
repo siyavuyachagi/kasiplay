@@ -2,10 +2,10 @@
 import { defineStore } from "pinia"
 import { ref, computed } from "vue"
 
-export const useThemeStore = defineStore("sc812-theme", () => {
+export const useThemeStore = defineStore("theme", () => {
+  const STORAGE_KEY = "kp-public-auth-store"; // Single key for storing auth data
   const isDark = ref(false)
   const theme = computed(() => (isDark.value ? "dark" : "light"))
-  const isInitialized = ref(false)
 
   function toggleTheme() {
     isDark.value = !isDark.value
@@ -29,7 +29,7 @@ export const useThemeStore = defineStore("sc812-theme", () => {
   function saveToStorage() {
     if (import.meta.client) {
       try {
-        localStorage.setItem("sc812-theme", theme.value)
+        localStorage.setItem(STORAGE_KEY, theme.value)
       } catch (error) {
         console.warn("Could not save theme to localStorage:", error)
       }
@@ -37,9 +37,9 @@ export const useThemeStore = defineStore("sc812-theme", () => {
   }
 
   function init() {
-    if (import.meta.client && !isInitialized.value) {
+    if (import.meta.client) {
       try {
-        const saved = localStorage.getItem("sc812-theme")
+        const saved = localStorage.getItem(STORAGE_KEY)
         if (saved) {
           isDark.value = saved === "dark"
         } else {
@@ -50,7 +50,6 @@ export const useThemeStore = defineStore("sc812-theme", () => {
         isDark.value = window.matchMedia("(prefers-color-scheme: dark)").matches
       }
       applyTheme()
-      isInitialized.value = true
     }
   }
 

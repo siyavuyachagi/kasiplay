@@ -3,6 +3,8 @@ import { ref, computed } from "vue";
 
 interface User {
     id: string;
+    username?: string;
+    email: string;
     userName: string;
     lastName: string;
     firstName: string;
@@ -16,12 +18,6 @@ interface ResponseData {
     user: User;
 }
 
-interface AuthStorage {
-    user: User;
-    accessToken: string;
-    refreshToken: string;
-}
-
 export const useAuthStore = defineStore("auth", () => {
     const STORAGE_KEY = "kp-dashboard-auth-store"; // Single key for storing auth data
     const user = ref<User | null>(null);
@@ -32,11 +28,6 @@ export const useAuthStore = defineStore("auth", () => {
     const isAuthenticated = computed(() => !!user.value && !!accessToken.value);
 
     function signIn(responseData: ResponseData, rememberMe: boolean = false) {
-        const authData: AuthStorage = {
-            user: responseData.user,
-            accessToken: responseData.accessToken,
-            refreshToken: responseData.refreshToken,
-        };
 
         // Retrieve the cookie object
         const userCookie = useCookie(STORAGE_KEY, {
@@ -48,7 +39,7 @@ export const useAuthStore = defineStore("auth", () => {
         });
 
         // Set the cookie value with the authentication data
-        userCookie.value = JSON.stringify(authData);
+        userCookie.value = JSON.stringify(responseData);
 
         // Set individual state variables in Pinia store
         user.value = responseData.user;
@@ -81,7 +72,7 @@ export const useAuthStore = defineStore("auth", () => {
         // Check if the cookie is not empty
         if (userCookie.value) {
             // Assert that userCookie.value is of type AuthStorage
-            const storedData = userCookie.value as unknown as AuthStorage;
+            const storedData = userCookie.value as unknown as ResponseData;
             // Destructure the values into the required variables
             const {
                 user: storedUser,
@@ -94,8 +85,6 @@ export const useAuthStore = defineStore("auth", () => {
             refreshToken.value = storedRefreshToken;
         }
     }
-
-    init(); // Call the init function when the store is created
 
     return {
         user,

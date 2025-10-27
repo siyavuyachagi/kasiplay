@@ -12,11 +12,11 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@pinia/nuxt',
     '@nuxtjs/sitemap',
-    '@vite-pwa/nuxt'
   ],
 
   devServer: {
-    port: 3001,
+    port: 3000,
+    host: 'localhost',
   },
 
   vite: {
@@ -30,7 +30,12 @@ export default defineNuxtConfig({
     gzip: true, // generates sitemap.xml.gz
   },
   sitemap: {
-    exclude: [],
+    exclude: [
+      "/account/**",
+      "/admin/**",
+      "/dashboard/**",
+      "/settings/**",
+    ],
     defaults: {
       changefreq: 'weekly',
       priority: 0.7,
@@ -100,63 +105,5 @@ export default defineNuxtConfig({
         }
       ]
     }
-  },
-
-
-  pwa: {
-    registerType: 'autoUpdate',
-    manifest: {
-      name: 'KasiPlay',
-      short_name: 'KasiPlay',
-      description: 'Your ultimate sports and tournaments platform',
-      theme_color: '#ffffff',
-      background_color: '#000000',
-      display: 'standalone',
-      start_url: '/',
-      orientation: 'portrait',
-      icons: [
-        {
-          src: '/icons/web-app-manifest-192x192.png',
-          sizes: '192x192',
-          type: 'image/png',
-        },
-        {
-          src: '/icons/web-app-manifest-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-        },
-        {
-          src: '/icons/web-app-manifest-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-          purpose: 'maskable',
-        },
-      ],
-    },
-
-    workbox: {
-      globPatterns: [], // Empty in dev - no precaching warnings
-      runtimeCaching: [
-        {
-          urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'google-fonts-cache',
-            expiration: {
-              maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
-            },
-            cacheableResponse: {
-              statuses: [0, 200]
-            }
-          }
-        }
-      ]
-    },
-
-    devOptions: {
-      enabled: true,
-      type: 'module',
-    },
   },
 })

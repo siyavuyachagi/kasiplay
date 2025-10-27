@@ -98,8 +98,8 @@ KasiPlay is a modern SaaS platform designed to streamline sports team management
 
 ### Prerequisites
 - .NET 8.0 SDK
-- Node.js 18+ 
-- SQL Server or PostgreSQL
+- Node.js 18+
+- PostgreSQL
 - Azure account (for deployment)
 
 ## 📱 Responsive Design

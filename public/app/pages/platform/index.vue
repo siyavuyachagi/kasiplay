@@ -276,9 +276,6 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  // layout: "public",
-});
 
 interface Feature {
   icon: string;

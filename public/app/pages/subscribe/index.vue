@@ -1,0 +1,3 @@
+<template>
+    Subscribe page
+</template>

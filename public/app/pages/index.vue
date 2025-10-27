@@ -712,7 +712,22 @@
     </transition>
 
     <footer>
-      <div class="flex justify-center">Copy right &copy; 2025 Kasiplay, Kinetic Studios</div>
+      <div
+        class="flex justify-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-3">
+        <div
+          class="flex flex-wrap gap-2 text-xs text-gray-500 dark:text-gray-400">
+          <a href="/about" class="hover:underline">About</a>
+          <span>•</span>
+          <a href="/help" class="hover:underline">Help</a>
+          <span>•</span>
+          <a href="/terms" class="hover:underline">Terms</a>
+          <span>•</span>
+          <a href="/privacy" class="hover:underline">Privacy</a>
+        </div>
+        <p class="text-xs text-gray-400 dark:text-gray-500 mt-2">
+          © 2025 KasiPlay
+        </p>
+      </div>
     </footer>
   </div>
 </template>

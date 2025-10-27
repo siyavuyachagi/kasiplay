@@ -94,8 +94,6 @@ KasiPlay is a modern SaaS platform designed to streamline sports team management
 * Communicate with team and staff
 * Update schedule and availability
 
-## 🏗️ Architecture
-
 ## 🚀 Getting Started
 
 ### Prerequisites

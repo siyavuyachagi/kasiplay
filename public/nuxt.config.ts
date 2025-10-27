@@ -40,6 +40,8 @@ export default defineNuxtConfig({
   },
 
   app: {
+    baseURL: "/",
+    // buildAssetsDir: "assets",
     head: {
       htmlAttrs: {
         lang: 'en-za' // Set your language/region here - google accessibility
@@ -132,14 +134,29 @@ export default defineNuxtConfig({
       ],
     },
 
-    // Adds automatic service worker generation
     workbox: {
-      globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}'],
-      globIgnores: ["**\/node_modules\/**\/*"]
+      globPatterns: [], // Empty in dev - no precaching warnings
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        }
+      ]
     },
 
     devOptions: {
-      enabled: true, // allows testing PWA in dev mode
+      enabled: true,
+      type: 'module',
     },
   },
 })

@@ -710,6 +710,10 @@
         class="fixed inset-0 bg-black/50 z-20 lg:hidden"
         style="top: 112px"></div>
     </transition>
+
+    <footer>
+      <div class="flex justify-center">Copy right &copy; 2025 Kasiplay, Kinetic Studios</div>
+    </footer>
   </div>
 </template>
 

@@ -1,0 +1,3 @@
+<template>
+    Gallery page
+</template>

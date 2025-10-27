@@ -1,0 +1,1 @@
+<template>Teams list</template>

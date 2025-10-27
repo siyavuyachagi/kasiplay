@@ -54,12 +54,14 @@
           <button
             @click="themeStore.toggleTheme()"
             class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-            <icon
-              v-if="themeStore.isDark"
-              name="lucide:sun"
-              size="20"
-              class="text-yellow-500" />
-            <icon v-else name="lucide:moon" size="20" class="text-gray-600" />
+            <ClientOnly>
+              <icon
+                v-if="themeStore.isDark"
+                name="lucide:sun"
+                size="20"
+                class="text-yellow-500" />
+              <icon v-else name="lucide:moon" size="20" class="text-gray-600" />
+            </ClientOnly>
           </button>
 
           <button

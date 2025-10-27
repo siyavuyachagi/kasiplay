@@ -1,5 +1,10 @@
 <template>
-  <div class="bg-gray-50 dark:bg-gray-900">
+  <div
+    class="bg-gray-50 dark:bg-gray-900"
+    :class="{
+      'overflow-hidden h-screen lg:overflow-auto lg:h-auto':
+        layoutStore.isLeftSidebarOpen || layoutStore.isRightSidebarOpen,
+    }">
     <!-- Top Navigation Bar -->
     <top-navigations />
     <!-- Live Match Banner -->
@@ -7,7 +12,7 @@
 
     <!-- Main Content Area -->
     <slot />
-    
+
     <!-- Footer  -->
     <default-footer />
 

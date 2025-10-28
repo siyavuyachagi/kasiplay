@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-blue-700 dark:from-blue-900 dark:via-purple-900 dark:to-blue-950 flex items-center justify-center p-4 relative overflow-hidden">
+    class="min-h-screen bg-linear-to-br from-blue-600 via-purple-600 to-blue-700 dark:from-blue-900 dark:via-purple-900 dark:to-blue-950 flex items-center justify-center p-4 relative overflow-hidden">
     <!-- Background Pattern -->
     <div
       class="absolute inset-0 opacity-10"
@@ -37,8 +37,7 @@
                 class="w-10 h-10 object-contain" />
             </div>
           </nuxt-link>
-          <h2
-            class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Welcome Back
           </h2>
           <p class="text-gray-600 dark:text-gray-400">
@@ -172,8 +171,7 @@
         </div>
 
         <!-- Sign Up Link -->
-        <p
-          class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
           Don't have an account?
           <nuxt-link
             to="/account/register"

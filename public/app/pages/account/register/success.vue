@@ -47,36 +47,41 @@
           </div>
 
           <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Password Reset Successful!
+            Registration Successful!
           </h2>
           <p class="text-gray-600 dark:text-gray-400">
-            Your password has been successfully updated
+            Your account has been successfully created.
           </p>
         </div>
 
         <!-- Success Message -->
         <div
           class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mb-6 text-center">
-          <div class="flex items-center justify-center space-x-2 text-green-700 dark:text-green-400">
+          <div
+            class="flex items-center justify-center space-x-2 text-green-700 dark:text-green-400">
             <icon name="lucide:shield-check" size="20" />
             <p class="text-sm font-medium">
-              Your account is now secure with the new password
+              Welcome! Your account is now secure and ready to use.
             </p>
           </div>
         </div>
 
         <!-- Info Box -->
-        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+        <div
+          class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
           <div class="flex items-start space-x-3">
-            <icon name="lucide:info" size="20" class="text-blue-600 dark:text-blue-400 mt-0.5" />
+            <icon
+              name="lucide:info"
+              size="20"
+              class="text-blue-600 dark:text-blue-400 mt-0.5" />
             <div class="text-sm text-gray-700 dark:text-gray-300">
               <p class="font-medium text-gray-900 dark:text-white mb-2">
                 What's next?
               </p>
               <ul class="space-y-1 text-gray-600 dark:text-gray-400">
-                <li>• Use your new password to sign in</li>
-                <li>• Keep your password secure</li>
-                <li>• Consider enabling two-factor authentication</li>
+                <li>• Sign in using your new account credentials</li>
+                <li>• Complete your profile to get personalized content</li>
+                <li>• Explore features and enjoy the platform</li>
               </ul>
             </div>
           </div>
@@ -92,12 +97,12 @@
 
         <!-- Additional Links -->
         <div class="mt-6 flex flex-col items-center space-y-3">
-          <nuxt-link
+          <!-- <nuxt-link
             to="/"
             class="inline-flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200">
             <icon name="lucide:home" size="16" />
             <span>Go to homepage</span>
-          </nuxt-link>
+          </nuxt-link> -->
 
           <div class="text-sm text-gray-500 dark:text-gray-400">
             Need help?

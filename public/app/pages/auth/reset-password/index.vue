@@ -11,7 +11,7 @@
     <!-- Theme Toggle Button -->
     <button
       @click="themeStore.toggleTheme()"
-      class="absolute top-4 right-4 p-3 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg hover:bg-white/20 dark:hover:bg-gray-700/50 transition-colors border border-white/20 dark:border-gray-700 z-10">
+      class="hidden md:flex absolute top-4 right-4 p-1 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg hover:bg-white/20 dark:hover:bg-gray-700/50 transition-colors border border-white/20 dark:border-gray-700 z-10">
       <ClientOnly>
         <icon
           v-if="themeStore.isDark"

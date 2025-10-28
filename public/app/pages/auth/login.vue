@@ -11,7 +11,7 @@
     <!-- Theme Toggle Button -->
     <button
       @click="themeStore.toggleTheme()"
-      class="absolute top-4 right-4 p-3 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg hover:bg-white/20 dark:hover:bg-gray-700/50 transition-colors border border-white/20 dark:border-gray-700 z-10">
+      class="hidden md:flex absolute top-4 right-4 p-1 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg hover:bg-white/20 dark:hover:bg-gray-700/50 transition-colors border border-white/20 dark:border-gray-700 z-10">
       <ClientOnly>
         <icon
           v-if="themeStore.isDark"
@@ -30,7 +30,7 @@
         <div class="text-center mb-8">
           <nuxt-link to="/" class="inline-block mb-4">
             <div
-              class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl">
+              class="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-blue-600 to-purple-600 rounded-2xl">
               <NuxtImg
                 src="/favicon.svg"
                 alt="Logo"
@@ -118,7 +118,7 @@
           <button
             type="submit"
             :disabled="loading"
-            class="w-full bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 dark:hover:from-blue-600 dark:hover:to-purple-600 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
+            class="w-full bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 dark:hover:from-blue-600 dark:hover:to-purple-600 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
             <span v-if="!loading">Sign In</span>
             <span v-else class="flex items-center justify-center space-x-2">
               <icon name="lucide:loader-2" size="20" class="animate-spin" />
@@ -176,7 +176,7 @@
           class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
           Don't have an account?
           <nuxt-link
-            to="/auth/register"
+            to="/account/register"
             class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold">
             Sign up for free
           </nuxt-link>

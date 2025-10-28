@@ -8,10 +8,11 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "clean": "rm -r .nuxt .output dist node_modules package-lock.json"
+    "clean": "rm -r .nuxt .output dist node_modules"
   },
   "dependencies": {
-    "@nuxt/icon": "^2.0.0",
+    "@iconify/utils": "^3.0.2",
+    "@nuxt/icon": "^2.1.0",
     "@nuxt/image": "^1.11.0",
     "@nuxtjs/sitemap": "^7.4.3",
     "@pinia/nuxt": "^0.11.2",

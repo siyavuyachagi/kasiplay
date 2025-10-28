@@ -73,8 +73,8 @@ export default defineNuxtConfig({
         // iOS home screen icons (required for Add to Home Screen)
         { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
 
-        // Manifest for PWA
-        { rel: "manifest", href: "/manifest.webmanifest" },
+        // Site manifest
+        { rel: "manifest", href: "/site.webmanifest" },
       ],
 
       script: [

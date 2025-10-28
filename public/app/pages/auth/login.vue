@@ -79,7 +79,7 @@
               <span class="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
             <nuxt-link
-              to="/auth/forgot-password"
+              to="/auth/reset-password"
               class="text-sm text-blue-600 hover:text-blue-700 font-medium">
               Forgot password?
             </nuxt-link>

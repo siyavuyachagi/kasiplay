@@ -1,4 +1,4 @@
-# KasiPlay Platform Documentation
+# KasiPlay Platform Architecture Documentation
 
 ## Project Overview
 **KasiPlay** is a sports team management and social content sharing platform designed for South African community football. The platform connects federations, clubs, players, officials, and fans in a unified digital ecosystem.

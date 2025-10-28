@@ -32,7 +32,7 @@
             @click="sections.standings = !sections.standings"
             class="w-full p-3 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
             <div class="flex items-center space-x-2">
-              <icon name="lucide:trophy" size="16" class="text-yellow-500" />
+              <icon name="lucide:trophy" size="16" class="text-purple-500" />
               <h3 class="font-semibold text-sm text-gray-900 dark:text-white">
                 League Standings
               </h3>
@@ -57,11 +57,11 @@
                 :key="team.id"
                 class="flex items-center space-x-2 px-2 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors cursor-pointer">
                 <div
-                  class="w-5 text-xs font-bold text-gray-500 dark:text-gray-400 text-center flex-shrink-0">
+                  class="w-5 text-xs font-bold text-gray-500 dark:text-gray-400 text-center shrink-0">
                   {{ index + 1 }}
                 </div>
                 <div
-                  class="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                  class="w-6 h-6 rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shrink-0">
                   <icon name="lucide:shield" size="12" class="text-white" />
                 </div>
                 <span
@@ -69,7 +69,7 @@
                   >{{ team.name }}</span
                 >
                 <span
-                  class="text-xs font-bold text-gray-900 dark:text-white flex-shrink-0"
+                  class="text-xs font-bold text-gray-900 dark:text-white shrink-0"
                   >{{ team.points }}</span
                 >
               </div>
@@ -115,7 +115,7 @@
                     :name="announcement.icon"
                     size="14"
                     :class="announcement.color"
-                    class="mt-1 flex-shrink-0" />
+                    class="mt-1 shrink-0" />
                   <div class="flex-1 min-w-0">
                     <h4
                       class="text-xs font-semibold text-gray-900 dark:text-white line-clamp-2">
@@ -142,6 +142,7 @@
           <button
             @click="sections.follow = !sections.follow"
             class="w-full p-3 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+            <icon name="lucide:user-plus" size="16" class="text-blue-500" />
             <h3 class="font-semibold text-sm text-gray-900 dark:text-white">
               Who to Follow
             </h3>
@@ -167,7 +168,7 @@
                 <div class="flex items-center space-x-2 flex-1 min-w-0">
                   <div
                     :class="[
-                      'w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-semibold flex-shrink-0',
+                      'w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-semibold shrink-0',
                       suggestion.gradient,
                     ]">
                     {{ suggestion.initials }}
@@ -182,7 +183,7 @@
                         v-if="suggestion.verified"
                         name="lucide:badge-check"
                         size="12"
-                        class="text-blue-500 flex-shrink-0" />
+                        class="text-blue-500 shrink-0" />
                     </div>
                     <span :class="['text-xs', suggestion.typeColor]">{{
                       suggestion.type
@@ -190,7 +191,7 @@
                   </div>
                 </div>
                 <button
-                  class="px-3 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex-shrink-0">
+                  class="px-3 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors shrink-0">
                   Follow
                 </button>
               </div>

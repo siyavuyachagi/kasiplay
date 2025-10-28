@@ -31,6 +31,7 @@
           <button
             @click="sections.navigation = !sections.navigation"
             class="w-full p-3 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+            <icon name="lucide:menu" size="16" class="text-purple-500" />
             <h3 class="font-semibold text-sm text-gray-900 dark:text-white">
               Navigation
             </h3>

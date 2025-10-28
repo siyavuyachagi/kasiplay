@@ -20,7 +20,7 @@
               alt="Logo"
               class="w-5 h-5 object-contain" />
             <span
-              class="hidden sm:inline text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              class="hidden sm:inline text-xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               KasiPlay
             </span>
           </nuxt-link>

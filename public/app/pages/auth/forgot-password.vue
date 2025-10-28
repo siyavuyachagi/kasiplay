@@ -1,3 +1,0 @@
-<template>
-    Forgot password
-</template>

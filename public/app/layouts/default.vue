@@ -6,15 +6,15 @@
         layoutStore.isLeftSidebarOpen || layoutStore.isRightSidebarOpen,
     }">
     <!-- Top Navigation Bar -->
-    <top-navigations />
+    <TopNavigations />
     <!-- Live Match Banner -->
-    <live-match-banner />
+    <LiveMatchBanner />
 
     <!-- Main Content Area -->
     <slot />
 
     <!-- Footer  -->
-    <default-footer />
+    <DefaultFooter />
 
     <!-- Mobile Overlay -->
     <transition
@@ -34,6 +34,12 @@
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
+
+const DefaultFooter = defineAsyncComponent(() => import('~/components/default-footer.vue'))
+const LiveMatchBanner = defineAsyncComponent(() => import('~/components/live-match-banner.vue'))
+const TopNavigations = defineAsyncComponent(() => import('~/components/top-navigations.vue'))
+
 const layoutStore = useLayoutStore();
 
 const closeSidebars = () => {

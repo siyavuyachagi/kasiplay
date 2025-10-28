@@ -89,6 +89,8 @@
             <icon name="lucide:log-in" size="18" />
             <span>Sign In</span>
           </nuxt-link>
+
+          <!-- Account icon dropdown  -->
         </div>
       </div>
 

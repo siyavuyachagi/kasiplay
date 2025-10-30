@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from "vue";
 
+// Async components imports
 const DefaultFooter = defineAsyncComponent(
   () => import("~/components/default-footer.vue")
 );
@@ -52,16 +53,22 @@ const LoginModal = defineAsyncComponent(
   () => import("~/components/modals/login-modal.vue")
 );
 
+// Variables & Properties
 const layoutStore = useFrontendLayoutStore();
 const loginModalRef = ref<InstanceType<typeof LoginModal> | null>(null);
 const { setModalRef } = useLoginModal();
 
+// Expressions & Functions
 const closeSidebars = () => {
   layoutStore.closeSidebar("left");
   layoutStore.closeSidebar("right");
 };
 
+
+// Hooks
 onMounted(() => {
-  loginModalRef ?? setModalRef(loginModalRef);
+  if (loginModalRef.value) {
+    setModalRef(loginModalRef.value);
+  }
 });
 </script>

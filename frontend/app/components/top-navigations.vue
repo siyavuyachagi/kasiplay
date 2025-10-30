@@ -64,7 +64,7 @@
             </ClientOnly>
           </button>
 
-          <button
+          <button @click="router.push('/notifications')"
             class="flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative">
             <icon
               name="lucide:bell"
@@ -133,4 +133,5 @@ import UserAccountDropdownBtn from "./buttons/user-account-dropdown-btn.vue";
 const layoutStore = useFrontendLayoutStore();
 const themeStore = useThemeStore();
 const mobileSearchOpen = ref(false);
+const router = useRouter();
 </script>

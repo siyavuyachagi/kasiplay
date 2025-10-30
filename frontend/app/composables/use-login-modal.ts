@@ -14,6 +14,7 @@ export const useLoginModal = () => {
 
     const openLoginModal = () => {
         modalRef.value?.openModal()
+        console.log("modalRef opened...", modalRef.value)
     }
 
     const closeLoginModal = () => {

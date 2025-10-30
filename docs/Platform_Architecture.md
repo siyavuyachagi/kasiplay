@@ -29,37 +29,6 @@
 - **Images**: Nuxt Image
 - **SEO**: Nuxt Sitemap
 
-### Application Structure
-```
-public/
-├── app/
-│   ├── assets/
-│   │   └── css/
-│   │       └── app.css          # Global styles + Tailwind imports
-│   ├── layouts/
-│   │   ├── default.vue          # Public-facing layout
-│   │   └── account.vue          # Authenticated user layout
-│   ├── pages/
-│   │   ├── index.vue            # Social feed landing page
-│   │   ├── platform/
-│   │   │   └── index.vue        # Marketing/info page
-│   │   └── [other pages]
-│   ├── middleware/
-│   │   ├── auth.global.ts       # Global auth middleware
-│   │   └── auth.ts              # Route-specific auth
-│   ├── plugins/
-│   │   ├── pinia.client.ts      # Pinia initialization
-│   │   └── theme.client.ts      # Theme initialization
-│   ├── stores/
-│   │   ├── auth.ts              # Authentication store
-│   │   └── theme.ts             # Theme/dark mode store
-│   └── app.vue                  # Root component
-├── nuxt.config.ts
-└── README.md
-```
-
----
-
 ## User Entities
 
 The platform supports **6 distinct user types**, each with specific roles and permissions:
@@ -126,7 +95,7 @@ The platform supports **6 distinct user types**, each with specific roles and pe
 
 ### Layout Architecture
 
-The application uses **two primary layouts**:
+The application uses **three primary layouts**:
 
 #### 1. Default Layout (`layouts/default.vue`)
 **Purpose**: Public-facing pages for unauthenticated users
@@ -163,6 +132,8 @@ The application uses **two primary layouts**:
 #### 2. Account Layout (`layouts/account.vue`)
 **Purpose**: Authenticated user dashboard (to be implemented)
 
+#### 3. Account Layout (`layouts/dashboard.vue`)
+**Purpose**: Authenticated organizations (Federation / Club) dashboard
 ---
 
 ## Layout Design
@@ -187,6 +158,8 @@ The main landing page (`pages/index.vue`) follows a **3-column social media layo
 │              │                         │                    │
 │  (Sticky)    │   (Scrollable)          │   (Sticky)        │
 └──────────────┴─────────────────────────┴────────────────────┘
+|                     Footer                                  |
+└──────────────-─────────────────────────-────────────────────┘
 ```
 
 ### Responsive Breakpoints

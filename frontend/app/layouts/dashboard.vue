@@ -15,7 +15,8 @@
         class="fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
 
       <!-- Sidebar - FIXED Z-INDEX -->
-      <federation-sidebar />
+      <FederationSidebar v-if="true" />
+      <ClubSidebar v-else />
 
       <!-- Main Content -->
       <main class="flex-1 lg:ml-0 min-h-0 overflow-hidden">
@@ -71,7 +72,9 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import ClubSidebar from "~/components/dashboard/club-sidebar.vue";
 import DesktopHeader from "~/components/dashboard/desktop-header.vue";
+import FederationSidebar from "~/components/dashboard/federation-sidebar.vue";
 import MobileHeader from "~/components/dashboard/mobile-header.vue";
 import { useDashboardLayoutStore } from "~/stores/dashboard-layout";
 

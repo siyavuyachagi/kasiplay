@@ -394,6 +394,11 @@
 <script setup>
 import { ref } from "vue";
 
+
+definePageMeta({
+  layout: "dashboard",
+})
+
 const activeCompetitions = ref([
   {
     id: 1,

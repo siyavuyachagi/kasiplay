@@ -1,4 +1,4 @@
-// app/plugins/directives.client.ts
+// /plugins/directives/click-outside.client.ts
 
 /**
  * Global v-click-outside directive.

@@ -169,6 +169,9 @@
 <script setup>
 import { ref } from "vue";
 
+definePageMeta({
+  layout: "dashboard",
+})
 const upcomingMatches = ref([
   {
     id: 1,

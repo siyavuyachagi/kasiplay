@@ -1,7 +1,7 @@
 <template>
   <!-- User Profile - Fixed at bottom -->
   <div
-    class="flex-shrink-0 p-4 lg:p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+    class="shrink-0 p-4 lg:p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
   >
     <div class="relative">
       <button
@@ -27,7 +27,7 @@
           </p>
         </div>
         <svg
-          class="w-5 h-5 text-gray-500 dark:text-gray-400 flex-shrink-0 transition-transform duration-200"
+          class="w-5 h-5 text-gray-500 dark:text-gray-400 shrink-0 transition-transform duration-200"
           :class="{ 'rotate-180': isOpen }"
           fill="none"
           stroke="currentColor"
@@ -73,7 +73,7 @@
               class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
               <svg
-                class="w-5 h-5 mr-3 flex-shrink-0"
+                class="w-5 h-5 mr-3 shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -93,7 +93,7 @@
               class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
               <svg
-                class="w-5 h-5 mr-3 flex-shrink-0"
+                class="w-5 h-5 mr-3 shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -119,7 +119,7 @@
               class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
               <svg
-                class="w-5 h-5 mr-3 flex-shrink-0"
+                class="w-5 h-5 mr-3 shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

@@ -1,0 +1,1 @@
+<template>Account settings</template>

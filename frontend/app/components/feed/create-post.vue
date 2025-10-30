@@ -16,7 +16,6 @@
     <!-- Bottom row: Actions -->
     <div
       class="flex items-center justify-between mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-      
       <!-- Left actions -->
       <div class="flex space-x-2">
         <button
@@ -47,11 +46,15 @@
       </div>
 
       <!-- Right link -->
-      <nuxt-link
-        to="/auth/login"
+      <button
+        @click="openLoginModal"
         class="text-xs sm:text-sm text-blue-600 hover:text-blue-700 font-medium whitespace-nowrap">
         Sign in to post
-      </nuxt-link>
+      </button>
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+const { openLoginModal } = useLoginModal();
+</script>

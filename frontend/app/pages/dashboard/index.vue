@@ -10,7 +10,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useApi } from "~/composables/api";
+import { useApi } from "~/composables/use-api";
 import type { ApplicationUser } from "~/models/ApplicationUsers";
 
 definePageMeta({

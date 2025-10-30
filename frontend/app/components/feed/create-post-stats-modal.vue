@@ -1,3 +1,3 @@
 <template>
-    Login modal
+    Create stats post
 </template>

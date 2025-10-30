@@ -204,7 +204,7 @@
 </template>
 
 <script setup lang="ts">
-const layoutStore = useLayoutStore();
+const layoutStore = useFrontendLayoutStore();
 
 const sections = ref({
   announcements: true,

@@ -30,20 +30,38 @@
         class="fixed inset-0 bg-black/50 z-20 lg:hidden"
         style="top: 112px"></div>
     </transition>
+
+    <!-- Modals  -->
+    <LoginModal ref="loginModalRef" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from "vue";
 
-const DefaultFooter = defineAsyncComponent(() => import('~/components/default-footer.vue'))
-const LiveMatchBanner = defineAsyncComponent(() => import('~/components/live-match-banner.vue'))
-const TopNavigations = defineAsyncComponent(() => import('~/components/top-navigations.vue'))
+const DefaultFooter = defineAsyncComponent(
+  () => import("~/components/default-footer.vue")
+);
+const LiveMatchBanner = defineAsyncComponent(
+  () => import("~/components/live-match-banner.vue")
+);
+const TopNavigations = defineAsyncComponent(
+  () => import("~/components/top-navigations.vue")
+);
+const LoginModal = defineAsyncComponent(
+  () => import("~/components/modals/login-modal.vue")
+);
 
-const layoutStore = useLayoutStore();
+const layoutStore = useFrontendLayoutStore();
+const loginModalRef = ref<InstanceType<typeof LoginModal> | null>(null);
+const { setModalRef } = useLoginModal();
 
 const closeSidebars = () => {
   layoutStore.closeSidebar("left");
   layoutStore.closeSidebar("right");
 };
+
+onMounted(() => {
+  loginModalRef ?? setModalRef(loginModalRef);
+});
 </script>

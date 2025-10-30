@@ -56,7 +56,7 @@
                 v-for="link in navigationLinks"
                 :key="link.path"
                 :to="link.path"
-                @click="layoutStore.isLeftSidebarOpen = false"
+                @click="layoutStore.closeSidebar('left')"
                 class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300">
                 <icon :name="link.icon" size="20" :class="link.color" />
                 <span class="text-sm font-medium">{{ link.label }}</span>
@@ -171,7 +171,7 @@
 </template>
 
 <script setup lang="ts">
-const layoutStore = useLayoutStore();
+const layoutStore = useFrontendLayoutStore();
 
 const sections = ref({
   navigation: true,

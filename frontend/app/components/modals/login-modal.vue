@@ -1,64 +1,163 @@
 <template>
   <Teleport to="body">
     <Transition name="modal">
-      <div v-if="isOpen" class="modal-overlay" @click.self="closeModal">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="text-2xl font-bold">Sign In</h2>
-            <button @click="closeModal" class="close-button">&times;</button>
+      <div
+        v-if="isLoginModalOpen"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 backdrop-blur-sm"
+        @click.self="closeLoginModal">
+        <div
+          class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8 relative transition-all duration-300">
+          <!-- Close Button (Top Right Corner) -->
+          <button
+            @click="closeLoginModal"
+            class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+            aria-label="Close">
+            <icon name="lucide:x" size="22" />
+          </button>
+
+          <!-- Header -->
+          <div class="text-center mb-8 mt-2">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              Welcome Back
+            </h2>
           </div>
 
-          <form @submit.prevent="handleLogin">
-            <div class="mb-4">
-              <label class="block mb-2">Email</label>
-              <input
-                type="email"
-                v-model="form.email"
-                class="form-control"
-                required />
+          <!-- Form -->
+          <form @submit.prevent="handleLogin" class="space-y-4">
+            <!-- Email -->
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Email Address
+              </label>
+              <div class="relative">
+                <icon
+                  name="lucide:mail"
+                  size="20"
+                  class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
+                <input
+                  v-model="form.email"
+                  type="email"
+                  required
+                  placeholder="you@example.com"
+                  class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent outline-none placeholder-gray-400 dark:placeholder-gray-500 transition-all" />
+              </div>
             </div>
 
-            <div class="mb-4">
-              <label class="block mb-2">Password</label>
-              <input
-                type="password"
-                v-model="form.password"
-                class="form-control"
-                required />
+            <!-- Password -->
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Password
+              </label>
+              <div class="relative">
+                <icon
+                  name="lucide:lock"
+                  size="20"
+                  class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
+                <input
+                  v-model="form.password"
+                  :type="showPassword ? 'text' : 'password'"
+                  required
+                  placeholder="••••••••"
+                  class="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent outline-none placeholder-gray-400 dark:placeholder-gray-500 transition-all" />
+                <button
+                  type="button"
+                  @click="showPassword = !showPassword"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">
+                  <icon
+                    :name="showPassword ? 'lucide:eye-off' : 'lucide:eye'"
+                    size="20" />
+                </button>
+              </div>
             </div>
 
-            <div class="flex justify-between items-center mb-4">
-              <label class="flex items-center">
-                <input type="checkbox" v-model="form.remember" />
-                <span class="ml-2">Remember me</span>
+            <!-- Remember & Forgot -->
+            <div class="flex items-center justify-between">
+              <label class="flex items-center cursor-pointer">
+                <input
+                  v-model="form.rememberMe"
+                  type="checkbox"
+                  class="w-4 h-4 text-blue-600 border-gray-300 dark:border-gray-600 rounded focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-700" />
+                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400"
+                  >Remember me</span
+                >
               </label>
               <NuxtLink
                 to="/auth/reset-password"
-                class="text-blue-600"
-                @click="closeModal">
-                Forgot Password?
+                @click="closeLoginModal"
+                class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium">
+                Forgot password?
               </NuxtLink>
             </div>
 
+            <!-- Submit Button -->
             <button
               type="submit"
-              class="w-full btn-primary"
-              :disabled="loading">
-              {{ loading ? "Signing in..." : "Sign In" }}
+              :disabled="loading"
+              class="w-full bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 dark:hover:from-blue-600 dark:hover:to-purple-600 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
+              <span v-if="!loading">Sign In</span>
+              <span v-else class="flex items-center justify-center space-x-2">
+                <icon name="lucide:loader-2" size="20" class="animate-spin" />
+                <span>Signing in...</span>
+              </span>
             </button>
           </form>
 
-          <div class="mt-4 text-center">
-            <p>
-              Don't have an account?
-              <NuxtLink
-                to="/account/register"
-                class="text-blue-600"
-                @click="closeModal">
-                Sign up
-              </NuxtLink>
-            </p>
+          <!-- Divider -->
+          <div class="mt-6">
+            <div class="relative">
+              <div class="absolute inset-0 flex items-center">
+                <div
+                  class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+              </div>
+              <div class="relative flex justify-center text-sm">
+                <span
+                  class="px-4 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                  Or continue with
+                </span>
+              </div>
+            </div>
+
+            <!-- Social Login -->
+            <div class="mt-6 grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                class="flex items-center justify-center px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
+                <icon
+                  name="lucide:mail"
+                  size="20"
+                  class="text-gray-700 dark:text-gray-300" />
+                <span
+                  class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Google
+                </span>
+              </button>
+              <button
+                type="button"
+                class="flex items-center justify-center px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
+                <icon
+                  name="lucide:facebook"
+                  size="20"
+                  class="text-gray-700 dark:text-gray-300" />
+                <span
+                  class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Facebook
+                </span>
+              </button>
+            </div>
           </div>
+
+          <!-- Sign Up Link -->
+          <p class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+            Don't have an account?
+            <NuxtLink
+              to="/account/register"
+              @click="closeLoginModal"
+              class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold">
+              Sign up for free
+            </NuxtLink>
+          </p>
         </div>
       </div>
     </Transition>
@@ -66,22 +165,14 @@
 </template>
 
 <script setup>
-const isOpen = ref(false);
+const { isLoginModalOpen, closeLoginModal } = useLoginModal();
+
 const loading = ref(false);
 const form = reactive({
   email: "",
   password: "",
   remember: false,
 });
-
-const closeModal = () => {
-  isOpen.value = false;
-  resetForm();
-};
-
-const openModal = () => {
-  isOpen.value = true;
-};
 
 const resetForm = () => {
   form.email = "";
@@ -96,7 +187,7 @@ const handleLogin = async () => {
     // Example: await useAuth().login(form)
 
     // On success, close modal
-    // closeModal()
+    // closeLoginModal()
   } catch (error) {
     console.error("Login error:", error);
   } finally {
@@ -104,10 +195,11 @@ const handleLogin = async () => {
   }
 };
 
-// Expose methods
-defineExpose({
-  openModal,
-  closeModal,
+// Reset form when modal closes
+watch(isLoginModalOpen, (newVal) => {
+  if (!newVal) {
+    resetForm();
+  }
 });
 </script>
 

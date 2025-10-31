@@ -1,28 +1,20 @@
-import { ref, type Ref } from 'vue'
+// /composables/use-login-modal.ts
 
-interface LoginModalRef {
-    openModal: () => void
-    closeModal: () => void
-}
+// Simpler approach using global state
+const isLoginModalOpen = ref(false)
 
 export const useLoginModal = () => {
-    const modalRef: Ref<LoginModalRef | null> = ref(null)
-
-    const setModalRef = (refInstance: LoginModalRef) => {
-        modalRef.value = refInstance
-    }
-
     const openLoginModal = () => {
-        modalRef.value?.openModal()
-        console.log("modalRef opened...", modalRef.value)
+        isLoginModalOpen.value = true
+        console.log("Login modal opened")
     }
 
     const closeLoginModal = () => {
-        modalRef.value?.closeModal()
+        isLoginModalOpen.value = false
     }
 
     return {
-        setModalRef,
+        isLoginModalOpen: readonly(isLoginModalOpen),
         openLoginModal,
         closeLoginModal
     }

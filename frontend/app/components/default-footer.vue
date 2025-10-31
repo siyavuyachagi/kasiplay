@@ -13,8 +13,9 @@
           <span>•</span>
           <a href="/privacy" class="hover:underline">Privacy</a>
         </div>
-
-        <p class="text-xs text-gray-400 dark:text-gray-500">© 2025 KasiPlay</p>
+        <p class="text-xs text-gray-400 dark:text-gray-500">
+          © 2025 KasiPlay - Kinetic Studios
+        </p>
       </div>
     </div>
   </footer>

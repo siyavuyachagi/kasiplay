@@ -15,7 +15,7 @@
 
     <!-- Bottom row: Actions -->
     <div
-      class="flex items-center justify-between mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+      class="flex items-center justify-center mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
       <!-- Left actions -->
       <div class="flex space-x-2">
         <button
@@ -46,7 +46,7 @@
       </div>
 
       <!-- Right link -->
-      <button
+      <button v-if="false"
         @click="openLoginModal"
         class="text-xs sm:text-sm text-blue-600 hover:text-blue-700 font-medium whitespace-nowrap">
         Sign in to post

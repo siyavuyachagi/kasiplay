@@ -7,8 +7,9 @@
     }">
     <!-- Top Navigation Bar -->
     <TopNavigations />
+
     <!-- Live Match Banner -->
-    <LiveMatchBanner />
+    <LiveMatchBanner v-if="true" />
 
     <!-- Main Content Area -->
     <slot />
@@ -32,7 +33,7 @@
     </transition>
 
     <!-- Modals  -->
-    <LoginModal ref="loginModalRef" />
+    <LoginModal />
   </div>
 </template>
 
@@ -55,20 +56,10 @@ const LoginModal = defineAsyncComponent(
 
 // Variables & Properties
 const layoutStore = useFrontendLayoutStore();
-const loginModalRef = ref<InstanceType<typeof LoginModal> | null>(null);
-const { setModalRef } = useLoginModal();
 
 // Expressions & Functions
 const closeSidebars = () => {
   layoutStore.closeSidebar("left");
   layoutStore.closeSidebar("right");
 };
-
-
-// Hooks
-onMounted(() => {
-  if (loginModalRef.value) {
-    setModalRef(loginModalRef.value);
-  }
-});
 </script>

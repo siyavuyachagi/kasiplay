@@ -5,17 +5,13 @@
       'overflow-hidden h-screen lg:overflow-auto lg:h-auto':
         layoutStore.isLeftSidebarOpen || layoutStore.isRightSidebarOpen,
     }">
-    <!-- Top Navigation Bar -->
-    <TopNavigations />
-
-    <!-- Live Match Banner -->
-    <LiveMatchBanner v-if="true" />
+    <MainHeader />
 
     <!-- Main Content Area -->
     <slot />
 
     <!-- Footer  -->
-    <DefaultFooter />
+    <MainFooter />
 
     <!-- Mobile Overlay -->
     <transition
@@ -41,14 +37,8 @@
 import { defineAsyncComponent } from "vue";
 
 // Async components imports
-const DefaultFooter = defineAsyncComponent(
-  () => import("~/components/default-footer.vue")
-);
-const LiveMatchBanner = defineAsyncComponent(
-  () => import("~/components/live-match-banner.vue")
-);
-const TopNavigations = defineAsyncComponent(
-  () => import("~/components/top-navigations.vue")
+const MainFooter = defineAsyncComponent(
+  () => import("~/components/main-footer.vue")
 );
 const LoginModal = defineAsyncComponent(
   () => import("~/components/modals/login-modal.vue")

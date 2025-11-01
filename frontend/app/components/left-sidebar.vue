@@ -2,7 +2,7 @@
   <aside
     class="lg:col-span-3 lg:h-min lg:rounded-lg"
     :class="[
-      'fixed lg:static z-10',
+      'fixed lg:static',
       'top-28 bottom-0 left-0 lg:top-auto lg:bottom-auto',
       'w-72 lg:w-auto',
       'bg-white dark:bg-gray-800 lg:bg-transparent',

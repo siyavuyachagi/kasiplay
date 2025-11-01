@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky top-0 z-20 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+    class="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm z-10">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between h-14">
         <!-- Left: Logo & Menu Toggle -->
@@ -64,7 +64,8 @@
             </ClientOnly>
           </button>
 
-          <button @click="router.push('/notifications')"
+          <button
+            @click="router.push('/notifications')"
             class="flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative">
             <icon
               name="lucide:bell"

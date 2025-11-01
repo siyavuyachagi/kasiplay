@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky top-14 z-20 bg-linear-to-r from-red-500 to-red-600 text-white shadow-lg">
+    class="sticky top-14 bg-linear-to-r from-red-500 to-red-600 text-white shadow-lg z-10">
     <div class="max-w-7xl mx-auto px-4 py-2">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2 sm:space-x-3">

@@ -15,7 +15,7 @@
         <button
           @click="isDropdownOpen = !isDropdownOpen"
           class="flex items-center space-x-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-          <img
+          <NuxtImg
             :src="user.avatar"
             alt="User avatar"
             class="w-8 h-8 rounded-full object-cover" />
@@ -28,7 +28,7 @@
 
         <div
           v-show="isDropdownOpen"
-          class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+          class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-20!">
           <div class="py-2">
             <nuxt-link
               to="/account/profile"

@@ -16,7 +16,7 @@
           >
         </div>
         <nuxt-link
-          :to="`/matches/live/${matchId}`"
+          :to="`/matches/live/f64115fa-ec5e-4335-aa7f-24711379a2a3`"
           class="px-3 py-1 bg-white text-red-600 rounded-md font-medium hover:bg-gray-100 transition-colors text-xs sm:text-sm whitespace-nowrap">
           Watch
         </nuxt-link>
@@ -26,5 +26,5 @@
 </template>
 
 <script setup lang="ts">
-const matchId = computed(() => crypto.randomUUID());
+
 </script>

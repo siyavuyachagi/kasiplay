@@ -4,10 +4,11 @@
     <!-- Top row: Avatar & input -->
     <div class="flex space-x-3">
       <div
-        class="w-10 h-10 rounded-full bg-linear-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white font-semibold shrink-0">
+        class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white font-semibold shrink-0">
         ?
       </div>
       <button
+        @click="openModal('text')"
         class="flex-1 text-left px-4 py-3 bg-gray-100 dark:bg-gray-700 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-sm sm:text-base">
         Share your thoughts...
       </button>
@@ -19,42 +20,75 @@
       <!-- Left actions -->
       <div class="flex space-x-2">
         <button
-          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+          @click="openModal('photo')"
+          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          title="Share photos">
           <icon name="lucide:image" size="18" />
           <span class="hidden sm:inline">Photo</span>
         </button>
         <button
-          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+          @click="openModal('video')"
+          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          title="Share video">
           <icon name="lucide:video" size="18" />
           <span class="hidden sm:inline">Video</span>
         </button>
         <button
-          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+          @click="openModal('poll')"
+          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          title="Create poll">
           <icon name="lucide:bar-chart-2" size="18" />
           <span class="hidden sm:inline">Poll</span>
         </button>
         <button
-          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+          @click="openModal('stats')"
+          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          title="Share match stats">
           <icon name="lucide:activity" size="18" />
           <span class="hidden sm:inline">Stats</span>
         </button>
         <button
-          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+          @click="openModal('event')"
+          class="flex items-center space-x-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          title="Create event">
           <icon name="lucide:calendar" size="18" />
           <span class="hidden sm:inline">Event</span>
         </button>
       </div>
-
-      <!-- Right link -->
-      <button v-if="false"
-        @click="openLoginModal"
-        class="text-xs sm:text-sm text-blue-600 hover:text-blue-700 font-medium whitespace-nowrap">
-        Sign in to post
-      </button>
     </div>
+
+    <!-- Modals -->
+    <CreatePostTextModal />
+    <CreatePostPhotosModal />
+    <CreatePostVideoModal />
+    <CreatePostPollModal />
+    <CreatePostStatsModal />
+    <CreatePostEventModal />
   </div>
 </template>
 
 <script lang="ts" setup>
-const { openLoginModal } = useLoginModal();
+import { usePostModal } from "~/composables/use-post-modal";
+
+const { openModal } = usePostModal();
+
+// Import modals
+const CreatePostTextModal = defineAsyncComponent(
+  () => import("./create-post-text-modal.vue")
+);
+const CreatePostPhotosModal = defineAsyncComponent(
+  () => import("./create-post-photos-modal.vue")
+);
+const CreatePostVideoModal = defineAsyncComponent(
+  () => import("./create-post-video-modal.vue")
+);
+const CreatePostPollModal = defineAsyncComponent(
+  () => import("./create-post-poll-modal.vue")
+);
+const CreatePostStatsModal = defineAsyncComponent(
+  () => import("./create-post-stats-modal.vue")
+);
+const CreatePostEventModal = defineAsyncComponent(
+  () => import("./create-post-event-modal.vue")
+);
 </script>

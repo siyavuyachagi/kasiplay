@@ -42,7 +42,8 @@
 
         <!-- Right: Actions -->
         <div class="flex items-center space-x-1 sm:space-x-2">
-          <button
+          <ClientOnly>
+                      <button
             @click="mobileSearchOpen = !mobileSearchOpen"
             class="md:hidden flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
             <icon
@@ -54,15 +55,14 @@
           <button
             @click="themeStore.toggleTheme()"
             class="flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-            <ClientOnly>
-              <icon
-                v-if="themeStore.isDark"
-                name="lucide:sun"
-                size="20"
-                class="text-yellow-500" />
-              <icon v-else name="lucide:moon" size="20" class="text-gray-600" />
-            </ClientOnly>
+            <icon
+              v-if="themeStore.isDark"
+              name="lucide:sun"
+              size="20"
+              class="text-yellow-500" />
+            <icon v-else name="lucide:moon" size="20" class="text-gray-600" />
           </button>
+          </ClientOnly>
 
           <button
             @click="router.push('/notifications')"
@@ -109,20 +109,18 @@
         leave-active-class="transition-all duration-150 ease-in"
         leave-from-class="opacity-100 translate-y-0"
         leave-to-class="opacity-0 -translate-y-2">
-        <ClientOnly>
-          <div v-if="mobileSearchOpen" class="md:hidden pb-3 pt-2">
-            <div class="relative">
-              <icon
-                name="lucide:search"
-                size="18"
-                class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search..."
-                class="w-full pl-10 pr-4 py-2 bg-gray-100 dark:bg-gray-700 border border-transparent focus:border-blue-500 rounded-lg text-sm text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none" />
-            </div>
+        <div v-if="mobileSearchOpen" class="md:hidden pb-3 pt-2">
+          <div class="relative">
+            <icon
+              name="lucide:search"
+              size="18"
+              class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search..."
+              class="w-full pl-10 pr-4 py-2 bg-gray-100 dark:bg-gray-700 border border-transparent focus:border-blue-500 rounded-lg text-sm text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none" />
           </div>
-        </ClientOnly>
+        </div>
       </transition>
     </div>
   </nav>

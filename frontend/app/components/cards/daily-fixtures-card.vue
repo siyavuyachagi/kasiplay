@@ -15,6 +15,7 @@
         size="16"
         class="text-gray-500 transition-transform" />
     </button>
+
     <transition
       enter-active-class="transition-all duration-300 ease-out"
       enter-from-class="max-h-0 opacity-0"

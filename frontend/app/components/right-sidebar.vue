@@ -1,9 +1,9 @@
 <template>
   <aside
-    class="lg:col-span-3 lg:h-min lg:rounded-lg z-25"
+    class="lg:col-span-3 lg:h-min lg:rounded-lg z-25 lg:z-20"
     :class="[
       'fixed lg:static',
-      'top-28 bottom-0 right-0 lg:top-auto lg:bottom-auto',
+      'top-0 bottom-0 right-0 lg:top-auto lg:bottom-auto',
       'w-80 lg:w-auto',
       'bg-white dark:bg-gray-800 lg:bg-transparent',
       'border-l lg:border-0 border-gray-200 dark:border-gray-700',
@@ -16,7 +16,7 @@
       <div class="p-4 space-y-4 pb-20">
         <!-- Close Button Mobile -->
         <div
-          class="lg:hidden flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800">
+          class="lg:hidden flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800 z-25">
           <h3 class="font-bold text-gray-900 dark:text-white">Updates</h3>
           <button
             @click="closeSidebar"
@@ -47,7 +47,7 @@
     <div
       v-if="layoutStore.isRightSidebarOpen"
       @click="closeSidebar"
-      class="fixed inset-0 bg-black/50 z-20 lg:hidden"
+      class="fixed inset-0 bg-black/50 z-[19px] lg:hidden"
       style="top: 112px"></div>
   </Transition>
 </template>

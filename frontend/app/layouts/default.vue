@@ -8,11 +8,22 @@
     <MainHeader />
 
     <!-- Main Content Area -->
-    <slot />
+  <div class="max-w-7xl mx-auto px-4 py-4 sm:py-6">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-6">
+      <!-- Left Sidebar -->
+      <LeftSidebar />
+
+      <!-- Page  -->
+       <slot></slot>
+
+      <!-- Right Sidebar -->
+      <RightSidebar />
+    </div>
+  </div>
 
     <!-- Footer  -->
     <MainFooter />
- 
+
     <!-- Modals  -->
     <LoginModal />
   </div>
@@ -22,6 +33,12 @@
 import { defineAsyncComponent } from "vue";
 
 // Async components imports
+const LeftSidebar = defineAsyncComponent(
+  () => import("~/components/left-sidebar.vue")
+);
+const RightSidebar = defineAsyncComponent(
+  () => import("~/components/right-sidebar.vue")
+);
 const MainFooter = defineAsyncComponent(
   () => import("~/components/main-footer.vue")
 );
@@ -31,10 +48,4 @@ const LoginModal = defineAsyncComponent(
 
 // Variables & Properties
 const layoutStore = useFrontendLayoutStore();
-
-// Expressions & Functions
-const closeSidebars = () => {
-  layoutStore.closeSidebar("left");
-  layoutStore.closeSidebar("right");
-};
 </script>

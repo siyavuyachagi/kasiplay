@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm z-10">
+    class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm z-10">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between h-14">
         <!-- Left: Logo & Menu Toggle -->
@@ -43,25 +43,25 @@
         <!-- Right: Actions -->
         <div class="flex items-center space-x-1 sm:space-x-2">
           <ClientOnly>
-                      <button
-            @click="mobileSearchOpen = !mobileSearchOpen"
-            class="md:hidden flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-            <icon
-              name="lucide:search"
-              size="20"
-              class="text-gray-700 dark:text-gray-300" />
-          </button>
+            <button
+              @click="mobileSearchOpen = !mobileSearchOpen"
+              class="md:hidden flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+              <icon
+                name="lucide:search"
+                size="20"
+                class="text-gray-700 dark:text-gray-300" />
+            </button>
 
-          <button
-            @click="themeStore.toggleTheme()"
-            class="flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-            <icon
-              v-if="themeStore.isDark"
-              name="lucide:sun"
-              size="20"
-              class="text-yellow-500" />
-            <icon v-else name="lucide:moon" size="20" class="text-gray-600" />
-          </button>
+            <button
+              @click="themeStore.toggleTheme()"
+              class="flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+              <icon
+                v-if="themeStore.isDark"
+                name="lucide:sun"
+                size="20"
+                class="text-yellow-500" />
+              <icon v-else name="lucide:moon" size="20" class="text-gray-600" />
+            </button>
           </ClientOnly>
 
           <button

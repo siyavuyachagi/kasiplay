@@ -1,9 +1,11 @@
 <template>
-  <!-- Top Navigation Bar -->
-  <TopNavigations />
-
-  <!-- Live Match Banner -->
-  <LiveMatchBanner />
+  <header class="sticky top-0 z-25">
+    <!-- Top Navigation Bar -->
+    <TopNavigations />
+  
+    <!-- Live Match Banner -->
+    <LiveMatchBanner />
+  </header>
 </template>
 
 <script setup lang="ts">

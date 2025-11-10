@@ -1,10 +1,10 @@
 <template>
   <aside
-    class="lg:col-span-3 lg:h-min lg:rounded-lg z-25"
+    class="lg:col-span-3 lg:h-min lg:rounded-lg z-25 lg:z-20"
     :class="[
       'fixed lg:static',
-      'top-28 bottom-0 left-0 lg:top-auto lg:bottom-auto',
-      'w-72 lg:w-auto',
+      'top-0 bottom-0 left-0 lg:top-auto lg:bottom-auto',
+      'w-80 lg:w-auto',
       'bg-white dark:bg-gray-800 lg:bg-transparent',
       'border-r lg:border-0 border-gray-200 dark:border-gray-700',
       'transition-transform duration-300 lg:transition-none',
@@ -37,7 +37,6 @@
     </div>
   </aside>
 
-  
   <Transition
     enter-active-class="transition-opacity duration-300"
     enter-from-class="opacity-0"
@@ -48,7 +47,7 @@
     <div
       v-if="layoutStore.isLeftSidebarOpen"
       @click="closeSidebar"
-      class="fixed inset-0 bg-black/50 z-20 lg:hidden"
+      class="fixed inset-0 bg-black/50 z-[19px] lg:hidden"
       style="top: 112px"></div>
   </Transition>
 </template>

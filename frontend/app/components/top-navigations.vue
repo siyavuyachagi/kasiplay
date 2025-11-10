@@ -35,7 +35,7 @@
               class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Search players, matches, clubs..."
+              placeholder="Search players, matches, clubs, topics..."
               class="w-full pl-10 pr-4 py-2 bg-gray-100 dark:bg-gray-700 border border-transparent focus:border-blue-500 rounded-lg text-sm text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none transition-colors" />
           </div>
         </div>
@@ -64,7 +64,7 @@
             </button>
           </ClientOnly>
 
-          <button
+          <!-- <button
             @click="router.push('/notifications')"
             class="flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative">
             <icon
@@ -73,19 +73,13 @@
               class="text-gray-700 dark:text-gray-300" />
             <span
               class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
-          </button>
+          </button> -->
 
-          <button
-            class="flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative">
-            <icon
-              name="lucide:message-circle"
-              size="20"
-              class="text-gray-700 dark:text-gray-300" />
-            <span
-              class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-              2
-            </span>
-          </button>
+          <!-- Notifications  -->
+          <NotificationsCounterDropdown />
+
+          <!-- Messages -->
+          <MessagesCounterDropdown />
 
           <button
             @click="layoutStore.toggleSidebar('right')"
@@ -96,13 +90,13 @@
               class="text-gray-700 dark:text-gray-300" />
           </button>
 
-          <!-- User Account Actions  -->
-          <UserAccountDropdownBtn />
+          <!-- User account -->
+          <UserAccountDropdown />
         </div>
       </div>
 
       <!-- Mobile Search Expansion -->
-      <transition
+      <Transition
         enter-active-class="transition-all duration-200 ease-out"
         enter-from-class="opacity-0 -translate-y-2"
         enter-to-class="opacity-100 translate-y-0"
@@ -121,14 +115,21 @@
               class="w-full pl-10 pr-4 py-2 bg-gray-100 dark:bg-gray-700 border border-transparent focus:border-blue-500 rounded-lg text-sm text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none" />
           </div>
         </div>
-      </transition>
+      </Transition>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import UserAccountDropdownBtn from "./buttons/user-account-dropdown-btn.vue";
-
+const NotificationsCounterDropdown = defineAsyncComponent(
+  () => import("~/components/dropdowns/notifications-counter.dropdown.vue")
+);
+const MessagesCounterDropdown = defineAsyncComponent(
+  () => import("~/components/dropdowns/messages-counter.dropdown.vue")
+);
+const UserAccountDropdown = defineAsyncComponent(
+  () => import("./dropdowns/user-account.dropdown.vue")
+);
 const layoutStore = useFrontendLayoutStore();
 const themeStore = useThemeStore();
 const mobileSearchOpen = ref(false);

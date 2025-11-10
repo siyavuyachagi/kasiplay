@@ -25,6 +25,6 @@ import PostsFilter from "~/components/feed/posts-filter.vue";
 import RightSidebar from "~/components/right-sidebar.vue";
 
 definePageMeta({
-  layout: "default",
+  layout: "default-3-col",
 });
 </script>

@@ -28,7 +28,8 @@
           :key="link.path"
           :to="link.path"
           @click="layoutStore.closeSidebar('left')"
-          class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300">
+          class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
+          active-class="bg-gray-100 dark:bg-gray-700">
           <icon :name="link.icon" size="20" :class="link.color" />
           <span class="text-sm font-medium">{{ link.label }}</span>
         </nuxt-link>

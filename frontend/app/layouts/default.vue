@@ -1,30 +1,21 @@
 <template>
-  <div
-    class="bg-gray-50 dark:bg-gray-900"
-    :class="{
-      'overflow-hidden h-screen lg:overflow-auto lg:h-auto':
-        layoutStore.isLeftSidebarOpen || layoutStore.isRightSidebarOpen,
-    }">
+  <div class="bg-gray-50 dark:bg-gray-900">
+    <!-- Header -->
     <MainHeader />
 
-    <!-- Main Content Area -->
-  <div class="max-w-7xl mx-auto px-4 py-4 sm:py-6">
-    <div class="lg:grid lg:grid-cols-12 lg:gap-6">
-      <!-- Left Sidebar -->
-      <LeftSidebar />
+    
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-4 sm:py-6">
+      <!-- Breadcrumb  -->
+      <DefaultBreadcrumb />
+      
+      <slot></slot>
+    </main>
 
-      <!-- Page  -->
-       <slot></slot>
-
-      <!-- Right Sidebar -->
-      <RightSidebar />
-    </div>
-  </div>
-
-    <!-- Footer  -->
+    <!-- Footer -->
     <MainFooter />
 
-    <!-- Modals  -->
+    <!-- Modals -->
     <LoginModal />
   </div>
 </template>
@@ -33,11 +24,11 @@
 import { defineAsyncComponent } from "vue";
 
 // Async components imports
-const LeftSidebar = defineAsyncComponent(
-  () => import("~/components/left-sidebar.vue")
+const MainHeader = defineAsyncComponent(
+  () => import("~/components/main-header.vue")
 );
-const RightSidebar = defineAsyncComponent(
-  () => import("~/components/right-sidebar.vue")
+const DefaultBreadcrumb = defineAsyncComponent(
+  () => import("~/components/ui/default-breadcrumb.vue")
 );
 const MainFooter = defineAsyncComponent(
   () => import("~/components/main-footer.vue")
@@ -45,7 +36,4 @@ const MainFooter = defineAsyncComponent(
 const LoginModal = defineAsyncComponent(
   () => import("~/components/modals/login-modal.vue")
 );
-
-// Variables & Properties
-const layoutStore = useFrontendLayoutStore();
 </script>

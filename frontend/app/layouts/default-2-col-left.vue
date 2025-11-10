@@ -1,3 +1,5 @@
+<!-- layouts/default-2-col-left.vue  -->
+
 <template>
   <div
     class="bg-gray-50 dark:bg-gray-900"
@@ -9,12 +11,14 @@
 
     <!-- Main Content Area -->
     <div class="max-w-7xl mx-auto px-4 py-4 sm:py-6">
-      <div class="lg:grid lg:grid-cols-12 lg:gap-6">
+      <div class="flex lg:gap-6">
         <!-- Left Sidebar -->
-        <LeftSidebar />
+        <div class="w-75">
+          <LeftSidebar />
+        </div>
 
-        <!-- Page Content -->
-        <div class="lg:col-span-9 xl:col-span-10">
+        <!-- Main Content -->
+        <div class="flex-1">
           <slot></slot>
         </div>
       </div>
@@ -34,8 +38,9 @@ import { defineAsyncComponent } from "vue";
 const LeftSidebar = defineAsyncComponent(
   () => import("~/components/ui/left-sidebar.vue")
 );
-const MainFooter~/components/ui/main-footer.vue
-  () => import("~/components/main-footer.vue")
+
+const MainFooter = defineAsyncComponent(
+  () => import("~/components/ui/main-footer.vue")
 );
 const LoginModal = defineAsyncComponent(
   () => import("~/components/modals/login.modal.vue")

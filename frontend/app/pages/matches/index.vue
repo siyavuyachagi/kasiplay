@@ -52,7 +52,7 @@
         <div
           v-for="match in liveMatches"
           :key="match.id"
-          class="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 rounded-lg border-2 border-red-500 dark:border-red-400 p-6">
+          class="bg-linear-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 rounded-lg border-2 border-red-500 dark:border-red-400 p-6">
           <div class="flex items-center justify-between mb-4">
             <span class="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full">
               LIVE • {{ match.minute }}'
@@ -196,6 +196,11 @@
 </template>
 
 <script setup lang="ts">
+
+definePageMeta({
+  layout: 'default-2-col-left'
+})
+
 const selectedStatus = ref('all')
 const selectedCompetition = ref('all')
 const searchQuery = ref('')

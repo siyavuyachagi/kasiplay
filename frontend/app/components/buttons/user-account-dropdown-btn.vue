@@ -11,7 +11,11 @@
       </nuxt-link>
 
       <!-- User Account Dropdown -->
-      <div v-else class="relative" @click-outside="closeDropdown">
+      <div
+        ref="userAccountDropdown"
+        v-else
+        class="relative"
+        @click-outside="closeDropdown">
         <button
           @click="isDropdownOpen = !isDropdownOpen"
           class="flex items-center space-x-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
@@ -73,6 +77,8 @@
 const authStore = useAuthStore();
 const isAuthenticated = ref(true); // Replace with actual auth check
 const isDropdownOpen = ref(false);
+// Ref for the dropdown container
+const userAccountDropdown = ref<HTMLElement | null>(null);
 
 const user = ref({
   name: "John Doe",
@@ -91,4 +97,22 @@ const logout = () => {
   authStore.signOut();
   isAuthenticated.value = false;
 };
+
+// Close dropdown when clicking outside
+const handleClickOutside = (event: MouseEvent) => {
+  if (
+    userAccountDropdown.value &&
+    !userAccountDropdown.value.contains(event.target as HTMLElement)
+  ) {
+    isDropdownOpen.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>

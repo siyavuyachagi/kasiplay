@@ -16,7 +16,7 @@
       <div class="p-4 space-y-4 pb-20">
         <!-- Close Button Mobile -->
         <div
-          class="lg:hidden flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800 z-10">
+          class="lg:hidden flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800 z-25">
           <h3 class="font-bold text-gray-900 dark:text-white">Updates</h3>
           <button
             @click="closeSidebar"

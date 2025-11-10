@@ -1,0 +1,1 @@
+<template>Post card</template>

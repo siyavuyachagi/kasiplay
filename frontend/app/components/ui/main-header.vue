@@ -13,6 +13,6 @@ const LiveMatchBanner = defineAsyncComponent(
   () => import("~/components/ui/live-match-banner.vue")
 );
 const TopNavigations = defineAsyncComponent(
-  () => import("~/components/top-navigations.vue")
+  () => import("~/components/ui/top-navigations.vue")
 );
 </script>

@@ -8,18 +8,18 @@
     <MainHeader />
 
     <!-- Main Content Area -->
-  <div class="max-w-7xl mx-auto px-4 py-4 sm:py-6">
-    <div class="lg:grid lg:grid-cols-12 lg:gap-6">
-      <!-- Left Sidebar -->
-      <LeftSidebar />
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:py-6">
+      <div class="lg:grid lg:grid-cols-12 lg:gap-6">
+        <!-- Left Sidebar -->
+        <LeftSidebar />
 
-      <!-- Page  -->
-       <slot></slot>
+        <!-- Page  -->
+        <slot></slot>
 
-      <!-- Right Sidebar -->
-      <RightSidebar />
+        <!-- Right Sidebar -->
+        <RightSidebar />
+      </div>
     </div>
-  </div>
 
     <!-- Footer  -->
     <MainFooter />
@@ -34,16 +34,16 @@ import { defineAsyncComponent } from "vue";
 
 // Async components imports
 const LeftSidebar = defineAsyncComponent(
-  () => import("~/components/left-sidebar.vue")
+  () => import("~/components/ui/left-sidebar.vue")
 );
 const RightSidebar = defineAsyncComponent(
-  () => import("~/components/right-sidebar.vue")
+  () => import("~/components/ui/right-sidebar.vue")
 );
 const MainFooter = defineAsyncComponent(
-  () => import("~/components/main-footer.vue")
+  () => import("~/components/ui/main-footer.vue")
 );
 const LoginModal = defineAsyncComponent(
-  () => import("~/components/modals/login-modal.vue")
+  () => import("~/components/modals/login.modal.vue")
 );
 
 // Variables & Properties

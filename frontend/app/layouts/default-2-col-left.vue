@@ -2,7 +2,8 @@
   <div
     class="bg-gray-50 dark:bg-gray-900"
     :class="{
-      'overflow-hidden h-screen lg:overflow-auto lg:h-auto': layoutStore.isLeftSidebarOpen,
+      'overflow-hidden h-screen lg:overflow-auto lg:h-auto':
+        layoutStore.isLeftSidebarOpen,
     }">
     <MainHeader />
 
@@ -31,13 +32,13 @@
 import { defineAsyncComponent } from "vue";
 
 const LeftSidebar = defineAsyncComponent(
-  () => import("~/components/left-sidebar.vue")
+  () => import("~/components/ui/left-sidebar.vue")
 );
-const MainFooter = defineAsyncComponent(
+const MainFooter~/components/ui/main-footer.vue
   () => import("~/components/main-footer.vue")
 );
 const LoginModal = defineAsyncComponent(
-  () => import("~/components/modals/login-modal.vue")
+  () => import("~/components/modals/login.modal.vue")
 );
 const layoutStore = useFrontendLayoutStore();
 </script>

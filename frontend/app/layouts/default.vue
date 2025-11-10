@@ -3,12 +3,11 @@
     <!-- Header -->
     <MainHeader />
 
-    
     <!-- Main Content -->
     <main class="max-w-5xl mx-auto px-4 py-4 sm:py-6">
       <!-- Breadcrumb  -->
       <DefaultBreadcrumb />
-      
+
       <slot></slot>
     </main>
 
@@ -25,15 +24,15 @@ import { defineAsyncComponent } from "vue";
 
 // Async components imports
 const MainHeader = defineAsyncComponent(
-  () => import("~/components/main-header.vue")
+  () => import("~/components/ui/main-header.vue")
 );
 const DefaultBreadcrumb = defineAsyncComponent(
   () => import("~/components/ui/default-breadcrumb.vue")
 );
 const MainFooter = defineAsyncComponent(
-  () => import("~/components/main-footer.vue")
+  () => import("~/components/ui/main-footer.vue")
 );
 const LoginModal = defineAsyncComponent(
-  () => import("~/components/modals/login-modal.vue")
+  () => import("~/components/modals/login.modal.vue")
 );
 </script>

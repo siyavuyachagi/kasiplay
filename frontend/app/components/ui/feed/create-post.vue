@@ -4,7 +4,7 @@
     <!-- Top row: Avatar & input -->
     <div class="flex space-x-3">
       <div
-        class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white font-semibold shrink-0">
+        class="w-10 h-10 rounded-full bg-linear-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white font-semibold shrink-0">
         ?
       </div>
       <button
@@ -74,21 +74,21 @@ const { openModal } = usePostModal();
 
 // Import modals
 const CreatePostTextModal = defineAsyncComponent(
-  () => import("./create-post-text-modal.vue")
+  () => import("../../modals/create-post-text.modal.vue")
 );
 const CreatePostPhotosModal = defineAsyncComponent(
-  () => import("./create-post-photos-modal.vue")
+  () => import("~/components/modals/create-post-photos.modal.vue")
 );
 const CreatePostVideoModal = defineAsyncComponent(
-  () => import("./create-post-video-modal.vue")
+  () => import("../../modals/create-post-video.modal.vue")
 );
 const CreatePostPollModal = defineAsyncComponent(
-  () => import("./create-post-poll-modal.vue")
+  () => import("../../modals/create-post-poll.modal.vue")
 );
 const CreatePostStatsModal = defineAsyncComponent(
-  () => import("./create-post-stats-modal.vue")
+  () => import("../../modals/create-post-stats.modal.vue")
 );
 const CreatePostEventModal = defineAsyncComponent(
-  () => import("./create-post-event-modal.vue")
+  () => import("../../modals/create-post-event.modal.vue")
 );
 </script>

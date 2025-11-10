@@ -9,20 +9,27 @@
       <PostsFilter />
 
       <!-- Posts -->
-      <Post />
+      <Posts />
 
-      <!-- Load More -->
-      <LoadMorePostsBtn />
+      <!-- Load More Posts -->
+      <MorePostsButton />
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
-import LoadMorePostsBtn from "~/components/buttons/load-more-posts-btn.vue";
-import CreatePost from "~/components/feed/create-post.vue";
-import Post from "~/components/feed/post.vue";
-import LeftSidebar from "~/components/left-sidebar.vue";
-import PostsFilter from "~/components/feed/posts-filter.vue";
-import RightSidebar from "~/components/right-sidebar.vue";
+const CreatePost = defineAsyncComponent(
+  () => import("~/components/ui/feed/create-post.vue")
+);
+const PostsFilter = defineAsyncComponent(
+  () => import("~/components/ui/feed/posts-filter.vue")
+);
+const Posts = defineAsyncComponent(
+  () => import("~/components/ui/feed/posts.vue")
+);
+const MorePostsButton = defineAsyncComponent(
+  () => import("~/components/buttons/more-posts.button.vue")
+);
 
 definePageMeta({
   layout: "default-3-col",

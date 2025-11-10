@@ -64,17 +64,6 @@
             </button>
           </ClientOnly>
 
-          <!-- <button
-            @click="router.push('/notifications')"
-            class="flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors relative">
-            <icon
-              name="lucide:bell"
-              size="20"
-              class="text-gray-700 dark:text-gray-300" />
-            <span
-              class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
-          </button> -->
-
           <!-- Notifications  -->
           <NotificationsCounterDropdown />
 
@@ -128,7 +117,7 @@ const MessagesCounterDropdown = defineAsyncComponent(
   () => import("~/components/dropdowns/messages-counter.dropdown.vue")
 );
 const UserAccountDropdown = defineAsyncComponent(
-  () => import("./dropdowns/user-account.dropdown.vue")
+  () => import("~/components/dropdowns/user-account.dropdown.vue")
 );
 const layoutStore = useFrontendLayoutStore();
 const themeStore = useThemeStore();

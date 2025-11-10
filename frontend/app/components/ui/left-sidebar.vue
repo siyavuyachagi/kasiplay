@@ -3,21 +3,21 @@
     class="lg:col-span-3 lg:h-min lg:rounded-lg z-25 lg:z-20"
     :class="[
       'fixed lg:static',
-      'top-0 bottom-0 right-0 lg:top-auto lg:bottom-auto',
+      'top-0 bottom-0 left-0 lg:top-auto lg:bottom-auto',
       'w-80 lg:w-auto',
       'bg-white dark:bg-gray-800 lg:bg-transparent',
-      'border-l lg:border-0 border-gray-200 dark:border-gray-700',
+      'border-r lg:border-0 border-gray-200 dark:border-gray-700',
       'transition-transform duration-300 lg:transition-none',
-      layoutStore.isRightSidebarOpen
+      layoutStore.isLeftSidebarOpen
         ? 'translate-x-0'
-        : 'translate-x-full lg:translate-x-0',
+        : '-translate-x-full lg:translate-x-0',
     ]">
     <div class="h-full overflow-y-auto scrollbar-hide">
       <div class="p-4 space-y-4 pb-20">
         <!-- Close Button Mobile -->
         <div
           class="lg:hidden flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800 z-25">
-          <h3 class="font-bold text-gray-900 dark:text-white">Updates</h3>
+          <h3 class="font-bold text-gray-900 dark:text-white">Menu</h3>
           <button
             @click="closeSidebar"
             class="p-2 flex hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-lg transition-colors">
@@ -25,14 +25,14 @@
           </button>
         </div>
 
-        <!-- Today's Fixtures - Collapsible -->
-        <DailyFixturesCard />
+        <!-- Navigation - Collapsible -->
+        <NavigationsCard />
 
-        <!-- League Table - Collapsible -->
-        <LeagueStandingsCard />
+        <!-- Announcements - Collapsible -->
+        <AnnouncementsCard />
 
-        <!-- Who to Follow - Collapsible -->
-        <FollowSuggestionsCard />
+        <!-- Trending - Collapsible -->
+        <TrendingTopicsCard />
       </div>
     </div>
   </aside>
@@ -45,7 +45,7 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0">
     <div
-      v-if="layoutStore.isRightSidebarOpen"
+      v-if="layoutStore.isLeftSidebarOpen"
       @click="closeSidebar"
       class="fixed inset-0 bg-black/50 z-[19px] lg:hidden"
       style="top: 112px"></div>
@@ -53,13 +53,19 @@
 </template>
 
 <script setup lang="ts">
-import DailyFixturesCard from "./cards/daily-fixtures-card.vue";
-import FollowSuggestionsCard from "./cards/follow-suggestions-card.vue";
-import LeagueStandingsCard from "./cards/League-standings-card.vue";
+const AnnouncementsCard = defineAsyncComponent(
+  () => import("~/components/cards/announcements.card.vue")
+);
+const NavigationsCard = defineAsyncComponent(
+  () => import("~/components/cards/navigations.card.vue")
+);
+const TrendingTopicsCard = defineAsyncComponent(
+  () => import("~/components/cards/trending-topics.card.vue")
+);
 
 const layoutStore = useFrontendLayoutStore();
 
 const closeSidebar = () => {
-  layoutStore.closeSidebar("right");
+  layoutStore.closeSidebar("left");
 };
 </script>

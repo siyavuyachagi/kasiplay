@@ -1,0 +1,3 @@
+<template>
+    Member clubs
+</template>

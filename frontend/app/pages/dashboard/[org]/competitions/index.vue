@@ -1,0 +1,3 @@
+<template>
+    Federation competitions
+</template>

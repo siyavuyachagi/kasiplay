@@ -131,6 +131,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'default-2-col-left'
+})
 const searchQuery = ref('')
 const selectedPosition = ref('all')
 const selectedTeam = ref('all')

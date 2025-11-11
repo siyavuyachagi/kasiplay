@@ -1,23 +1,37 @@
 <template>
-  <!-- Center Feed -->
-  <div class="lg:col-span-6 mb-6 lg:mb-0">
-    <div class="space-y-4">
-      <!-- Create Post -->
-      <CreatePost />
+  <div class="lg:grid lg:grid-cols-12 lg:gap-6">
+    <!-- Left Sidebar -->
+    <LeftSidebar />
 
-      <!-- Filter Tabs -->
-      <PostsFilter />
+    <!-- Center Feed -->
+    <div class="lg:col-span-6 mb-6 lg:mb-0">
+      <div class="space-y-4">
+        <!-- Breadcrumb  -->
+        <DefaultBreadcrumb />
 
-      <!-- Posts -->
-      <Posts />
+        <!-- Create Post -->
+        <CreatePost />
 
-      <!-- Load More Posts -->
-      <MorePostsButton />
+        <!-- Filter Tabs -->
+        <PostsFilter />
+
+        <!-- Posts -->
+        <Posts />
+
+        <!-- Load More Posts -->
+        <MorePostsButton />
+      </div>
     </div>
+
+    <!-- Right Sidebar -->
+    <RightSidebar />
   </div>
 </template>
 
 <script setup lang="ts">
+const DefaultBreadcrumb = defineAsyncComponent(
+  () => import("~/components/ui/default-breadcrumb.vue")
+);
 const CreatePost = defineAsyncComponent(
   () => import("~/components/ui/feed/create-post.vue")
 );
@@ -32,6 +46,6 @@ const MorePostsButton = defineAsyncComponent(
 );
 
 definePageMeta({
-  layout: "default-3-col",
+  layout: "default",
 });
 </script>

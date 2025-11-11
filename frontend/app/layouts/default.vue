@@ -3,13 +3,10 @@
     <!-- Header -->
     <MainHeader />
 
-    <!-- Main Content -->
-    <main class="max-w-5xl mx-auto px-4 py-4 sm:py-6">
-      <!-- Breadcrumb  -->
-      <DefaultBreadcrumb />
-
+    <!-- Main Content Area -->
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:py-6">
       <slot></slot>
-    </main>
+    </div>
 
     <!-- Footer -->
     <MainFooter />

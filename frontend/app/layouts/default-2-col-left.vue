@@ -19,6 +19,8 @@
 
         <!-- Main Content -->
         <div class="flex-1">
+
+
           <slot></slot>
         </div>
       </div>
@@ -38,7 +40,9 @@ import { defineAsyncComponent } from "vue";
 const LeftSidebar = defineAsyncComponent(
   () => import("~/components/ui/left-sidebar.vue")
 );
-
+const DefaultBreadcrumb = defineAsyncComponent(
+  () => import("~/components/ui/default-breadcrumb.vue")
+);
 const MainFooter = defineAsyncComponent(
   () => import("~/components/ui/main-footer.vue")
 );

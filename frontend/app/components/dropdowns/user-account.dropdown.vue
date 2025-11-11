@@ -32,37 +32,71 @@
 
         <div
           v-show="isDropdownOpen"
-          class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-20!">
+          class="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-20!">
           <div class="py-2">
-            <nuxt-link
-              to="/account/profile"
+            <NuxtLink
+              v-for="(link, i) in accountLinks"
+              :key="i"
+              :to="link.url"
               class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <icon name="lucide:user" size="16" class="mr-2" />
-              Profile
-            </nuxt-link>
-            <nuxt-link
-              to="/account/settings"
-              class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <icon name="lucide:settings" size="16" class="mr-2" />
-              Settings
-            </nuxt-link>
-            <nuxt-link
-              v-if="false"
-              to="/dashboard/federation"
-              class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <icon name="lucide:building-2" size="16" class="mr-2" />
-              SAF Association
-            </nuxt-link>
-            <nuxt-link
-              v-else
-              to="/dashboard/club"
+              <icon :name="link.icon" size="16" class="mr-2" />
+              {{ link.label }}
+            </NuxtLink>
+
+            <!-- Single Organization Link -->
+            <NuxtLink
+              v-if="userOrganizations.length === 1"
+              :to="userOrganizations[0]?.url || '/dashboard'"
               class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
               <icon name="lucide:building" size="16" class="mr-2" />
-              7 Stars FC
-            </nuxt-link>
+              {{ userOrganizations[0]?.name }}
+            </NuxtLink>
+
+            <!-- Multiple Organizations Dropdown -->
+            <div v-else-if="userOrganizations.length > 1" class="relative">
+              <button
+                @click="toggleOrganizationsDropdown"
+                class="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                <div class="flex items-center">
+                  <icon name="lucide:building-2" size="16" class="mr-2" />
+                  <span>Organizations</span>
+                </div>
+                <icon
+                  name="lucide:chevron-right"
+                  size="16"
+                  :class="[
+                    'transition-transform duration-200',
+                    isOrganizationsOpen ? 'rotate-90' : '',
+                  ]" />
+              </button>
+
+              <!-- Organizations Sub-menu -->
+              <Transition
+                enter-active-class="transition-all duration-150 ease-out"
+                enter-from-class="opacity-0 max-h-0"
+                enter-to-class="opacity-100 max-h-96"
+                leave-active-class="transition-all duration-150 ease-in"
+                leave-from-class="opacity-100 max-h-96"
+                leave-to-class="opacity-0 max-h-0">
+                <div
+                  v-show="isOrganizationsOpen"
+                  class="overflow-hidden bg-gray-50 dark:bg-gray-900/50">
+                  <NuxtLink
+                    v-for="(org, i) in userOrganizations"
+                    :key="i"
+                    :to="org.url"
+                    class="flex items-center pl-10 pr-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
+                    <icon name="lucide:building" size="16" class="mr-2" />
+                    {{ org.name }}
+                  </NuxtLink>
+                </div>
+              </Transition>
+            </div>
+
+            <!-- Sign Out Button -->
             <button
               @click="logout"
-              class="w-full flex items-center px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700">
+              class="w-full flex items-center px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700 border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
               <icon name="lucide:log-out" size="16" class="mr-2" />
               Sign Out
             </button>
@@ -77,8 +111,26 @@
 const authStore = useAuthStore();
 const isAuthenticated = ref(true); // Replace with actual auth check
 const isDropdownOpen = ref(false);
+const isOrganizationsOpen = ref(false);
 // Ref for the dropdown container
 const userAccountDropdown = ref<HTMLElement | null>(null);
+
+interface AccountLinks {
+  label: string;
+  icon: string;
+  url: string;
+}
+
+const accountLinks: AccountLinks[] = [
+  { label: "Profile", icon: "lucide:user", url: "/account/profile" },
+  { label: "Settings", icon: "lucide:settings", url: "/account/settings" },
+];
+
+const userOrganizations = ref([
+  { name: "SAF Association", url: "/saf-assoc" },
+  { name: "Home Brothers FC", url: "/home-brothers-fc" },
+  { name: "Orlando Pirates FC", url: "/orlando.pirate.club" },
+]);
 
 const user = ref({
   name: "John Doe",
@@ -91,6 +143,12 @@ const returnUrl = computed(() => {
 
 const closeDropdown = () => {
   isDropdownOpen.value = false;
+  isOrganizationsOpen.value = false;
+};
+
+const toggleOrganizationsDropdown = (event: Event) => {
+  event.stopPropagation();
+  isOrganizationsOpen.value = !isOrganizationsOpen.value;
 };
 
 const logout = () => {
@@ -105,6 +163,7 @@ const handleClickOutside = (event: MouseEvent) => {
     !userAccountDropdown.value.contains(event.target as HTMLElement)
   ) {
     isDropdownOpen.value = false;
+    isOrganizationsOpen.value = false;
   }
 };
 

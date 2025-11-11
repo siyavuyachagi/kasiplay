@@ -1,65 +1,17 @@
 <template>
   <div
     class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-    <!-- Mobile Header -->
-    <MobileHeader />
-
-    <!-- Desktop Header -->
+    <!-- Header -->
     <DesktopHeader />
 
     <div class="flex lg:h-[calc(100vh-73px)]">
-      <!-- Mobile Overlay - FIXED Z-INDEX -->
-      <div
-        v-if="layoutStore.isSidebarOpen"
-        @click="layoutStore.closeSidebar()"
-        class="fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
-
       <!-- Sidebar - FIXED Z-INDEX -->
-      <FederationSidebar v-if="true" />
-      <ClubSidebar v-else />
+      <DashboardSidebar />
 
       <!-- Main Content -->
       <main class="flex-1 lg:ml-0 min-h-0 overflow-hidden">
         <div
           class="h-full p-4 lg:p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
-          <!-- Quick Stats -->
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div
-              v-for="stat in quickStats"
-              :key="stat.title"
-              class="bg-white dark:bg-gray-800 rounded-lg p-4 lg:p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-200">
-              <div class="flex items-center justify-between mb-3">
-                <div
-                  class="w-10 h-10 rounded-lg flex items-center justify-center"
-                  :class="stat.color">
-                  <svg
-                    class="w-5 h-5 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                  </svg>
-                </div>
-                <span
-                  :class="stat.trend > 0 ? 'text-green-600' : 'text-red-600'"
-                  class="text-sm font-medium">
-                  {{ stat.trend > 0 ? "+" : "" }}{{ stat.trend }}%
-                </span>
-              </div>
-              <h3
-                class="font-bold text-xl lg:text-2xl text-gray-900 dark:text-white mb-1">
-                {{ stat.value }}
-              </h3>
-              <p class="text-sm text-gray-500 dark:text-gray-400">
-                {{ stat.title }}
-              </p>
-            </div>
-          </div>
-
           <!-- Main Content Area -->
           <main>
             <slot></slot>
@@ -84,13 +36,6 @@ interface NavItem {
   name: string;
   description: string;
   badge?: string;
-}
-
-interface QuickStat {
-  title: string;
-  value: string;
-  color: string;
-  trend: number;
 }
 
 interface UpcomingMatch {
@@ -137,14 +82,6 @@ const navItems = ref<NavItem[]>([
   { name: "Media", description: "Videos & photos" },
   { name: "Settings", description: "Team configuration" },
   { name: "Support", description: "Help & assistance" },
-]);
-
-// Quick stats
-const quickStats = ref<QuickStat[]>([
-  { title: "Total Players", value: "24", color: "bg-green-600", trend: 12.5 },
-  { title: "Matches Played", value: "18", color: "bg-blue-600", trend: 8.2 },
-  { title: "Win Rate", value: "72%", color: "bg-purple-600", trend: 15.3 },
-  { title: "Goals Scored", value: "45", color: "bg-orange-600", trend: 22.8 },
 ]);
 
 // Upcoming matches

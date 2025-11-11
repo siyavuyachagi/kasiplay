@@ -1,6 +1,6 @@
 <!-- components/ui/breadcrumb.vue -->
 <template>
-  <nav class="text-xs text-gray-500 dark:text-gray-400" aria-label="Breadcrumb">
+  <nav class="text-xs px-4 text-gray-500 dark:text-gray-400" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1">
       <li v-for="(item, i) in items" :key="i" class="inline-flex items-center">
         <NuxtLink

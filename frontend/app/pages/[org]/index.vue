@@ -39,7 +39,7 @@
   </div>
 
   <!-- Content section -->
-  <dashboard-federation-index v-if="true" />
+  <dashboard-federation-index v-if="false" />
   <dashboard-club-index v-else />
 </template>
 

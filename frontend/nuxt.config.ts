@@ -112,5 +112,10 @@ export default defineNuxtConfig({
       path: '~/components',
       pathPrefix: false, // ⛔ disables folder-based prefixes
     },
+    {
+      path: '~/components/dashboard',
+      pathPrefix: false,
+      prefix: "Dashboard", // enables 'Dashboard' prefix for components in this folder
+    },
   ],
 })

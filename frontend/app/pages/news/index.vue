@@ -188,6 +188,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'default'
+})
 const selectedCategory = ref('All')
 const categories = ['All', 'Matches', 'Transfers', 'Interviews', 'Analysis', 'Youth']
 

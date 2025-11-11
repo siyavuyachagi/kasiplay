@@ -1,4 +1,5 @@
 <template>
+  <!-- Quick Stats -->
   <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
     <div
       v-for="stat in quickStats"
@@ -8,17 +9,7 @@
         <div
           class="w-10 h-10 rounded-lg flex items-center justify-center"
           :class="stat.color">
-          <svg
-            class="w-5 h-5 text-white"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-          </svg>
+          <icon :name="stat.icon" size="20" class="text-white" />
         </div>
         <span
           :class="stat.trend > 0 ? 'text-green-600' : 'text-red-600'"
@@ -35,7 +26,7 @@
       </p>
     </div>
   </div>
-  
+
   <!-- Content Grid -->
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
     <!-- Competition Standings -->

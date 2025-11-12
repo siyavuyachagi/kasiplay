@@ -1,35 +1,25 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-6">
-    <!-- Page Header -->
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Players</h1>
-      <p class="text-gray-600 dark:text-gray-400">
-        Discover talented players from across the league
-      </p>
-    </div>
+  <div class="lg:grid lg:grid-cols-12 lg:gap-6">
+    <!-- Left Sidebar -->
+    <LeftSidebar />
 
-    <!-- Search & Filters -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
+    <!-- Main Content -->
+    <div class="lg:col-span-9 max-w-7xl mx-auto space-y-4">
+      <!-- Breadcrumb -->
+      <Breadcrumb :links="breadcrumbs" />
+
+      <!-- Page Header -->
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          Players
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400">
+          Browse all players in the Kasi Premier League
+        </p>
+      </div>
+
+      <!-- Filters -->
       <div class="flex flex-wrap gap-4">
-        <div class="flex-1 min-w-[250px] relative">
-          <icon name="lucide:search" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Search players..."
-            class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 placeholder-gray-400" />
-        </div>
-
-        <select
-          v-model="selectedPosition"
-          class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
-          <option value="all">All Positions</option>
-          <option value="goalkeeper">Goalkeeper</option>
-          <option value="defender">Defender</option>
-          <option value="midfielder">Midfielder</option>
-          <option value="forward">Forward</option>
-        </select>
-
         <select
           v-model="selectedTeam"
           class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
@@ -37,211 +27,433 @@
           <option value="pirates">Orlando Pirates</option>
           <option value="chiefs">Kaizer Chiefs</option>
           <option value="sundowns">Mamelodi Sundowns</option>
+          <option value="supersport">SuperSport United</option>
         </select>
-      </div>
-    </div>
 
-    <!-- Players Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      <div
-        v-for="player in players"
-        :key="player.id"
-        class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer">
-        <!-- Player Image/Avatar -->
-        <div class="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-              <icon name="lucide:user" size="64" class="text-white" />
+        <select
+          v-model="selectedPosition"
+          class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
+          <option value="all">All Positions</option>
+          <option value="goalkeeper">Goalkeepers</option>
+          <option value="defender">Defenders</option>
+          <option value="midfielder">Midfielders</option>
+          <option value="forward">Forwards</option>
+        </select>
+
+        <select
+          v-model="sortBy"
+          class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
+          <option value="name">Name (A-Z)</option>
+          <option value="goals">Most Goals</option>
+          <option value="assists">Most Assists</option>
+          <option value="age">Age</option>
+        </select>
+
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Search players..."
+          class="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 placeholder-gray-400 dark:placeholder-gray-500" />
+      </div>
+
+      <!-- League Stats Overview -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:users"
+              size="20"
+              class="text-blue-600 dark:text-blue-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Active</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            480
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Players</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:target"
+              size="20"
+              class="text-green-600 dark:text-green-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Total</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            342
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Goals</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:hand"
+              size="20"
+              class="text-yellow-600 dark:text-yellow-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Total</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            218
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Assists</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:globe"
+              size="20"
+              class="text-purple-600 dark:text-purple-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >From</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            18
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Countries</p>
+        </div>
+      </div>
+
+      <!-- Top Performers Section -->
+      <div class="space-y-4">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+          Top Performers
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <!-- Top Scorer -->
+          <div
+            class="bg-gradient-to-br from-green-500 to-green-700 rounded-lg p-6 text-white">
+            <div class="flex items-center space-x-2 mb-4">
+              <icon name="lucide:trophy" size="20" />
+              <span class="text-sm font-medium opacity-90">Top Scorer</span>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div
+                class="w-16 h-16 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <icon name="lucide:user" size="32" />
+              </div>
+              <div>
+                <p class="text-2xl font-bold">Peter Shalulile</p>
+                <p class="text-sm opacity-90">Mamelodi Sundowns</p>
+                <p class="text-3xl font-bold mt-1">18 goals</p>
+              </div>
             </div>
           </div>
-          <!-- Jersey Number -->
-          <div class="absolute top-4 right-4 w-12 h-12 bg-white/90 dark:bg-gray-800/90 rounded-full flex items-center justify-center shadow-lg">
-            <span class="text-xl font-bold text-gray-900 dark:text-white">{{ player.number }}</span>
+
+          <!-- Top Assister -->
+          <div
+            class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg p-6 text-white">
+            <div class="flex items-center space-x-2 mb-4">
+              <icon name="lucide:hand" size="20" />
+              <span class="text-sm font-medium opacity-90">Top Assister</span>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div
+                class="w-16 h-16 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <icon name="lucide:user" size="32" />
+              </div>
+              <div>
+                <p class="text-2xl font-bold">Themba Zwane</p>
+                <p class="text-sm opacity-90">Mamelodi Sundowns</p>
+                <p class="text-3xl font-bold mt-1">14 assists</p>
+              </div>
+            </div>
           </div>
-          <!-- Status Badge -->
-          <div class="absolute bottom-4 left-4">
-            <span class="px-3 py-1 text-xs font-medium rounded-full" :class="player.statusColor">
-              {{ player.status }}
-            </span>
+
+          <!-- Best Goalkeeper -->
+          <div
+            class="bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg p-6 text-white">
+            <div class="flex items-center space-x-2 mb-4">
+              <icon name="lucide:shield-check" size="20" />
+              <span class="text-sm font-medium opacity-90"
+                >Best Goalkeeper</span
+              >
+            </div>
+            <div class="flex items-center space-x-4">
+              <div
+                class="w-16 h-16 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                <icon name="lucide:user" size="32" />
+              </div>
+              <div>
+                <p class="text-2xl font-bold">Ronwen Williams</p>
+                <p class="text-sm opacity-90">Mamelodi Sundowns</p>
+                <p class="text-3xl font-bold mt-1">12 clean sheets</p>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Player Info -->
-        <div class="p-4">
-          <div class="mb-3">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 transition-colors">
-              {{ player.name }}
-            </h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{ player.team }}</p>
-          </div>
+      <!-- Players List -->
+      <div class="space-y-4">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+          All Players
+        </h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div
+            v-for="player in players"
+            :key="player.id"
+            @click="router.push(`/players/${player.id}`)"
+            class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg hover:border-blue-500 dark:hover:border-blue-500 transition-all cursor-pointer group">
+            <!-- Player Header -->
+            <div class="flex items-start space-x-3 mb-4">
+              <div
+                class="w-16 h-16 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <span class="text-white font-bold text-xl">{{
+                  player.number
+                }}</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3
+                  class="font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {{ player.name }}
+                </h3>
+                <p
+                  class="text-sm text-gray-500 dark:text-gray-400 truncate">
+                  {{ player.team }}
+                </p>
+                <div class="flex items-center space-x-2 mt-1">
+                  <span
+                    class="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-medium rounded">
+                    {{ player.position }}
+                  </span>
+                  <span class="text-xs text-gray-500 dark:text-gray-400"
+                    >{{ player.age }} yrs</span
+                  >
+                </div>
+              </div>
+            </div>
 
-          <!-- Position & Age -->
-          <div class="flex items-center space-x-3 mb-4 text-sm">
-            <div class="flex items-center space-x-1">
-              <icon name="lucide:target" size="14" class="text-gray-400" />
-              <span class="text-gray-600 dark:text-gray-400">{{ player.position }}</span>
+            <!-- Player Stats -->
+            <div
+              class="grid grid-cols-3 gap-2 pt-3 border-t border-gray-200 dark:border-gray-700">
+              <div class="text-center">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  Apps
+                </p>
+                <p class="text-lg font-bold text-gray-900 dark:text-white">
+                  {{ player.appearances }}
+                </p>
+              </div>
+              <div class="text-center">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  Goals
+                </p>
+                <p class="text-lg font-bold text-green-600 dark:text-green-400">
+                  {{ player.goals }}
+                </p>
+              </div>
+              <div class="text-center">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  Assists
+                </p>
+                <p class="text-lg font-bold text-blue-600 dark:text-blue-400">
+                  {{ player.assists }}
+                </p>
+              </div>
             </div>
-            <div class="flex items-center space-x-1">
-              <icon name="lucide:cake" size="14" class="text-gray-400" />
-              <span class="text-gray-600 dark:text-gray-400">{{ player.age }} yrs</span>
-            </div>
-          </div>
 
-          <!-- Stats -->
-          <div class="grid grid-cols-3 gap-2 mb-4">
-            <div class="text-center p-2 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-              <div class="text-lg font-bold text-gray-900 dark:text-white">{{ player.goals }}</div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">Goals</div>
+            <!-- Additional Info -->
+            <div
+              class="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between text-xs">
+              <div class="flex items-center text-gray-500 dark:text-gray-400">
+                <icon name="lucide:flag" size="12" class="mr-1" />
+                <span>{{ player.nationality }}</span>
+              </div>
+              <NuxtLink :to="`/players/${player.id}`" class="text-blue-600 dark:text-blue-400 font-medium">
+                View Profile →
+              </NuxtLink>
             </div>
-            <div class="text-center p-2 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-              <div class="text-lg font-bold text-gray-900 dark:text-white">{{ player.assists }}</div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">Assists</div>
-            </div>
-            <div class="text-center p-2 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-              <div class="text-lg font-bold text-gray-900 dark:text-white">{{ player.matches }}</div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">Matches</div>
-            </div>
-          </div>
-
-          <!-- Actions -->
-          <div class="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
-            <div class="flex items-center space-x-1">
-              <button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                <icon name="lucide:heart" size="16" class="text-gray-400 hover:text-red-500" />
-              </button>
-              <button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                <icon name="lucide:share-2" size="16" class="text-gray-400" />
-              </button>
-            </div>
-            <button class="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400">
-              View Profile
-            </button>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Load More -->
-    <div class="flex justify-center mt-8">
-      <button class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
-        Load More Players
-      </button>
+      <!-- Load More -->
+      <div class="flex justify-center pt-4">
+        <button
+          class="px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          Load More Players
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: 'default-2-col-left'
-})
-const searchQuery = ref('')
-const selectedPosition = ref('all')
-const selectedTeam = ref('all')
+import { generateRandomUUID } from "~/utilities/generate-random-uuid";
+
+definePageMeta({ layout: "default" });
+
+const Breadcrumb = defineAsyncComponent(
+  () => import("~/components/ui/breadcrumb.vue")
+);
+
+const breadcrumbs = [{ label: "Players" }];
+const router = useRouter();
+
+const selectedTeam = ref("all");
+const selectedPosition = ref("all");
+const sortBy = ref("name");
+const searchQuery = ref("");
 
 const players = ref([
   {
-    id: 1,
-    name: 'Thabo Mkhize',
-    team: 'Orlando Pirates',
-    number: 10,
-    position: 'Midfielder',
-    age: 24,
+    id: generateRandomUUID(),
+    name: "Monnapule Saleng",
+    number: 11,
+    team: "Orlando Pirates",
+    position: "Forward",
+    age: 25,
+    nationality: "South Africa",
+    appearances: 18,
     goals: 12,
-    assists: 8,
-    matches: 28,
-    status: 'Active',
-    statusColor: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+    assists: 6,
   },
   {
-    id: 2,
-    name: 'Sipho Ndlovu',
-    team: 'Kaizer Chiefs',
+    id: generateRandomUUID(),
+    name: "Evidence Makgopa",
     number: 9,
-    position: 'Forward',
+    team: "Orlando Pirates",
+    position: "Forward",
+    age: 24,
+    nationality: "South Africa",
+    appearances: 20,
+    goals: 10,
+    assists: 4,
+  },
+  {
+    id: generateRandomUUID(),
+    name: "Patrick Maswanganyi",
+    number: 10,
+    team: "Orlando Pirates",
+    position: "Midfielder",
     age: 26,
+    nationality: "South Africa",
+    appearances: 19,
+    goals: 8,
+    assists: 9,
+  },
+  {
+    id: generateRandomUUID(),
+    name: "Peter Shalulile",
+    number: 9,
+    team: "Mamelodi Sundowns",
+    position: "Forward",
+    age: 30,
+    nationality: "Namibia",
+    appearances: 20,
     goals: 18,
     assists: 5,
-    matches: 30,
-    status: 'Active',
-    statusColor: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
   },
   {
-    id: 3,
-    name: 'Mandla Khumalo',
-    team: 'Mamelodi Sundowns',
-    number: 7,
-    position: 'Winger',
-    age: 22,
-    goals: 10,
-    assists: 12,
-    matches: 26,
-    status: 'Active',
-    statusColor: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+    id: generateRandomUUID(),
+    name: "Themba Zwane",
+    number: 18,
+    team: "Mamelodi Sundowns",
+    position: "Midfielder",
+    age: 34,
+    nationality: "South Africa",
+    appearances: 19,
+    goals: 6,
+    assists: 14,
   },
   {
-    id: 4,
-    name: 'John Dlamini',
-    team: 'SuperSport United',
-    number: 5,
-    position: 'Defender',
-    age: 28,
-    goals: 2,
-    assists: 3,
-    matches: 32,
-    status: 'Injured',
-    statusColor: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
-  },
-  {
-    id: 5,
-    name: 'Peter Mokoena',
-    team: 'AmaZulu FC',
+    id: generateRandomUUID(),
+    name: "Ronwen Williams",
     number: 1,
-    position: 'Goalkeeper',
-    age: 30,
+    team: "Mamelodi Sundowns",
+    position: "Goalkeeper",
+    age: 32,
+    nationality: "South Africa",
+    appearances: 20,
     goals: 0,
     assists: 0,
-    matches: 28,
-    status: 'Active',
-    statusColor: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
   },
   {
-    id: 6,
-    name: 'David Zulu',
-    team: 'Cape Town City',
-    number: 11,
-    position: 'Forward',
-    age: 23,
-    goals: 15,
-    assists: 7,
-    matches: 27,
-    status: 'Active',
-    statusColor: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
-  },
-  {
-    id: 7,
-    name: 'James Nkosi',
-    team: 'Orlando Pirates',
-    number: 8,
-    position: 'Midfielder',
-    age: 25,
+    id: generateRandomUUID(),
+    name: "Ashley Du Preez",
+    number: 9,
+    team: "Kaizer Chiefs",
+    position: "Forward",
+    age: 26,
+    nationality: "South Africa",
+    appearances: 18,
     goals: 7,
-    assists: 11,
-    matches: 29,
-    status: 'Suspended',
-    statusColor: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400',
+    assists: 3,
   },
   {
-    id: 8,
-    name: 'Michael Sithole',
-    team: 'Kaizer Chiefs',
-    number: 4,
-    position: 'Defender',
-    age: 27,
-    goals: 3,
-    assists: 2,
-    matches: 31,
-    status: 'Active',
-    statusColor: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+    id: generateRandomUUID(),
+    name: "Yusuf Maart",
+    number: 6,
+    team: "Kaizer Chiefs",
+    position: "Midfielder",
+    age: 28,
+    nationality: "South Africa",
+    appearances: 20,
+    goals: 4,
+    assists: 7,
   },
-])
+  {
+    id: generateRandomUUID(),
+    name: "Itumeleng Khune",
+    number: 1,
+    team: "Kaizer Chiefs",
+    position: "Goalkeeper",
+    age: 37,
+    nationality: "South Africa",
+    appearances: 15,
+    goals: 0,
+    assists: 0,
+  },
+  {
+    id: generateRandomUUID(),
+    name: "Khuliso Mudau",
+    number: 20,
+    team: "Mamelodi Sundowns",
+    position: "Defender",
+    age: 29,
+    nationality: "South Africa",
+    appearances: 20,
+    goals: 2,
+    assists: 8,
+  },
+  {
+    id: generateRandomUUID(),
+    name: "Sipho Chaine",
+    number: 1,
+    team: "Orlando Pirates",
+    position: "Goalkeeper",
+    age: 27,
+    nationality: "South Africa",
+    appearances: 20,
+    goals: 0,
+    assists: 0,
+  },
+  {
+    id: generateRandomUUID(),
+    name: "Bradley Grobler",
+    number: 9,
+    team: "SuperSport United",
+    position: "Forward",
+    age: 36,
+    nationality: "South Africa",
+    appearances: 17,
+    goals: 11,
+    assists: 2,
+  },
+]);
 </script>

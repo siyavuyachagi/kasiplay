@@ -1,201 +1,319 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-6">
-    <!-- Page Header -->
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Teams</h1>
-      <p class="text-gray-600 dark:text-gray-400">
-        Explore all registered teams and clubs
-      </p>
-    </div>
+  <div class="lg:grid lg:grid-cols-12 lg:gap-6">
+    <!-- Left Sidebar -->
+    <LeftSidebar />
 
-    <!-- Search & Filters -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
+    <!-- Main Content -->
+    <div class="lg:col-span-9 space-y-4">
+      <!-- Breadcrumb -->
+      <Breadcrumb :links="breadcrumbs" />
+
+      <!-- Page Header -->
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          Teams
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400">
+          Explore all teams competing in the Kasi Premier League
+        </p>
+      </div>
+
+      <!-- Filters -->
       <div class="flex flex-wrap gap-4">
-        <div class="flex-1 min-w-[250px] relative">
-          <icon name="lucide:search" size="20" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Search teams..."
-            class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 placeholder-gray-400" />
-        </div>
-
         <select
           v-model="selectedLeague"
           class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
           <option value="all">All Leagues</option>
           <option value="kpl">Kasi Premier League</option>
-          <option value="division2">Division 2</option>
-          <option value="youth">Youth League</option>
+          <option value="division1">Division 1</option>
+          <option value="reserve">Reserve League</option>
         </select>
 
         <select
-          v-model="selectedRegion"
+          v-model="sortBy"
           class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
-          <option value="all">All Regions</option>
-          <option value="gauteng">Gauteng</option>
-          <option value="western-cape">Western Cape</option>
-          <option value="kwazulu-natal">KwaZulu-Natal</option>
+          <option value="name">Name (A-Z)</option>
+          <option value="position">League Position</option>
+          <option value="founded">Year Founded</option>
         </select>
+
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Search teams..."
+          class="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 placeholder-gray-400 dark:placeholder-gray-500" />
       </div>
-    </div>
 
-    <!-- Teams Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div
-        v-for="team in teams"
-        :key="team.id"
-        class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer">
-        <!-- Team Header with Gradient -->
-        <div class="h-32 relative overflow-hidden" :class="team.gradient">
-          <div class="absolute inset-0 bg-black/20"></div>
-          <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-            <div class="w-20 h-20 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center shadow-lg">
-              <icon name="lucide:shield" size="40" class="text-gray-400" />
-            </div>
-            <div v-if="team.verified" class="bg-white/90 dark:bg-gray-800/90 rounded-full p-1">
-              <icon name="lucide:badge-check" size="20" class="text-blue-500" />
-            </div>
+      <!-- League Stats Overview -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:shield"
+              size="20"
+              class="text-blue-600 dark:text-blue-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Total</span
+            >
           </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            16
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Teams</p>
         </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:trophy"
+              size="20"
+              class="text-yellow-600 dark:text-yellow-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Total</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            48
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Trophies</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:users"
+              size="20"
+              class="text-green-600 dark:text-green-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Active</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            480
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Players</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:calendar"
+              size="20"
+              class="text-purple-600 dark:text-purple-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Season</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            240
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Matches</p>
+        </div>
+      </div>
 
-        <!-- Team Info -->
-        <div class="p-6">
-          <div class="flex items-start justify-between mb-3">
-            <div class="flex-1">
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 transition-colors">
+      <!-- Teams Grid -->
+      <div class="space-y-4">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+          All Teams
+        </h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div
+            v-for="team in teams"
+            :key="team.id"
+            @click="router.push(`/teams/${team.id}`)"
+            class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg hover:border-blue-500 dark:hover:border-blue-500 transition-all cursor-pointer group">
+            <!-- Team Badge -->
+            <div class="flex flex-col items-center mb-4">
+              <div
+                class="w-24 h-24 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <icon name="lucide:shield" size="48" class="text-white" />
+              </div>
+              <h3
+                class="text-lg font-bold text-gray-900 dark:text-white text-center group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {{ team.name }}
               </h3>
-              <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center">
-                <icon name="lucide:map-pin" size="14" class="mr-1" />
-                {{ team.location }}
+              <p class="text-sm text-gray-500 dark:text-gray-400 text-center">
+                {{ team.nickname }}
               </p>
             </div>
-          </div>
 
-          <!-- Stats -->
-          <div class="grid grid-cols-3 gap-3 mb-4 py-3 border-y border-gray-200 dark:border-gray-700">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ team.players }}</div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">Players</div>
+            <!-- Team Stats -->
+            <div
+              class="grid grid-cols-3 gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div class="text-center">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  Position
+                </p>
+                <p class="text-lg font-bold text-gray-900 dark:text-white">
+                  {{ team.position }}
+                </p>
+              </div>
+              <div class="text-center">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                  Points
+                </p>
+                <p class="text-lg font-bold text-gray-900 dark:text-white">
+                  {{ team.points }}
+                </p>
+              </div>
+              <div class="text-center">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Form</p>
+                <div class="flex justify-center space-x-1">
+                  <span
+                    v-for="(result, idx) in team.form.slice(0, 3)"
+                    :key="idx"
+                    class="w-2 h-2 rounded-full"
+                    :class="{
+                      'bg-green-500': result === 'W',
+                      'bg-gray-400': result === 'D',
+                      'bg-red-500': result === 'L',
+                    }"></span>
+                </div>
+              </div>
             </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ team.wins }}</div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">Wins</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-gray-900 dark:text-white">{{ team.trophies }}</div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">Trophies</div>
-            </div>
-          </div>
 
-          <!-- League & Actions -->
-          <div class="flex items-center justify-between">
-            <span class="px-3 py-1 text-xs font-medium rounded-full" :class="team.leagueColor">
-              {{ team.league }}
-            </span>
-            <div class="flex items-center space-x-2">
-              <button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                <icon name="lucide:heart" size="18" class="text-gray-400 hover:text-red-500" />
-              </button>
-              <button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                <icon name="lucide:share-2" size="18" class="text-gray-400" />
-              </button>
+            <!-- Additional Info -->
+            <div class="mt-4 space-y-2 text-xs text-gray-500 dark:text-gray-400">
+              <div class="flex items-center space-x-2">
+                <icon name="lucide:map-pin" size="12" />
+                <span>{{ team.stadium }}</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <icon name="lucide:calendar" size="12" />
+                <span>Founded: {{ team.founded }}</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <icon name="lucide:trophy" size="12" />
+                <span>{{ team.trophies }} Trophies</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Load More -->
-    <div class="flex justify-center mt-8">
-      <button class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
-        Load More Teams
-      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: 'default-2-col-left'
-})
-const searchQuery = ref('')
-const selectedLeague = ref('all')
-const selectedRegion = ref('all')
+import { generateRandomUUID } from "~/utilities/generate-random-uuid";
+
+definePageMeta({ layout: "default" });
+
+const Breadcrumb = defineAsyncComponent(
+  () => import("~/components/ui/breadcrumb.vue")
+);
+
+const breadcrumbs = [{ label: "Teams" }];
+const router = useRouter();
+
+const selectedLeague = ref("all");
+const sortBy = ref("position");
+const searchQuery = ref("");
 
 const teams = ref([
   {
-    id: 1,
-    name: 'Orlando Pirates',
-    location: 'Johannesburg, GP',
-    players: 28,
-    wins: 15,
+    id: generateRandomUUID(),
+    name: "Orlando Pirates",
+    nickname: "The Buccaneers",
+    position: 2,
+    points: 45,
+    form: ["W", "W", "W", "D", "W"],
+    stadium: "Orlando Stadium",
+    founded: 1937,
     trophies: 12,
-    league: 'KPL',
-    leagueColor: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
-    gradient: 'bg-gradient-to-br from-gray-800 to-black',
-    verified: true,
   },
   {
-    id: 2,
-    name: 'Kaizer Chiefs',
-    location: 'Johannesburg, GP',
-    players: 30,
-    wins: 18,
+    id: generateRandomUUID(),
+    name: "Kaizer Chiefs",
+    nickname: "Amakhosi",
+    position: 7,
+    points: 32,
+    form: ["L", "D", "W", "L", "D"],
+    stadium: "FNB Stadium",
+    founded: 1970,
+    trophies: 13,
+  },
+  {
+    id: generateRandomUUID(),
+    name: "Mamelodi Sundowns",
+    nickname: "The Brazilians",
+    position: 1,
+    points: 48,
+    form: ["W", "W", "W", "W", "D"],
+    stadium: "Loftus Versfeld",
+    founded: 1970,
     trophies: 15,
-    league: 'KPL',
-    leagueColor: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
-    gradient: 'bg-gradient-to-br from-yellow-600 to-yellow-800',
-    verified: true,
   },
   {
-    id: 3,
-    name: 'Mamelodi Sundowns',
-    location: 'Pretoria, GP',
-    players: 32,
-    wins: 22,
-    trophies: 18,
-    league: 'KPL',
-    leagueColor: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
-    gradient: 'bg-gradient-to-br from-yellow-400 to-blue-600',
-    verified: true,
-  },
-  {
-    id: 4,
-    name: 'AmaZulu FC',
-    location: 'Durban, KZN',
-    players: 26,
-    wins: 12,
-    trophies: 5,
-    league: 'KPL',
-    leagueColor: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
-    gradient: 'bg-gradient-to-br from-green-600 to-green-800',
-    verified: true,
-  },
-  {
-    id: 5,
-    name: 'SuperSport United',
-    location: 'Pretoria, GP',
-    players: 27,
-    wins: 14,
+    id: generateRandomUUID(),
+    name: "SuperSport United",
+    nickname: "Matsatsantsa",
+    position: 4,
+    points: 38,
+    form: ["W", "L", "W", "W", "D"],
+    stadium: "Lucas Moripe Stadium",
+    founded: 1994,
     trophies: 8,
-    league: 'KPL',
-    leagueColor: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
-    gradient: 'bg-gradient-to-br from-blue-600 to-blue-800',
-    verified: true,
   },
   {
-    id: 6,
-    name: 'Cape Town City',
-    location: 'Cape Town, WC',
-    players: 25,
-    wins: 11,
-    trophies: 3,
-    league: 'KPL',
-    leagueColor: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
-    gradient: 'bg-gradient-to-br from-sky-500 to-sky-700',
-    verified: false,
+    id: generateRandomUUID(),
+    name: "Cape Town City",
+    nickname: "The Citizens",
+    position: 5,
+    points: 36,
+    form: ["D", "W", "L", "W", "W"],
+    stadium: "Cape Town Stadium",
+    founded: 2016,
+    trophies: 2,
   },
-])
+  {
+    id: generateRandomUUID(),
+    name: "AmaZulu FC",
+    nickname: "Usuthu",
+    position: 6,
+    points: 34,
+    form: ["L", "D", "D", "W", "L"],
+    stadium: "Moses Mabhida Stadium",
+    founded: 1932,
+    trophies: 4,
+  },
+  {
+    id: generateRandomUUID(),
+    name: "Stellenbosch FC",
+    nickname: "The Maroons",
+    position: 3,
+    points: 42,
+    form: ["W", "W", "D", "W", "W"],
+    stadium: "Danie Craven Stadium",
+    founded: 2016,
+    trophies: 1,
+  },
+  {
+    id: generateRandomUUID(),
+    name: "Golden Arrows",
+    nickname: "Abafana Bes'thende",
+    position: 8,
+    points: 30,
+    form: ["D", "L", "W", "D", "L"],
+    stadium: "Sugar Ray Xulu Stadium",
+    founded: 1943,
+    trophies: 2,
+  },
+  {
+    id: generateRandomUUID(),
+    name: "Moroka Swallows",
+    nickname: "The Beautiful Birds",
+    position: 10,
+    points: 26,
+    form: ["L", "W", "L", "D", "W"],
+    stadium: "Dobsonville Stadium",
+    founded: 1947,
+    trophies: 5,
+  },
+]);
 </script>

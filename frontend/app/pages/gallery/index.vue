@@ -1,43 +1,34 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-6">
-    <!-- Page Header -->
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-        Gallery
-      </h1>
-      <p class="text-gray-600 dark:text-gray-400">
-        Explore memorable moments captured on and off the field
-      </p>
-    </div>
+  <div class="lg:grid lg:grid-cols-12 lg:gap-6">
+    <!-- Left Sidebar -->
+    <LeftSidebar />
 
-    <!-- Filters -->
-    <div
-      class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6">
+    <!-- Main Content -->
+    <div class="lg:col-span-9 max-w-7xl mx-auto space-y-4">
+      <!-- Breadcrumb -->
+      <Breadcrumb :links="breadcrumbs" />
+
+      <!-- Page Header -->
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          Gallery
+        </h1>
+        <p class="text-gray-600 dark:text-gray-400">
+          Explore the best moments captured from matches, training, and events
+        </p>
+      </div>
+
+      <!-- Filters -->
       <div class="flex flex-wrap gap-4">
-        <div class="flex space-x-2">
-          <button
-            v-for="type in mediaTypes"
-            :key="type.value"
-            @click="selectedType = type.value"
-            class="px-4 py-2 rounded-lg font-medium text-sm transition-colors flex items-center space-x-2"
-            :class="
-              selectedType === type.value
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            ">
-            <icon :name="type.icon" size="16" />
-            <span>{{ type.label }}</span>
-          </button>
-        </div>
-
         <select
           v-model="selectedCategory"
           class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
           <option value="all">All Categories</option>
-          <option value="matches">Match Day</option>
+          <option value="matches">Matches</option>
           <option value="training">Training</option>
           <option value="events">Events</option>
           <option value="celebrations">Celebrations</option>
+          <option value="behind-scenes">Behind the Scenes</option>
         </select>
 
         <select
@@ -48,259 +39,650 @@
           <option value="chiefs">Kaizer Chiefs</option>
           <option value="sundowns">Mamelodi Sundowns</option>
         </select>
-      </div>
-    </div>
 
-    <!-- Stats Bar -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-      <div
-        class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
-        <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">
-          1,234
-        </div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Photos</div>
-      </div>
-      <div
-        class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
-        <div
-          class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">
-          456
-        </div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Videos</div>
-      </div>
-      <div
-        class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
-        <div class="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">
-          89
-        </div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Albums</div>
-      </div>
-      <div
-        class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
-        <div
-          class="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-1">
-          12.5k
-        </div>
-        <div class="text-sm text-gray-600 dark:text-gray-400">Views</div>
-      </div>
-    </div>
+        <select
+          v-model="sortBy"
+          class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
+          <option value="recent">Most Recent</option>
+          <option value="popular">Most Popular</option>
+          <option value="oldest">Oldest First</option>
+        </select>
 
-    <!-- Featured Album -->
-    <div
-      class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
-      <div class="relative h-64 bg-gradient-to-br from-blue-500 to-purple-600">
-        <div class="absolute inset-0 flex items-center justify-center">
-          <icon name="lucide:images" size="80" class="text-white/20" />
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Search gallery..."
+          class="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 placeholder-gray-400 dark:placeholder-gray-500" />
+      </div>
+
+      <!-- Gallery Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:image"
+              size="20"
+              class="text-blue-600 dark:text-blue-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Total</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            1,248
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Photos</p>
         </div>
-        <div class="absolute top-4 left-4">
-          <span
-            class="px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full">
-            FEATURED
-          </span>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:video"
+              size="20"
+              class="text-red-600 dark:text-red-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Total</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            86
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Videos</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:folder"
+              size="20"
+              class="text-purple-600 dark:text-purple-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >Albums</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            42
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">Collections</p>
+        </div>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <icon
+              name="lucide:calendar"
+              size="20"
+              class="text-green-600 dark:text-green-400" />
+            <span
+              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+              >This Week</span
+            >
+          </div>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+            24
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">New</p>
         </div>
       </div>
-      <div class="p-6">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          Soweto Derby 2025 - Match Highlights
-        </h2>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">
-          Relive the excitement from one of the most thrilling matches of the
-          season. 125 photos capturing every moment of action.
+
+      <!-- Featured Album -->
+      <div
+        class="bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl p-6 text-white shadow-sm">
+        <div class="flex items-center space-x-2 mb-4">
+          <icon name="lucide:star" size="20" />
+          <span class="text-sm font-medium">Featured Album</span>
+        </div>
+        <h2 class="text-2xl font-bold mb-2">Soweto Derby Highlights</h2>
+        <p class="text-sm opacity-90 mb-4">
+          Best moments from the thrilling 3-1 victory • November 1, 2025
         </p>
         <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-4 text-sm text-gray-500">
+          <div class="flex items-center space-x-4 text-sm">
             <span class="flex items-center space-x-1">
-              <icon name="lucide:image" size="16" />
-              <span>125 photos</span>
+              <icon name="lucide:image" size="14" />
+              <span>48 photos</span>
             </span>
             <span class="flex items-center space-x-1">
-              <icon name="lucide:calendar" size="16" />
-              <span>Oct 28, 2025</span>
+              <icon name="lucide:video" size="14" />
+              <span>6 videos</span>
             </span>
             <span class="flex items-center space-x-1">
-              <icon name="lucide:eye" size="16" />
-              <span>2.3k views</span>
+              <icon name="lucide:eye" size="14" />
+              <span>12.5k views</span>
             </span>
           </div>
           <button
-            class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
-            View Album
+            @click="viewAlbum('featured')"
+            class="px-4 py-2 bg-white text-blue-600 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center space-x-2">
+            <span>View Album</span>
+            <icon name="lucide:arrow-right" size="16" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="space-y-6">
+        <!-- Albums Section -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+              Recent Albums
+            </h2>
+            <button
+              class="text-sm text-blue-600 dark:text-blue-400 hover:underline flex items-center space-x-1">
+              <span>View All</span>
+              <icon name="lucide:arrow-right" size="14" />
+            </button>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div
+              v-for="album in albums"
+              :key="album.id"
+              @click="viewAlbum(album.id)"
+              class="group relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-500 transition-all cursor-pointer">
+              <!-- Album Cover -->
+              <div
+                class="relative h-48 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 overflow-hidden">
+                <div
+                  class="absolute inset-0 flex items-center justify-center">
+                  <icon
+                    name="lucide:image"
+                    size="60"
+                    class="text-gray-400 dark:text-gray-500" />
+                </div>
+                <!-- Overlay on Hover -->
+                <div
+                  class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <icon
+                    name="lucide:play-circle"
+                    size="40"
+                    class="text-white" />
+                </div>
+                <!-- Media Count Badge -->
+                <div
+                  class="absolute top-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-sm rounded text-white text-xs font-medium flex items-center space-x-1">
+                  <icon name="lucide:image" size="12" />
+                  <span>{{ album.photoCount }}</span>
+                </div>
+              </div>
+
+              <!-- Album Info -->
+              <div class="p-4">
+                <h3
+                  class="font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {{ album.title }}
+                </h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">
+                  {{ album.date }} • {{ album.category }}
+                </p>
+                <div
+                  class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                  <span class="flex items-center space-x-1">
+                    <icon name="lucide:eye" size="12" />
+                    <span>{{ album.views }}</span>
+                  </span>
+                  <span class="flex items-center space-x-1">
+                    <icon name="lucide:heart" size="12" />
+                    <span>{{ album.likes }}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest Photos -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+              Latest Photos
+            </h2>
+            <div class="flex items-center space-x-2">
+              <button
+                @click="viewMode = 'grid'"
+                class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                :class="
+                  viewMode === 'grid'
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-gray-500 dark:text-gray-400'
+                ">
+                <icon name="lucide:grid-3x3" size="18" />
+              </button>
+              <button
+                @click="viewMode = 'masonry'"
+                class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                :class="
+                  viewMode === 'masonry'
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-gray-500 dark:text-gray-400'
+                ">
+                <icon name="lucide:layout-grid" size="18" />
+              </button>
+            </div>
+          </div>
+
+          <!-- Grid View -->
+          <div
+            v-if="viewMode === 'grid'"
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            <div
+              v-for="photo in photos"
+              :key="photo.id"
+              @click="openLightbox(photo)"
+              class="group relative aspect-square bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg overflow-hidden cursor-pointer">
+              <div
+                class="absolute inset-0 flex items-center justify-center">
+                <icon
+                  name="lucide:image"
+                  size="40"
+                  class="text-gray-400 dark:text-gray-500" />
+              </div>
+              <!-- Hover Overlay -->
+              <div
+                class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-4">
+                <p class="text-sm font-semibold mb-2 text-center">
+                  {{ photo.title }}
+                </p>
+                <div class="flex items-center space-x-3 text-xs">
+                  <span class="flex items-center space-x-1">
+                    <icon name="lucide:eye" size="12" />
+                    <span>{{ photo.views }}</span>
+                  </span>
+                  <span class="flex items-center space-x-1">
+                    <icon name="lucide:heart" size="12" />
+                    <span>{{ photo.likes }}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Masonry View -->
+          <div
+            v-else
+            class="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+            <div
+              v-for="photo in photos"
+              :key="photo.id"
+              @click="openLightbox(photo)"
+              class="group relative break-inside-avoid bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg overflow-hidden cursor-pointer"
+              :style="{ height: photo.height + 'px' }">
+              <div
+                class="absolute inset-0 flex items-center justify-center">
+                <icon
+                  name="lucide:image"
+                  size="40"
+                  class="text-gray-400 dark:text-gray-500" />
+              </div>
+              <!-- Hover Overlay -->
+              <div
+                class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-4">
+                <p class="text-sm font-semibold mb-2 text-center">
+                  {{ photo.title }}
+                </p>
+                <div class="flex items-center space-x-3 text-xs">
+                  <span class="flex items-center space-x-1">
+                    <icon name="lucide:eye" size="12" />
+                    <span>{{ photo.views }}</span>
+                  </span>
+                  <span class="flex items-center space-x-1">
+                    <icon name="lucide:heart" size="12" />
+                    <span>{{ photo.likes }}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Videos Section -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+              Featured Videos
+            </h2>
+            <button
+              class="text-sm text-blue-600 dark:text-blue-400 hover:underline flex items-center space-x-1">
+              <span>View All</span>
+              <icon name="lucide:arrow-right" size="14" />
+            </button>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div
+              v-for="video in videos"
+              :key="video.id"
+              @click="playVideo(video)"
+              class="group relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg hover:border-blue-500 dark:hover:border-blue-500 transition-all cursor-pointer">
+              <!-- Video Thumbnail -->
+              <div
+                class="relative h-48 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 overflow-hidden">
+                <div
+                  class="absolute inset-0 flex items-center justify-center">
+                  <icon
+                    name="lucide:video"
+                    size="60"
+                    class="text-gray-400 dark:text-gray-500" />
+                </div>
+                <!-- Play Button -->
+                <div
+                  class="absolute inset-0 flex items-center justify-center">
+                  <div
+                    class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <icon name="lucide:play" size="28" class="text-white ml-1" />
+                  </div>
+                </div>
+                <!-- Duration Badge -->
+                <div
+                  class="absolute bottom-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-sm rounded text-white text-xs font-medium">
+                  {{ video.duration }}
+                </div>
+              </div>
+
+              <!-- Video Info -->
+              <div class="p-4">
+                <h3
+                  class="font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                  {{ video.title }}
+                </h3>
+                <p
+                  class="text-sm text-gray-500 dark:text-gray-400 mb-3 line-clamp-2">
+                  {{ video.description }}
+                </p>
+                <div
+                  class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                  <span>{{ video.date }}</span>
+                  <div class="flex items-center space-x-3">
+                    <span class="flex items-center space-x-1">
+                      <icon name="lucide:eye" size="12" />
+                      <span>{{ video.views }}</span>
+                    </span>
+                    <span class="flex items-center space-x-1">
+                      <icon name="lucide:thumbs-up" size="12" />
+                      <span>{{ video.likes }}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="flex justify-center pt-4">
+          <button
+            class="px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            Load More
           </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Gallery Grid -->
-    <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+  <!-- Lightbox Modal -->
+  <div
+    v-if="selectedPhoto"
+    @click="closeLightbox"
+    class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+    <div
+      @click.stop
+      class="relative max-w-5xl w-full bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+      <!-- Close Button -->
+      <button
+        @click="closeLightbox"
+        class="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors z-10">
+        <icon name="lucide:x" size="24" />
+      </button>
+
+      <!-- Image -->
       <div
-        v-for="item in galleryItems"
-        :key="item.id"
-        class="break-inside-avoid bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group">
-        <!-- Image/Video Placeholder -->
+        class="relative h-[60vh] bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
+        <icon
+          name="lucide:image"
+          size="100"
+          class="text-gray-400 dark:text-gray-500" />
+      </div>
+
+      <!-- Info -->
+      <div class="p-6">
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          {{ selectedPhoto.title }}
+        </h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+          {{ selectedPhoto.description }}
+        </p>
         <div
-          class="relative overflow-hidden"
-          :style="{ height: item.height + 'px' }">
-          <div
-            class="absolute inset-0 bg-gradient-to-br"
-            :class="item.gradient">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <icon
-                :name="
-                  item.type === 'video' ? 'lucide:play-circle' : 'lucide:image'
-                "
-                size="48"
-                class="text-white/40 group-hover:scale-110 transition-transform" />
-            </div>
-          </div>
-
-          <!-- Media Type Badge -->
-          <div class="absolute top-2 right-2">
-            <span
-              v-if="item.type === 'video'"
-              class="px-2 py-1 bg-black/70 text-white text-xs font-medium rounded flex items-center space-x-1">
-              <icon name="lucide:video" size="12" />
-              <span>{{ item.duration }}</span>
-            </span>
-          </div>
-
-          <!-- Overlay on Hover -->
-          <div
-            class="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+          class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+          <span>{{ selectedPhoto.date }}</span>
+          <div class="flex items-center space-x-4">
             <button
-              class="p-3 bg-white rounded-full transform scale-0 group-hover:scale-100 transition-transform">
-              <icon name="lucide:expand" size="20" class="text-gray-900" />
+              class="flex items-center space-x-1 hover:text-blue-600 dark:hover:text-blue-400">
+              <icon name="lucide:heart" size="16" />
+              <span>{{ selectedPhoto.likes }}</span>
+            </button>
+            <button
+              class="flex items-center space-x-1 hover:text-blue-600 dark:hover:text-blue-400">
+              <icon name="lucide:share-2" size="16" />
+              <span>Share</span>
+            </button>
+            <button
+              class="flex items-center space-x-1 hover:text-blue-600 dark:hover:text-blue-400">
+              <icon name="lucide:download" size="16" />
+              <span>Download</span>
             </button>
           </div>
         </div>
-
-        <!-- Info -->
-        <div class="p-3">
-          <h3
-            class="font-semibold text-sm text-gray-900 dark:text-white mb-1 line-clamp-2">
-            {{ item.title }}
-          </h3>
-          <div
-            class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-            <span>{{ item.date }}</span>
-            <div class="flex items-center space-x-2">
-              <span class="flex items-center space-x-1">
-                <icon name="lucide:heart" size="12" />
-                <span>{{ item.likes }}</span>
-              </span>
-              <span class="flex items-center space-x-1">
-                <icon name="lucide:eye" size="12" />
-                <span>{{ item.views }}</span>
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-
-    <!-- Load More -->
-    <div class="flex justify-center mt-8">
-      <button
-        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
-        Load More
-      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const selectedType = ref("all");
+import { generateRandomUUID } from "~/utilities/generate-random-uuid";
+
+definePageMeta({ layout: "default" });
+
+const Breadcrumb = defineAsyncComponent(
+  () => import("~/components/ui/breadcrumb.vue")
+);
+
+const breadcrumbs = [{ label: "Gallery" }];
+
 const selectedCategory = ref("all");
 const selectedTeam = ref("all");
+const sortBy = ref("recent");
+const searchQuery = ref("");
+const viewMode = ref("grid");
+const selectedPhoto = ref(null);
 
-const mediaTypes = [
-  { value: "all", label: "All Media", icon: "lucide:layout-grid" },
-  { value: "photos", label: "Photos", icon: "lucide:image" },
-  { value: "videos", label: "Videos", icon: "lucide:video" },
-];
-
-const galleryItems = ref([
+const albums = ref([
   {
-    id: 1,
-    type: "photo",
-    title: "Goal Celebration - Thabo Mkhize",
-    date: "Oct 31, 2025",
-    likes: 234,
-    views: 1200,
-    height: 250,
-    gradient: "from-blue-500 to-purple-600",
+    id: generateRandomUUID(),
+    title: "Orlando Pirates vs Kaizer Chiefs",
+    date: "Nov 1, 2025",
+    category: "Matches",
+    photoCount: 48,
+    views: "12.5k",
+    likes: "892",
   },
   {
-    id: 2,
-    type: "video",
-    title: "Match Highlights: Pirates vs Chiefs",
+    id: generateRandomUUID(),
+    title: "Training Session - Week 12",
     date: "Oct 30, 2025",
-    duration: "5:23",
-    likes: 567,
-    views: 3400,
-    height: 180,
-    gradient: "from-red-500 to-orange-600",
+    category: "Training",
+    photoCount: 32,
+    views: "5.2k",
+    likes: "345",
   },
   {
-    id: 3,
-    type: "photo",
-    title: "Team Training Session",
-    date: "Oct 29, 2025",
-    likes: 145,
-    views: 890,
-    height: 300,
-    gradient: "from-green-500 to-teal-600",
-  },
-  {
-    id: 4,
-    type: "photo",
-    title: "Fan Zone Atmosphere",
+    id: generateRandomUUID(),
+    title: "Trophy Celebration",
     date: "Oct 28, 2025",
-    likes: 189,
-    views: 1050,
-    height: 220,
-    gradient: "from-yellow-500 to-orange-600",
+    category: "Events",
+    photoCount: 56,
+    views: "18.3k",
+    likes: "1.2k",
   },
   {
-    id: 5,
-    type: "video",
-    title: "Player Interview: Sipho Ndlovu",
-    date: "Oct 27, 2025",
-    duration: "3:45",
-    likes: 312,
-    views: 2100,
-    height: 200,
-    gradient: "from-purple-500 to-pink-600",
-  },
-  {
-    id: 6,
-    type: "photo",
-    title: "Trophy Presentation Ceremony",
-    date: "Oct 26, 2025",
-    likes: 445,
-    views: 2800,
-    height: 280,
-    gradient: "from-indigo-500 to-blue-600",
-  },
-  {
-    id: 7,
-    type: "photo",
-    title: "Behind the Scenes: Match Preparation",
+    id: generateRandomUUID(),
+    title: "Fan Meet & Greet",
     date: "Oct 25, 2025",
-    likes: 178,
-    views: 950,
-    height: 240,
-    gradient: "from-cyan-500 to-blue-600",
+    category: "Events",
+    photoCount: 24,
+    views: "7.8k",
+    likes: "567",
   },
   {
-    id: 8,
-    type: "video",
-    title: "Top 10 Saves of the Month",
-    date: "Oct 24, 2025",
-    duration: "4:12",
-    likes: 523,
-    views: 4200,
-    height: 190,
-    gradient: "from-pink-500 to-rose-600",
+    id: generateRandomUUID(),
+    title: "Behind the Scenes",
+    date: "Oct 22, 2025",
+    category: "Behind the Scenes",
+    photoCount: 40,
+    views: "9.1k",
+    likes: "678",
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Pre-Season Camp",
+    date: "Oct 15, 2025",
+    category: "Training",
+    photoCount: 64,
+    views: "6.4k",
+    likes: "445",
   },
 ]);
+
+const photos = ref([
+  {
+    id: generateRandomUUID(),
+    title: "Goal Celebration",
+    description: "Monnapule Saleng celebrates his goal",
+    date: "Nov 1, 2025",
+    views: "3.2k",
+    likes: "256",
+    height: 250,
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Team Huddle",
+    description: "Players gather before kickoff",
+    date: "Nov 1, 2025",
+    views: "2.8k",
+    likes: "198",
+    height: 320,
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Spectacular Save",
+    description: "Goalkeeper makes crucial save",
+    date: "Nov 1, 2025",
+    views: "4.1k",
+    likes: "312",
+    height: 280,
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Victory Lap",
+    description: "Team celebrates with fans",
+    date: "Nov 1, 2025",
+    views: "5.6k",
+    likes: "445",
+    height: 300,
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Training Intensity",
+    description: "Players in training session",
+    date: "Oct 30, 2025",
+    views: "1.9k",
+    likes: "145",
+    height: 260,
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Tactical Discussion",
+    description: "Coach instructs players",
+    date: "Oct 30, 2025",
+    views: "2.3k",
+    likes: "167",
+    height: 290,
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Fan Support",
+    description: "Passionate fans in stands",
+    date: "Oct 28, 2025",
+    views: "3.7k",
+    likes: "289",
+    height: 310,
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Match Action",
+    description: "Intense midfield battle",
+    date: "Oct 28, 2025",
+    views: "2.5k",
+    likes: "178",
+    height: 270,
+  },
+]);
+
+const videos = ref([
+  {
+    id: generateRandomUUID(),
+    title: "Match Highlights: Pirates vs Chiefs",
+    description:
+      "Extended highlights from the thrilling 3-1 victory in the Soweto Derby",
+    date: "Nov 1, 2025",
+    duration: "12:45",
+    views: "45k",
+    likes: "2.3k",
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Goal Compilation - Monnapule Saleng",
+    description: "All goals scored by Saleng this season",
+    date: "Oct 30, 2025",
+    duration: "8:32",
+    views: "28k",
+    likes: "1.8k",
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Training Session Highlights",
+    description: "Behind the scenes look at training preparation",
+    date: "Oct 28, 2025",
+    duration: "6:15",
+    views: "15k",
+    likes: "892",
+  },
+  {
+    id: generateRandomUUID(),
+    title: "Player Interviews Post-Match",
+    description: "Exclusive interviews after the derby victory",
+    date: "Nov 1, 2025",
+    duration: "10:20",
+    views: "32k",
+    likes: "1.5k",
+  },
+]);
+
+const viewAlbum = (albumId: string) => {
+  console.log("Viewing album:", albumId);
+  // Navigate to album detail page
+};
+
+const openLightbox = (photo: any) => {
+  selectedPhoto.value = photo;
+};
+
+const closeLightbox = () => {
+  selectedPhoto.value = null;
+};
+
+const playVideo = (video: any) => {
+  console.log("Playing video:", video);
+  // Open video player
+};
 </script>

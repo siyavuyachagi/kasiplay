@@ -23,7 +23,7 @@
           v-for="category in categories"
           :key="category"
           @click="selectedCategory = category"
-          class="px-4 py-2 rounded-lg font-medium text-sm transition-colors"
+          class="px-2 py-1 rounded-lg font-medium text-sm transition-colors"
           :class="
             selectedCategory === category
               ? 'bg-blue-600 text-white'

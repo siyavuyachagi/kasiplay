@@ -5,6 +5,7 @@
 
     <!-- Main Content -->
     <div class="lg:col-span-9 max-w-7xl mx-auto space-y-4">
+      <!-- Breadcrumb  -->
       <Breadcrumb :links="breadcrumbs" />
 
       <!-- Page Header -->

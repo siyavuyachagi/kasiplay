@@ -64,8 +64,7 @@
               name="lucide:image"
               size="20"
               class="text-blue-600 dark:text-blue-400" />
-            <span
-              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+            <span class="text-xs font-medium text-gray-500 dark:text-gray-400"
               >Total</span
             >
           </div>
@@ -81,8 +80,7 @@
               name="lucide:video"
               size="20"
               class="text-red-600 dark:text-red-400" />
-            <span
-              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+            <span class="text-xs font-medium text-gray-500 dark:text-gray-400"
               >Total</span
             >
           </div>
@@ -98,8 +96,7 @@
               name="lucide:folder"
               size="20"
               class="text-purple-600 dark:text-purple-400" />
-            <span
-              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+            <span class="text-xs font-medium text-gray-500 dark:text-gray-400"
               >Albums</span
             >
           </div>
@@ -115,8 +112,7 @@
               name="lucide:calendar"
               size="20"
               class="text-green-600 dark:text-green-400" />
-            <span
-              class="text-xs font-medium text-gray-500 dark:text-gray-400"
+            <span class="text-xs font-medium text-gray-500 dark:text-gray-400"
               >This Week</span
             >
           </div>
@@ -129,7 +125,7 @@
 
       <!-- Featured Album -->
       <div
-        class="bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl p-6 text-white shadow-sm">
+        class="bg-linear-to-br from-blue-600 to-purple-700 rounded-2xl p-6 text-white shadow-sm">
         <div class="flex items-center space-x-2 mb-4">
           <icon name="lucide:star" size="20" />
           <span class="text-sm font-medium">Featured Album</span>
@@ -184,9 +180,8 @@
               class="group relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:border-blue-500 dark:hover:border-blue-500 transition-all cursor-pointer">
               <!-- Album Cover -->
               <div
-                class="relative h-48 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 overflow-hidden">
-                <div
-                  class="absolute inset-0 flex items-center justify-center">
+                class="relative h-48 bg-linear-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
                   <icon
                     name="lucide:image"
                     size="60"
@@ -271,9 +266,8 @@
               v-for="photo in photos"
               :key="photo.id"
               @click="openLightbox(photo)"
-              class="group relative aspect-square bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg overflow-hidden cursor-pointer">
-              <div
-                class="absolute inset-0 flex items-center justify-center">
+              class="group relative aspect-square bg-linear-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg overflow-hidden cursor-pointer">
+              <div class="absolute inset-0 flex items-center justify-center">
                 <icon
                   name="lucide:image"
                   size="40"
@@ -307,10 +301,9 @@
               v-for="photo in photos"
               :key="photo.id"
               @click="openLightbox(photo)"
-              class="group relative break-inside-avoid bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg overflow-hidden cursor-pointer"
+              class="group relative break-inside-avoid bg-linear-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg overflow-hidden cursor-pointer"
               :style="{ height: photo.height + 'px' }">
-              <div
-                class="absolute inset-0 flex items-center justify-center">
+              <div class="absolute inset-0 flex items-center justify-center">
                 <icon
                   name="lucide:image"
                   size="40"
@@ -357,20 +350,21 @@
               class="group relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg hover:border-blue-500 dark:hover:border-blue-500 transition-all cursor-pointer">
               <!-- Video Thumbnail -->
               <div
-                class="relative h-48 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 overflow-hidden">
-                <div
-                  class="absolute inset-0 flex items-center justify-center">
+                class="relative h-48 bg-linear-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
                   <icon
                     name="lucide:video"
                     size="60"
                     class="text-gray-400 dark:text-gray-500" />
                 </div>
                 <!-- Play Button -->
-                <div
-                  class="absolute inset-0 flex items-center justify-center">
+                <div class="absolute inset-0 flex items-center justify-center">
                   <div
                     class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <icon name="lucide:play" size="28" class="text-white ml-1" />
+                    <icon
+                      name="lucide:play"
+                      size="28"
+                      class="text-white ml-1" />
                   </div>
                 </div>
                 <!-- Duration Badge -->
@@ -421,61 +415,6 @@
   </div>
 
   <!-- Lightbox Modal -->
-  <div
-    v-if="selectedPhoto"
-    @click="closeLightbox"
-    class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-    <div
-      @click.stop
-      class="relative max-w-5xl w-full bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
-      <!-- Close Button -->
-      <button
-        @click="closeLightbox"
-        class="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors z-10">
-        <icon name="lucide:x" size="24" />
-      </button>
-
-      <!-- Image -->
-      <div
-        class="relative h-[60vh] bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
-        <icon
-          name="lucide:image"
-          size="100"
-          class="text-gray-400 dark:text-gray-500" />
-      </div>
-
-      <!-- Info -->
-      <div class="p-6">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          {{ selectedPhoto.title }}
-        </h3>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">
-          {{ selectedPhoto.description }}
-        </p>
-        <div
-          class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-          <span>{{ selectedPhoto.date }}</span>
-          <div class="flex items-center space-x-4">
-            <button
-              class="flex items-center space-x-1 hover:text-blue-600 dark:hover:text-blue-400">
-              <icon name="lucide:heart" size="16" />
-              <span>{{ selectedPhoto.likes }}</span>
-            </button>
-            <button
-              class="flex items-center space-x-1 hover:text-blue-600 dark:hover:text-blue-400">
-              <icon name="lucide:share-2" size="16" />
-              <span>Share</span>
-            </button>
-            <button
-              class="flex items-center space-x-1 hover:text-blue-600 dark:hover:text-blue-400">
-              <icon name="lucide:download" size="16" />
-              <span>Download</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">

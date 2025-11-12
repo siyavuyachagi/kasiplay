@@ -77,7 +77,7 @@ const navigations = computed<NavigationItem[]>(() => [
   },
   {
     name: "Match Officials",
-    route: `${slug.value}/match-officials`,
+    route: `${slug.value}/officials`,
     description: "Referees & officials",
     icon: "lucide:users",
   },
@@ -113,11 +113,4 @@ const navigations = computed<NavigationItem[]>(() => [
     icon: "lucide:settings",
   },
 ]);
-
-// Check if route is active
-const isActiveRoute = (itemRoute: string) => {
-  const currentPath = route.path.replace(/^\//, "");
-  const routePath = itemRoute;
-  return currentPath === routePath;
-};
 </script>

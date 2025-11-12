@@ -5,12 +5,9 @@
       <div class="flex items-center space-x-3">
         <div class="flex items-center space-x-2">
           <button
-            @click="toggleSidebar"
+            @click="layoutStore.toggleSidebar()"
             class="lg:hidden flex justify-center p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-200">
-            <icon
-              name="lucide:menu"
-              size="20"
-              class="text-gray-400 dark:text-gray-300" />
+            <icon name="lucide:menu" size="20" class="text-white" />
           </button>
 
           <NuxtLink to="/" class="hidden lg:flex items-center space-x-2">
@@ -24,7 +21,9 @@
             </span>
           </NuxtLink>
 
-          <NuxtLink to="/dashboard" class="hidden md:flex">
+          <NuxtLink
+            :to="`/${route.params.org as string}`"
+            class="hidden md:flex">
             <div
               class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg px-3 py-1">
               <span
@@ -101,7 +100,9 @@
       leave-active-class="transition-all duration-150 ease-in"
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-2">
-      <div v-if="showMobileSearch" class="md:hidden px-4 pb-3 border-t border-gray-200 dark:border-gray-700 pt-3">
+      <div
+        v-if="showMobileSearch"
+        class="md:hidden px-4 pb-3 border-t border-gray-200 dark:border-gray-700 pt-3">
         <div class="relative w-full">
           <icon
             name="lucide:search"
@@ -122,18 +123,16 @@
 const DashboardUserAccountDropdown = defineAsyncComponent(
   () => import("~/components/dashboard/dropdowns/user-account.dropdown.vue")
 );
-const dashboardLayoutStore = useDashboardLayoutStore();
+
+const layoutStore = useDashboardLayoutStore();
 const activeTeam = ref<string>("Orlando Pirates FC");
 const showMobileSearch = ref<boolean>(false);
 const mobileSearchInput = ref<HTMLInputElement | null>(null);
-
-const toggleSidebar = () => {
-  dashboardLayoutStore.toggleSidebar();
-};
+const route = useRoute();
 
 const toggleMobileSearch = () => {
   showMobileSearch.value = !showMobileSearch.value;
-  
+
   // Focus the input when opened
   if (showMobileSearch.value) {
     nextTick(() => {

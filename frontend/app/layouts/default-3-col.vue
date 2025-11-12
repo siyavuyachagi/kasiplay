@@ -1,10 +1,6 @@
 <template>
   <div
-    class="bg-gray-50 dark:bg-gray-900"
-    :class="{
-      'overflow-hidden h-screen lg:overflow-auto lg:h-auto':
-        layoutStore.isLeftSidebarOpen || layoutStore.isRightSidebarOpen,
-    }">
+    class="bg-gray-50 dark:bg-gray-900">
     <MainHeader />
 
     <!-- Main Content Area -->

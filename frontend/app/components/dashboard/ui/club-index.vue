@@ -207,6 +207,20 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+interface QuickStat {
+  title: string;
+  value: string;
+  color: string;
+  trend: number;
+}
+// Quick stats
+const quickStats = ref<QuickStat[]>([
+  { title: "Total Players", value: "24", color: "bg-green-600", trend: 12.5 },
+  { title: "Matches Played", value: "18", color: "bg-blue-600", trend: 8.2 },
+  { title: "Win Rate", value: "72%", color: "bg-purple-600", trend: 15.3 },
+  { title: "Goals Scored", value: "45", color: "bg-orange-600", trend: 22.8 },
+]);
+
 const upcomingMatches = ref([
   {
     id: 1,

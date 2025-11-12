@@ -1,23 +1,29 @@
 <template>
+    <!-- Overlay (mobile only) -->
+  <div
+    v-if="dashboardLayoutStore.isSidebarOpen"
+    class="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm lg:hidden"
+    @click="dashboardLayoutStore.closeSidebar()"
+  ></div>
+
   <!-- Sidebar - FIXED Z-INDEX -->
   <aside
     class="fixed inset-y-0 left-0 z-50 w-64 sm:w-72 lg:w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 lg:z-auto shadow-xl lg:shadow-none overflow-hidden flex flex-col lg:mt-0"
-    :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-    style="top: 65px">
+    :class="
+      dashboardLayoutStore.isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+    ">
     <!-- Mobile Sidebar Header with Close Button -->
     <div
-      class="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 shrink-0">
-      <div class="flex items-center space-x-3">
-        <div
-          class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-          <span class="text-white text-sm font-semibold">⚽</span>
-        </div>
-        <span class="text-lg font-semibold text-gray-900 dark:text-white"
-          >KasiPlay</span
-        >
-      </div>
+      class="lg:hidden flex items-center justify-between px-4 border-b border-gray-200 dark:border-gray-700 shrink-0">
+      <NuxtLink to="/" class="flex items-center space-x-2">
+        <NuxtImg src="/favicon.svg" alt="Logo" class="w-5 h-5 object-contain" />
+        <span
+          class="inline text-xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          KasiPlay
+        </span>
+      </NuxtLink>
       <button
-        @click="sidebarOpen = false"
+        @click="dashboardLayoutStore.isSidebarOpen = false"
         class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
         <icon
           name="lucide:x"
@@ -66,7 +72,7 @@ const DashboardNavigationsSidebar = defineAsyncComponent(
 );
 
 // Props
-const sidebarOpen = ref(false);
+const dashboardLayoutStore = useDashboardLayoutStore();
 const activeNav = ref("Dashboard");
 
 // Methods
@@ -74,7 +80,7 @@ const selectNav = (navName: string): void => {
   activeNav.value = navName;
   // Close sidebar on mobile after selection
   if (window.innerWidth < 1024) {
-    sidebarOpen.value = false;
+    dashboardLayoutStore.closeSidebar();
   }
 };
 </script>

@@ -14,7 +14,7 @@
               class="text-gray-700 dark:text-gray-300" />
           </button>
 
-          <nuxt-link to="/" class="flex items-center space-x-2">
+          <nuxt-link to="/" class="hidden md:flex items-center space-x-2">
             <NuxtImg
               src="/favicon.svg"
               alt="Logo"

@@ -47,8 +47,7 @@
     <div
       v-if="layoutStore.isLeftSidebarOpen"
       @click="closeSidebar"
-      class="fixed inset-0 bg-black/50 z-[19px] lg:hidden"
-      style="top: 112px"></div>
+      class="fixed inset-0 bg-black/50 z-24 lg:hidden"></div>
   </Transition>
 </template>
 

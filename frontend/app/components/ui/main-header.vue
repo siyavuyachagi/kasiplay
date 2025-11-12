@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 z-25">
+  <header class="sticky top-0 z-20 lg:z-25">
     <!-- Top Navigation Bar -->
     <TopNavigations />
 

@@ -1,12 +1,7 @@
 <!-- layouts/default-2-col-left.vue  -->
 
 <template>
-  <div
-    class="bg-gray-50 dark:bg-gray-900"
-    :class="{
-      'overflow-hidden h-screen lg:overflow-auto lg:h-auto':
-        layoutStore.isLeftSidebarOpen,
-    }">
+  <div class="bg-gray-50 dark:bg-gray-900">
     <MainHeader />
 
     <!-- Main Content Area -->
@@ -19,8 +14,6 @@
 
         <!-- Main Content -->
         <div class="flex-1">
-
-
           <slot></slot>
         </div>
       </div>
@@ -41,7 +34,7 @@ const LeftSidebar = defineAsyncComponent(
   () => import("~/components/ui/left-sidebar.vue")
 );
 const DefaultBreadcrumb = defineAsyncComponent(
-  () => import("~/components/ui/default-breadcrumb.vue")
+  () => import("~/components/ui/breadcrumb.vue")
 );
 const MainFooter = defineAsyncComponent(
   () => import("~/components/ui/main-footer.vue")

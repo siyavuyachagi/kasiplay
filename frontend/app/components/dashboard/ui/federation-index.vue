@@ -52,7 +52,7 @@
           <div class="flex items-start justify-between mb-3">
             <div class="flex items-center space-x-3">
               <div
-                class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
+                class="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
                 :class="
                   competition.type === 'league'
                     ? 'bg-blue-100 dark:bg-blue-900/30'
@@ -423,7 +423,49 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const slug = ref("safa-org-federation");
+const route = useRoute();
+const slug = route.params.org as string;
+
+interface QuickStat {
+  title: string;
+  value: string | number;
+  color: string;
+  trend: number;
+  icon: string;
+}
+
+const quickStats = ref<QuickStat[]>([
+  {
+    title: "Registered Clubs",
+    value: 128,
+    color: "bg-purple-600",
+    trend: 5.4,
+    icon: "lucide:users",
+  },
+  {
+    title: "Active Competitions",
+    value: 12,
+    color: "bg-blue-600",
+    trend: 8.1,
+    icon: "lucide:trophy",
+  },
+  {
+    title: "Total Referees",
+    value: 84,
+    color: "bg-green-600",
+    trend: 3.2,
+    icon: "lucide:whistle",
+  },
+  {
+    title: "Pending Applications",
+    value: 9,
+    color: "bg-orange-600",
+    trend: -4.7,
+    icon: "lucide:clock",
+  },
+]);
+
+
 const activeCompetitions = ref([
   {
     id: 1,

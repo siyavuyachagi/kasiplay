@@ -4,11 +4,11 @@
     <LeftSidebar />
 
     <!-- Center Feed -->
-    <div class="lg:col-span-6 mb-6 lg:mb-0">
-      <div class="space-y-4">
-        <!-- Breadcrumb  -->
-        <DefaultBreadcrumb />
+    <div class="lg:col-span-6 mb-6 lg:mb-0 space-y-4">
+      <!-- Breadcrumb  -->
+      <Breadcrumb :links="breadcrumbs" />
 
+      <div class="space-y-4">
         <!-- Create Post -->
         <CreatePost />
 
@@ -29,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-const DefaultBreadcrumb = defineAsyncComponent(
-  () => import("~/components/ui/default-breadcrumb.vue")
+const Breadcrumb = defineAsyncComponent(
+  () => import("~/components/ui/breadcrumb.vue")
 );
 const CreatePost = defineAsyncComponent(
   () => import("~/components/ui/feed/create-post.vue")
@@ -44,6 +44,8 @@ const Posts = defineAsyncComponent(
 const MorePostsButton = defineAsyncComponent(
   () => import("~/components/buttons/more-posts.button.vue")
 );
+
+const breadcrumbs = [{ label: "Feed", route: "/feed", active: true }];
 
 definePageMeta({
   layout: "default",

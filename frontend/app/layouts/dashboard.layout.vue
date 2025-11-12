@@ -25,10 +25,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import ClubSidebar from "~/components/dashboard/club-sidebar.vue";
-import DesktopHeader from "~/components/dashboard/desktop-header.vue";
-import FederationSidebar from "~/components/dashboard/federation-sidebar.vue";
-import MobileHeader from "~/components/dashboard/mobile-header.vue";
-import { useDashboardLayoutStore } from "~/stores/dashboard-layout";
 
 const layoutStore = useDashboardLayoutStore();
 

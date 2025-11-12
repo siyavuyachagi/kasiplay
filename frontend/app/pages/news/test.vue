@@ -4,7 +4,8 @@
     <LeftSidebar />
 
     <!-- Main Content -->
-    <div class="lg:col-span-9 max-w-7xl mx-auto space-y-4">
+    <div class="lg:col-span-6 mb-6 lg:mb-0 space-y-4">
+      <!-- Breadcrumb -->
       <Breadcrumb :links="breadcrumbs" />
 
       <!-- Page Header -->
@@ -33,15 +34,14 @@
         </button>
       </div>
 
+      <!-- Articles Grid -->
       <div class="space-y-6">
         <!-- Featured Article -->
         <article
-          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-shadow">
+          class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
           <div
             class="relative h-64 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
-            <div
-              @click="router.replace(`/news/${generateRandomUUID()}`)"
-              class="absolute inset-0 flex items-center justify-center cursor-pointer">
+            <div class="absolute inset-0 flex items-center justify-center">
               <icon name="lucide:newspaper" size="80" class="text-white/20" />
             </div>
             <div class="absolute top-4 left-4">
@@ -63,63 +63,47 @@
                 <span>5 min read</span>
               </span>
             </div>
-            <NuxtLink :to="`/news/${generateRandomUUID()}`">
-              <h2
-                class="text-2xl font-bold text-gray-900 dark:text-white mb-3 hover:text-blue-600 transition-colors">
-                Orlando Pirates Secure Historic Victory in Soweto Derby
-              </h2>
-              <p
-                class="text-gray-600 dark:text-gray-400 mb-4 hover:text-blue-600 transition-colors">
-                In a thrilling encounter at FNB Stadium, Orlando Pirates
-                defeated Kaizer Chiefs 3-1 to claim bragging rights in the
-                Soweto Derby. The match saw spectacular goals and intense
-                action...
-              </p>
-            </NuxtLink>
+            <h2
+              class="text-2xl font-bold text-gray-900 dark:text-white mb-3 hover:text-blue-600 transition-colors">
+              Orlando Pirates Secure Historic Victory in Soweto Derby
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              In a thrilling encounter at FNB Stadium, Orlando Pirates defeated
+              Kaizer Chiefs 3-1 to claim bragging rights in the Soweto Derby.
+              The match saw spectacular goals and intense action...
+            </p>
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-2">
                 <div
-                  class="w-8 h-8 rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                  class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                   <span class="text-white text-xs font-bold">JS</span>
                 </div>
                 <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  John Smith
-                </span>
+                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >John Smith</span
+                >
               </div>
-              <div class="flex items-center space-x-3 text-xs text-gray-500">
-                <span class="flex items-center space-x-1">
-                  <icon name="lucide:eye" size="14" />
-                  <span>{{ `24k` }}</span>
-                </span>
-                <span class="flex items-center space-x-1">
-                  <icon name="lucide:message-circle" size="14" />
-                  <span>{{ "345" }}</span>
-                </span>
-              </div>
-              <!-- <button
+              <button
                 class="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 flex items-center space-x-1">
                 <span>Read More</span>
                 <icon name="lucide:arrow-right" size="16" />
-              </button> -->
+              </button>
             </div>
           </div>
         </article>
 
         <!-- News List -->
-<div class="space-y-4">
+        <div class="space-y-4">
           <article
             v-for="article in articles"
             :key="article.id"
             class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg transition-shadow cursor-pointer">
-            <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex gap-4">
               <!-- Thumbnail -->
-              <NuxtLink :key="article.id" :to="`/news/${generateRandomUUID()}`">
-                <div
-                  class="w-full sm:w-32 h-48 sm:h-32 shrink-0 rounded-lg bg-linear-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
-                  <icon name="lucide:image" size="32" class="text-gray-400" />
-                </div>
-              </NuxtLink>
+              <div
+                class="w-32 h-32 flex-shrink-0 rounded-lg bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
+                <icon name="lucide:image" size="32" class="text-gray-400" />
+              </div>
 
               <!-- Content -->
               <div class="flex-1 min-w-0">
@@ -132,20 +116,18 @@
                     article.date
                   }}</span>
                 </div>
-                <NuxtLink :to="`/news/${article.id}`">
-                  <h3
-                    class="text-lg font-bold text-gray-900 dark:text-white mb-2 hover:text-blue-600 transition-colors line-clamp-2">
-                    {{ article.title }}
-                  </h3>
-                </NuxtLink>
+                <h3
+                  class="text-lg font-bold text-gray-900 dark:text-white mb-2 hover:text-blue-600 transition-colors line-clamp-2">
+                  {{ article.title }}
+                </h3>
                 <p
                   class="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
                   {{ article.excerpt }}
                 </p>
-                <div class="flex justify-between sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div class="flex items-center justify-between">
                   <div class="flex items-center space-x-2">
                     <div
-                      class="w-6 h-6 rounded-full bg-linear-to-br from-green-500 to-green-700 flex items-center justify-center">
+                      class="w-6 h-6 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
                       <span class="text-white text-xs font-bold">{{
                         article.author.initials
                       }}</span>
@@ -155,7 +137,7 @@
                     }}</span>
                   </div>
                   <div
-                    class="flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400">
+                    class="flex items-center space-x-3 text-xs text-gray-500">
                     <span class="flex items-center space-x-1">
                       <icon name="lucide:eye" size="14" />
                       <span>{{ article.views }}</span>
@@ -174,27 +156,30 @@
         <!-- Load More -->
         <div class="flex justify-center pt-4">
           <button
-            @click="router.replace(`/news/${generateRandomUUID()}`)"
             class="px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
             Load more
           </button>
         </div>
       </div>
     </div>
+
+    <!-- Right Sidebar (Page Sidebar) -->
+    <div class="lg:col-span-3 space-y-6">
+      <RightSidebarNews />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { generateRandomUUID } from "~/utilities/generate-random-uuid";
-
 const Breadcrumb = defineAsyncComponent(
   () => import("~/components/ui/breadcrumb.vue")
 );
+const RightSidebarNews = defineAsyncComponent(
+  () => import("~/components/ui/news/right-sidebar.news.vue")
+);
+
 const breadcrumbs = [{ label: "News", route: "/news" }];
-const router = useRouter();
-definePageMeta({
-  layout: "default",
-});
+definePageMeta({ layout: "default" });
 
 const selectedCategory = ref("All");
 const categories = [
@@ -208,7 +193,7 @@ const categories = [
 
 const articles = ref([
   {
-    id: generateRandomUUID(),
+    id: 1,
     title: "Mamelodi Sundowns Announce Major Signing",
     excerpt:
       "The Brazilians have secured the services of a highly-rated midfielder from Europe...",
@@ -219,7 +204,7 @@ const articles = ref([
     author: { name: "Sarah Johnson", initials: "SJ" },
   },
   {
-    id: generateRandomUUID(),
+    id: 2,
     title: "Young Star Shines in Youth League Final",
     excerpt:
       "A 17-year-old forward scored a hat-trick to lead his team to victory...",
@@ -230,7 +215,7 @@ const articles = ref([
     author: { name: "David Moyo", initials: "DM" },
   },
   {
-    id: generateRandomUUID(),
+    id: 3,
     title: "Coach Interview: Building a Winning Culture",
     excerpt:
       "Exclusive sit-down with one of the league's most successful coaches...",
@@ -241,7 +226,7 @@ const articles = ref([
     author: { name: "Lisa Khumalo", initials: "LK" },
   },
   {
-    id: generateRandomUUID(),
+    id: 4,
     title: "Tactical Analysis: The Rise of High-Pressing",
     excerpt: "How local teams are adopting modern tactical approaches...",
     category: "Analysis",

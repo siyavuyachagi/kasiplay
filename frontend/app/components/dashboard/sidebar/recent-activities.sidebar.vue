@@ -39,39 +39,40 @@
 <script setup lang="ts">
 import type { Activity } from "~/dtos/activity.dto";
 import { formatDistanceToNow } from "date-fns";
+import { generateRandomUUID } from "~/utilities/generate-random-uuid";
 
 // Recent activities - Federation specific
 const recentActivities = ref<Activity[]>([
   {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     initiatorType: "system",
     name: "New Club Application",
     description: "Kaizer Chiefs submitted membership renewal",
     timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
   },
   {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     name: "League Match Completed",
     initiatorType: "system",
     description: "Pirates 2-1 Sundowns - PSL Matchday 15",
     timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000), // 5 hours ago
   },
   {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     initiatorType: "user",
     name: "Official Appointed",
     description: "Victor Gomes assigned to Cup Final",
     timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
   },
   {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     initiatorType: "system",
     name: "Competition Started",
     description: "Nedbank Cup Round of 32 kicked off",
     timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
   },
   {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     initiatorType: "system",
     name: "Report Generated",
     description: "Q4 Competition Performance Report",

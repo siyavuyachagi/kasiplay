@@ -10,6 +10,7 @@ import type { Billing } from "~/models/Billing";
 import type { Administrator } from "~/models/Administrator";
 import type { Staff } from "~/models/Staff";
 import { AdminRole, SocialPlatform, StaffRole } from "~/types/enums";
+import { generateRandomUUID } from "~/utilities/generate-random-uuid";
 
 const myUserId = "CHAGI-SYSTEM-USER-ID";
 const systemTenantId = "SYSTEM-TENANT";
@@ -27,7 +28,7 @@ const systemCreator: ApplicationUser = {
     dateOfBirth: new Date("2000-01-08"),
     // nationality: "South African",
     physicalAddress: {
-        id: crypto.randomUUID(),
+        id: generateRandomUUID(),
         street: "Santa, East London, Community Hall",
         city: "East London",
         state: "Eastern Cape",
@@ -41,7 +42,7 @@ const systemCreator: ApplicationUser = {
 };
 
 // System Contact
-const systemContactId = crypto.randomUUID();
+const systemContactId = generateRandomUUID();
 const systemContact: Contact = {
     id: systemContactId,
     email: "contact@kasiplay.com",
@@ -52,9 +53,9 @@ const systemContact: Contact = {
 
 // System Billing
 const systemBilling: Billing = {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     tenantId: systemTenantId,
-    billingAddressId: crypto.randomUUID(),
+    billingAddressId: generateRandomUUID(),
     billingEmail: "billing@kasiplay.com",
     billingPhone: "+27639615361",
     taxId: "ZA-TAX-123456789",
@@ -100,32 +101,33 @@ const systemOrganization: Organization = {
     websiteUrl: "https://kasiplay.com",
     socialLinks: [
         {
-            id: crypto.randomUUID(),
+            id: generateRandomUUID(),
             linkedEntityId: systemOrgId,
             platform: SocialPlatform.WEBSITE,
             url: "https://kasiplay.com"
         },
         {
-            id: crypto.randomUUID(),
+            id: generateRandomUUID(),
             linkedEntityId: systemOrgId,
             platform: SocialPlatform.TWITTER,
             url: "https://twitter.com/kasiplay"
         },
         {
-            id: crypto.randomUUID(),
+            id: generateRandomUUID(),
             linkedEntityId: systemOrgId,
             platform: SocialPlatform.LINKEDIN,
             url: "https://linkedin.com/en/kasiplay"
         },
         {
-            id: crypto.randomUUID(),
+            id: generateRandomUUID(),
             linkedEntityId: systemOrgId,
             platform: SocialPlatform.INSTAGRAM,
             url: "https://instagram.com/kasiplay"
         }
     ],
     createdAt: new Date("2024-01-01"),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    officials: []
 };
 
 // You as System Founder/Administrator
@@ -145,7 +147,7 @@ const systemFounder: Administrator = {
 
 // Senior System Administrator
 const seniorAdmin: Administrator = {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     tenantId: systemTenantId,
     tenant: systemTenant,
     role: AdminRole.SYSTEM_ADMIN,
@@ -156,7 +158,7 @@ const seniorAdmin: Administrator = {
     dateOfBirth: new Date("1990-05-15"),
     // nationality: "South African",
     physicalAddress: {
-        id: crypto.randomUUID(),
+        id: generateRandomUUID(),
         street: "123 Admin Street",
         city: "Cape Town",
         state: "Western Cape",
@@ -180,7 +182,7 @@ const seniorAdmin: Administrator = {
 
 // Platform Developer
 const platformDeveloper: Staff = {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     tenantId: systemTenantId,
     tenant: systemTenant,
     role: StaffRole.PLATFORM_DEVELOPER,
@@ -191,7 +193,7 @@ const platformDeveloper: Staff = {
     dateOfBirth: new Date("1995-03-10"),
     // nationality: "South African",
     physicalAddress: {
-        id: crypto.randomUUID(),
+        id: generateRandomUUID(),
         street: "456 Dev Street",
         city: "Johannesburg",
         state: "Gauteng",
@@ -216,7 +218,7 @@ const platformDeveloper: Staff = {
 
 // Customer Success Manager
 const customerSuccess: Staff = {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     tenantId: systemTenantId,
     tenant: systemTenant,
     role: StaffRole.CUSTOMER_SUCCESS,
@@ -227,7 +229,7 @@ const customerSuccess: Staff = {
     dateOfBirth: new Date("1992-07-20"),
     // nationality: "South African",
     physicalAddress: {
-        id: crypto.randomUUID(),
+        id: generateRandomUUID(),
         street: "789 Success Avenue",
         city: "Durban",
         state: "KwaZulu-Natal",
@@ -253,7 +255,7 @@ const customerSuccess: Staff = {
 
 // Support Agent
 const supportAgent: Staff = {
-    id: crypto.randomUUID(),
+    id: generateRandomUUID(),
     tenantId: systemTenantId,
     role: StaffRole.SUPPORT_AGENT,
     tenant: systemTenant,
@@ -264,7 +266,7 @@ const supportAgent: Staff = {
     dateOfBirth: new Date("1998-11-12"),
     // nationality: "South African",
     physicalAddress: {
-        id: crypto.randomUUID(),
+        id: generateRandomUUID(),
         street: "321 Support Road",
         city: "Port Elizabeth",
         state: "Eastern Cape",

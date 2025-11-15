@@ -33,7 +33,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 
 type Crumb = { label: string; route?: string | null; icon?: string };
 const props = defineProps<{ links?: Crumb[] }>();

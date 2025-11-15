@@ -19,41 +19,53 @@
 
     <!-- Competition Stats -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+      <div
+        class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
         <div class="flex items-center justify-between">
           <div>
-            <div class="text-3xl font-bold text-gray-900 dark:text-white">5</div>
+            <div class="text-3xl font-bold text-gray-900 dark:text-white">
+              5
+            </div>
             <div class="text-sm text-gray-600 dark:text-gray-400">
               Active Competitions
             </div>
           </div>
-          <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
+          <div
+            class="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
             <icon name="lucide:trophy" size="24" class="text-blue-600" />
           </div>
         </div>
       </div>
-      <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+      <div
+        class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
         <div class="flex items-center justify-between">
           <div>
-            <div class="text-3xl font-bold text-gray-900 dark:text-white">156</div>
+            <div class="text-3xl font-bold text-gray-900 dark:text-white">
+              156
+            </div>
             <div class="text-sm text-gray-600 dark:text-gray-400">
               Total Matches
             </div>
           </div>
-          <div class="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
+          <div
+            class="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
             <icon name="lucide:calendar" size="24" class="text-green-600" />
           </div>
         </div>
       </div>
-      <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+      <div
+        class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
         <div class="flex items-center justify-between">
           <div>
-            <div class="text-3xl font-bold text-gray-900 dark:text-white">48</div>
+            <div class="text-3xl font-bold text-gray-900 dark:text-white">
+              48
+            </div>
             <div class="text-sm text-gray-600 dark:text-gray-400">
               Participating Clubs
             </div>
           </div>
-          <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
+          <div
+            class="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
             <icon name="lucide:building-2" size="24" class="text-purple-600" />
           </div>
         </div>
@@ -109,7 +121,8 @@
             <div class="text-xs text-gray-600 dark:text-gray-400">Matchday</div>
           </div>
           <div class="text-center">
-            <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">
+            <div
+              class="text-2xl font-bold text-purple-600 dark:text-purple-400">
               {{ competition.nextMatch }}
             </div>
             <div class="text-xs text-gray-600 dark:text-gray-400">Next</div>
@@ -117,12 +130,17 @@
         </div>
 
         <div class="flex items-center space-x-2">
-          <button class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <NuxtLink
+            :to="`${route.params.org as string}/competitions/${competition.id}`"
+            class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-center block">
             View Details
-          </button>
-          <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          </NuxtLink>
+
+          <NuxtLink
+            :to="`${route.params.org as string}/competitions/manage/${competition.id}`"
+            class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-center block">
             Manage
-          </button>
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -130,13 +148,17 @@
 </template>
 
 <script setup lang="ts">
+import { generateRandomUUID } from "~/utilities/generate-random-uuid";
+
 definePageMeta({
   layout: "dashboard-2-col-layout",
 });
 
+const route = useRoute();
+
 const competitions = ref([
   {
-    id: 1,
+    id: generateRandomUUID(),
     name: "Premier Soccer League",
     season: "2024/2025",
     type: "league",
@@ -149,7 +171,7 @@ const competitions = ref([
     color: "bg-blue-600",
   },
   {
-    id: 2,
+    id: generateRandomUUID(),
     name: "Nedbank Cup",
     season: "2024/2025",
     type: "cup",
@@ -162,7 +184,7 @@ const competitions = ref([
     color: "bg-purple-600",
   },
   {
-    id: 3,
+    id: generateRandomUUID(),
     name: "MTN8 Cup",
     season: "2024/2025",
     type: "tournament",

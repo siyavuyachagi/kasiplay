@@ -92,6 +92,7 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const authStore = useAuthStore();
+const route = useRoute();
 
 const isOpen = ref(false);
 

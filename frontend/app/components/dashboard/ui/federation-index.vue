@@ -286,10 +286,11 @@
           </div>
         </div>
 
-        <button
-          class="w-full mt-4 py-2 px-4 rounded-lg border border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 font-medium transition-colors">
+        <NuxtLink
+          :to="`/${route.params.org as string}/member-clubs/applications`"
+          class="w-full mt-4 py-2 px-4 rounded-lg border border-purple-600 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 font-medium transition-colors text-center block">
           Review All Applications
-        </button>
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -464,7 +465,6 @@ const quickStats = ref<QuickStat[]>([
     icon: "lucide:clock",
   },
 ]);
-
 
 const activeCompetitions = ref([
   {

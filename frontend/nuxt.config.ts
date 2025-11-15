@@ -35,6 +35,9 @@ export default defineNuxtConfig({
       "/admin/**",
       "/dashboard/**",
       "/settings/**",
+      "/[org]/**",
+      "/404",
+      "/500"
     ],
     defaults: {
       changefreq: 'weekly',

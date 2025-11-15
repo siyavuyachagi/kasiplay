@@ -27,6 +27,7 @@ export default defineNuxtConfig({
     url: 'https://dashboard.kasiplay.com', // your live site
     gzip: true, // generates sitemap.xml.gz
   },
+  
   sitemap: {
     urls: ['/auth/login', 'auth/register'],
     defaults: {

@@ -41,7 +41,7 @@ export const useFrontendLayoutStore = defineStore("frontend-layout", () => {
         saveState()
     }
 
-    function closeAll() {
+    function closeAllSidebars() {
         sidebars.value.left = false
         sidebars.value.right = false
         saveState()
@@ -92,7 +92,7 @@ export const useFrontendLayoutStore = defineStore("frontend-layout", () => {
         toggleSidebar,
         openSidebar,
         closeSidebar,
-        closeAll,
+        closeAllSidebars,
         init,
     }
 })

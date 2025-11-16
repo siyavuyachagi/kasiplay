@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="bg-gray-50 dark:bg-gray-900">
+  <div class="bg-gray-50 dark:bg-gray-900">
     <MainHeader />
 
     <!-- Main Content Area -->

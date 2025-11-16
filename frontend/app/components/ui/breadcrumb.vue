@@ -1,7 +1,7 @@
 <!-- components/ui/breadcrumb.vue -->
 <template>
   <nav
-    class="text-xs text-gray-500 dark:text-gray-400"
+    class="text-xs text-gray-500 dark:text-gray-400 mb-4"
     aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 min-w-0">
       <li

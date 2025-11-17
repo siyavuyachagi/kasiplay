@@ -14,6 +14,9 @@ The main landing page (`pages/index.vue`) follows a **3-column social media layo
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+│                         HEADER                              │
+│                    (Logo, Search, Profile)                  │
+├─────────────────────────────────────────────────────────────┤
 │                     Live Match Banner (Sticky)              │
 ├──────────────┬─────────────────────────┬────────────────────┤
 │              │                         │                    │
@@ -28,19 +31,68 @@ The main landing page (`pages/index.vue`) follows a **3-column social media layo
 │              │                         │                    │
 │  (Sticky)    │   (Scrollable)          │   (Sticky)        │
 └──────────────┴─────────────────────────┴────────────────────┘
-|                     Footer                                  |
-└──────────────-─────────────────────────-────────────────────┘
+│                     Footer                                  │
+└─────────────────────────────────────────────────────────────┘
 ```
+
+Other index pages (`pages/fixtures`)
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         HEADER                              │
+│                    (Logo, Search, Profile)                  │
+├─────────────────────────────────────────────────────────────┤
+│                     Live Match Banner (Sticky)              │
+├──────────────┬──────────────────────────────────────────────┤
+│              │                                              │
+│   LEFT       │           CENTER FEED                        │
+│   SIDEBAR    │           (Main Content)                     │
+│   (30%)      │              (70%)                           │
+│              │                                              │
+│ - Navigation │ - Create Post Card                           │
+│ - Trending   │ - Filter Tabs                                │
+│ - Fixtures   │ - Social Posts Feed                          │
+│              │ - Load More Button                           │
+│              │                                              │
+│  (Sticky)    │   (Scrollable)                               │
+└──────────────┴──────────────────────────────────────────────┘
+│                     Footer                                  │
+└─────────────────────────────────────────────────────────────┘
+```
+Details pages (`pages/fixtures/[id]`)
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         HEADER                              │
+│                    (Logo, Search, Profile)                  │
+├─────────────────────────────────────────────────────────────┤
+│                     Live Match Banner (Sticky)              │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│                    CENTER FEED                              │
+│                    (Main Content)                           │
+│                       (100%)                                │
+│                                                             │
+│              - Create Post Card                             │
+│              - Filter Tabs                                  │
+│              - Social Posts Feed                            │
+│              - Load More Button                             │
+│                                                             │
+│                   (Scrollable)                              │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+│                     Footer                                  │
+└─────────────────────────────────────────────────────────────┘
+```
+All columns in each page independantly scrollable without scrollbars
 
 ### Responsive Breakpoints
 
 ```css
 /* Mobile: < 1024px */
 - Single column layout
-- Sidebars hidden or moved to bottom
+- Sidebars hidden
 - Simplified navigation
 
-/* Desktop: >= 1024px */
+/* Desktop: >= 1024px | lg */
 - Three column layout (lg:grid-cols-12)
 - Left sidebar: lg:col-span-3
 - Center feed: lg:col-span-6

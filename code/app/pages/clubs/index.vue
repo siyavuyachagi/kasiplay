@@ -1,0 +1,1 @@
+<template>Clubs page</template>

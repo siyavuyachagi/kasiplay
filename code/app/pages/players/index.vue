@@ -1,0 +1,1 @@
+<template>Players page</template>

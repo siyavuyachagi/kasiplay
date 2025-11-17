@@ -138,38 +138,6 @@ The application uses **three primary layouts**:
 
 ## Component Hierarchy
 
-### Page Components
-
-#### `pages/index.vue` (Landing Page)
-```
-index.vue
-├── Live Match Banner
-├── Container Grid (3 columns)
-│   ├── Left Sidebar
-│   │   ├── Navigation Widget
-│   │   ├── Trending Topics Widget
-│   │   └── Today's Fixtures Widget
-│   │
-│   ├── Center Feed
-│   │   ├── Create Post Card
-│   │   ├── Filter Tabs
-│   │   ├── Posts Feed
-│   │   │   └── Post Card (v-for)
-│   │   │       ├── Post Header
-│   │   │       ├── Post Content
-│   │   │       ├── Post Media
-│   │   │       ├── Match Score (conditional)
-│   │   │       ├── Action Buttons
-│   │   │       └── Top Comment (conditional)
-│   │   └── Load More Button
-│   │
-│   └── Right Sidebar
-│       ├── Announcements Widget
-│       ├── League Standings Widget
-│       ├── Who to Follow Widget
-│       └── Footer Links Widget
-```
-
 ### Reusable Patterns
 
 **Widget Container**:
@@ -218,12 +186,12 @@ index.vue
 
 **Actions**:
 - `init()`: Load auth data from cookies on app start
-- `signIn(responseData, rememberMe)`: Authenticate user
+- `signIn(responseData, rememberMe, returnUrl)`: Authenticate user
 - `signOut(returnUrl)`: Clear auth state and redirect
 
 **Storage**: Uses cookies for persistent auth
 ```typescript
-const STORAGE_KEY = "kp-dashboard-auth-store";
+const STORAGE_KEY = "kp-auth-store";
 ```
 
 #### 2. Theme Store (`stores/theme.ts`)
@@ -259,34 +227,18 @@ document.documentElement.setAttribute("data-theme", "dark");
 
 ---
 
-## Routing Structure
-
-### Public Routes (Unauthenticated)
-```
-/                     → Landing page (social feed)
-/platform             → Marketing/info page
-/matches              → All matches
-/teams                → All teams
-/players              → All players
-/news                 → News & updates
-/gallery              → Media gallery
-/about                → About page
-/auth/login           → Login page
-/auth/register        → Registration page
-```
 
 ### Protected Routes (Future)
 ```
-/dashboard            → User dashboard
-/profile              → User profile
-/settings             → Account settings
+/dashboard/            → Organization routes
+/account/              → User settings routes
+/admin                 → Administrators settings
 ```
 
 ### Middleware
 
 **Global Middleware** (`auth.global.ts`):
 - Runs on every route
-- Currently commented out (to be implemented)
 
 **Route Middleware** (`auth.ts`):
 - Applied to specific routes via `definePageMeta`
@@ -320,137 +272,6 @@ border-gray-200 dark:border-gray-700
 3. Falls back to system preference (`prefers-color-scheme`)
 4. Applies theme to DOM immediately
 5. Watches for changes and persists to localStorage
-
----
-
-## Design System
-
-### Color Palette
-
-**User Type Colors**:
-```css
-/* Federation */
-Purple: bg-purple-100 dark:bg-purple-900/20 
-        text-purple-600 dark:text-purple-400
-
-/* Club */
-Blue:   bg-blue-100 dark:bg-blue-900/20 
-        text-blue-600 dark:text-blue-400
-
-/* Player */
-Green:  bg-green-100 dark:bg-green-900/20 
-        text-green-600 dark:text-green-400
-
-/* Fan */
-Orange: bg-orange-100 dark:bg-orange-900/20 
-        text-orange-600 dark:text-orange-400
-
-/* Official */
-Yellow: bg-yellow-100 dark:bg-yellow-900/20 
-        text-yellow-700 dark:text-yellow-400
-```
-
-**Action Colors**:
-```css
-Like:    Red     (text-red-600, hover:bg-red-50)
-Comment: Blue    (text-blue-600, hover:bg-blue-50)
-Repost:  Green   (text-green-600, hover:bg-green-50)
-Share:   Purple  (text-purple-600, hover:bg-purple-50)
-```
-
-**Brand Colors**:
-```css
-Primary:   Blue-600 to Purple-600 (gradient)
-Secondary: Gray-50 / Gray-900 (light/dark)
-Accent:    Yellow-500 (highlights)
-```
-
-### Typography
-
-**Font Sizes**:
-```css
-Hero:        text-4xl md:text-5xl lg:text-6xl
-Section:     text-3xl md:text-4xl lg:text-5xl
-Card Title:  text-lg (18px)
-Body:        text-sm (14px)
-Caption:     text-xs (12px)
-```
-
-**Font Weights**:
-```css
-Bold:      font-bold (700)
-Semibold:  font-semibold (600)
-Medium:    font-medium (500)
-Regular:   (400 - default)
-```
-
-### Spacing System
-
-**Container**:
-```css
-container mx-auto px-4
-max-width: 1280px (default)
-```
-
-**Grid Gaps**:
-```css
-gap-4    /* 16px - small */
-gap-6    /* 24px - medium */
-gap-8    /* 32px - large */
-```
-
-**Card Padding**:
-```css
-p-2      /* Compact widget */
-p-3      /* Standard widget header */
-p-4      /* Post card */
-```
-
-### Border Radius
-
-```css
-rounded-md    /* 6px - buttons */
-rounded-lg    /* 8px - cards */
-rounded-xl    /* 12px - large containers */
-rounded-full  /* Pills, badges, avatars */
-```
-
-### Shadows
-
-```css
-shadow-sm     /* Subtle card elevation */
-shadow-lg     /* CTA buttons */
-shadow-xl     /* Hover states */
-```
-
-### Icons
-
-**Library**: Lucide Icons via `@nuxt/icon`
-
-**Common Icons**:
-```
-lucide:home           → Home
-lucide:calendar       → Matches
-lucide:users          → Teams
-lucide:user           → Player
-lucide:shield         → Team badge
-lucide:trophy         → League/Awards
-lucide:heart          → Like
-lucide:message-circle → Comment
-lucide:repeat-2       → Repost
-lucide:share-2        → Share
-lucide:badge-check    → Verification
-lucide:megaphone      → Announcements
-```
-
-**Icon Sizes**:
-```vue
-size="14"  → Small (widget icons)
-size="16"  → Standard (inline icons)
-size="18"  → Medium (action buttons)
-size="20"  → Large (navigation)
-size="24"  → Extra large (mobile menu)
-```
 
 ---
 

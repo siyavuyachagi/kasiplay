@@ -101,6 +101,136 @@ All columns in each page independantly scrollable without scrollbars
 
 ---
 
+## Design System
+
+### Color Palette
+
+**User Type Colors**:
+```css
+/* Federation */
+Purple: bg-purple-100 dark:bg-purple-900/20 
+        text-purple-600 dark:text-purple-400
+
+/* Club */
+Blue:   bg-blue-100 dark:bg-blue-900/20 
+        text-blue-600 dark:text-blue-400
+
+/* Player */
+Green:  bg-green-100 dark:bg-green-900/20 
+        text-green-600 dark:text-green-400
+
+/* Fan */
+Orange: bg-orange-100 dark:bg-orange-900/20 
+        text-orange-600 dark:text-orange-400
+
+/* Official */
+Yellow: bg-yellow-100 dark:bg-yellow-900/20 
+        text-yellow-700 dark:text-yellow-400
+```
+
+**Action Colors**:
+```css
+Like:    Red     (text-red-600, hover:bg-red-50)
+Comment: Blue    (text-blue-600, hover:bg-blue-50)
+Repost:  Green   (text-green-600, hover:bg-green-50)
+Share:   Purple  (text-purple-600, hover:bg-purple-50)
+```
+
+**Brand Colors**:
+```css
+Primary:   Blue-600 to Purple-600 (gradient)
+Secondary: Gray-50 / Gray-900 (light/dark)
+Accent:    Yellow-500 (highlights)
+```
+
+### Typography
+
+**Font Sizes**:
+```css
+Hero:        text-4xl md:text-5xl lg:text-6xl
+Section:     text-3xl md:text-4xl lg:text-5xl
+Card Title:  text-lg (18px)
+Body:        text-sm (14px)
+Caption:     text-xs (12px)
+```
+
+**Font Weights**:
+```css
+Bold:      font-bold (700)
+Semibold:  font-semibold (600)
+Medium:    font-medium (500)
+Regular:   (400 - default)
+```
+
+### Spacing System
+
+**Container**:
+```css
+container mx-auto px-4
+max-width: 1280px (default)
+```
+
+**Grid Gaps**:
+```css
+gap-4    /* 16px - small */
+gap-6    /* 24px - medium */
+gap-8    /* 32px - large */
+```
+
+**Card Padding**:
+```css
+p-2      /* Compact widget */
+p-3      /* Standard widget header */
+p-4      /* Post card */
+```
+
+### Border Radius
+
+```css
+rounded-md    /* 6px - buttons */
+rounded-lg    /* 8px - cards */
+rounded-xl    /* 12px - large containers */
+rounded-full  /* Pills, badges, avatars */
+```
+
+### Shadows
+
+```css
+shadow-sm     /* Subtle card elevation */
+shadow-lg     /* CTA buttons */
+shadow-xl     /* Hover states */
+```
+
+### Icons
+
+**Library**: Lucide Icons via `@nuxt/icon`
+
+**Common Icons**:
+```
+lucide:home           → Home
+lucide:calendar       → Matches
+lucide:users          → Teams
+lucide:user           → Player
+lucide:shield         → Team badge
+lucide:trophy         → League/Awards
+lucide:heart          → Like
+lucide:message-circle → Comment
+lucide:repeat-2       → Repost
+lucide:share-2        → Share
+lucide:badge-check    → Verification
+lucide:megaphone      → Announcements
+```
+
+**Icon Sizes**:
+```vue
+size="14"  → Small (widget icons)
+size="16"  → Standard (inline icons)
+size="18"  → Medium (action buttons)
+size="20"  → Large (navigation)
+size="24"  → Extra large (mobile menu)
+```
+---
+
 ## UI/UX Patterns
 
 ### 1. Live Match Banner

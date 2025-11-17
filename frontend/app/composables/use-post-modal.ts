@@ -1,4 +1,4 @@
-// composables/use-post-modal.ts
+// composables/create-post.ts
 
 export type PostModalType = 'text' | 'photo' | 'video' | 'stats' | 'event' | 'poll' | null
 

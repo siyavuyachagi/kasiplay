@@ -19,7 +19,7 @@ interface ResponseData {
 }
 
 export const useAuthStore = defineStore("auth", () => {
-    const STORAGE_KEY = "kp-dashboard-auth-store"; // Single key for storing auth data
+    const STORAGE_KEY = "kp-auth-store"; // Single key for storing auth data
     const user = ref<User | null>(null);
     const accessToken = ref<string | null>(null);
     const refreshToken = ref<string | null>(null);

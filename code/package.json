@@ -2,13 +2,14 @@
   "name": "kasiplay",
   "description": "Sport management and streaming platform",
   "type": "module",
-  "private": false,
+  "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host 0.0.0.0",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "clean": "rm -r .nuxt .output dist node_modules"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.10.0",

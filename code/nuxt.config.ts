@@ -5,6 +5,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
+  css: ['@/assets/css/app.css'],
+
+  ssr: false,
+
   modules: [
     '@nuxt/eslint',
     '@nuxt/icon',
@@ -35,10 +39,18 @@ export default defineNuxtConfig({
       "/admin/**",
       "/dashboard/**",
       "/settings/**",
-      "/[org]/**",
       "/404",
       "/500"
     ],
+    // include: [
+    //   '/',
+    //   '/clubs',
+    //   '/tournaments',
+    //   '/about',
+    //   '/contact',
+    //   '/privacy',
+    //   '/terms'
+    // ],
     defaults: {
       changefreq: 'weekly',
       priority: 0.7,
@@ -49,7 +61,6 @@ export default defineNuxtConfig({
 
   app: {
     baseURL: "/",
-    // buildAssetsDir: "assets",
     head: {
       htmlAttrs: {
         lang: 'en-za' // Set your language/region here - google accessibility
@@ -118,17 +129,17 @@ export default defineNuxtConfig({
     {
       path: '~/components/ui/account',
       pathPrefix: false,
-      prefix: "Account",
+      prefix: "UiAccount",
     },
     {
       path: '~/components/ui/dashboard',
       pathPrefix: false,
-      prefix: "Dashboard", // enables 'Dashboard' prefix for components in this folder
+      prefix: "UiDashboard", // enables 'Dashboard' prefix for components in this folder
     },
     {
       path: '~/components/ui/default',
       pathPrefix: false,
-      prefix: "Default",
-    },
+      prefix: "UiDefault",
+    }
   ],
 })

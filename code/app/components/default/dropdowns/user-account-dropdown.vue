@@ -39,7 +39,7 @@
               :key="i"
               :to="link.url"
               class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <Icon :name="link.icon" size="16" class="mr-2" />
+              <Icon :name="link.icon || ''" size="16" class="mr-2" />
               {{ link.label }}
             </NuxtLink>
 
@@ -49,7 +49,7 @@
               :to="userOrganizations[0]?.url || '/dashboard'"
               class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
               <Icon name="lucide:building" size="16" class="mr-2" />
-              {{ userOrganizations[0]?.name }}
+              {{ userOrganizations[0]?.label }}
             </NuxtLink>
 
             <!-- Multiple Organizations Dropdown -->
@@ -87,7 +87,7 @@
                     :to="org.url"
                     class="flex items-center pl-10 pr-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                     <Icon name="lucide:building" size="16" class="mr-2" />
-                    {{ org.name }}
+                    {{ org.label }}
                   </NuxtLink>
                 </div>
               </Transition>
@@ -108,6 +108,8 @@
 </template>
 
 <script setup lang="ts">
+import type { NavigationItem } from "~/types/models/navigation-item";
+
 const authStore = useAuthStore();
 const isAuthenticated = ref(true); // Replace with actual auth check
 const isDropdownOpen = ref(false);
@@ -115,22 +117,15 @@ const isOrganizationsOpen = ref(false);
 // Ref for the dropdown container
 const userAccountDropdown = ref<HTMLElement | null>(null);
 
-interface AccountLinks {
-  label: string;
-  icon: string;
-  url: string;
-}
-
-const accountLinks: AccountLinks[] = [
-  { label: "User account", icon: "lucide:user", url: "/account/profile" },
-  // { label: "Preferences", icon: "lucide:settings", url: "/preferences" },
+const accountLinks: NavigationItem[] = [
+  { label: "User account", url: "/account", icon: "lucide:user" },
 ];
 
-const userOrganizations = ref([
-  { name: "SAF Association", url: "/saf-assoc" },
-  { name: "Home Brothers FC", url: "/home-brothers-fc" },
-  { name: "Orlando Pirates FC", url: "/orlando.pirate.club" },
-]);
+const userOrganizations: NavigationItem[] = [
+  { label: "SAF Association", url: "/saf-assoc" },
+  { label: "Home Brothers FC", url: "/home-brothers-fc" },
+  { label: "Orlando Pirates FC", url: "/orlando.pirate.club" },
+];
 
 const user = ref({
   name: "John Doe",

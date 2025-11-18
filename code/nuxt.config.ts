@@ -65,7 +65,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en-za' // Set your language/region here - google accessibility
       },
-      title: "Kasiplay | Your Ultimate Local Entertainment",
+      title: "Kasiplay | Your Ultimate Sport Entertainment",
       meta: [
         { name: "description", content: "Kasiplay - Your Ultimate Entertainment Hub" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },

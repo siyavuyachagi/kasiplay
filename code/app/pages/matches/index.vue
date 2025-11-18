@@ -66,7 +66,9 @@
                 v-for="match in liveMatches"
                 :key="match.id"
                 class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg transition-shadow cursor-pointer">
-                <NuxtLink :to="`/matches/live/${match.id}`" class="flex items-center justify-between mb-3">
+                <NuxtLink
+                  :to="`/matches/live/${match.id}`"
+                  class="flex items-center justify-between mb-3">
                   <span
                     class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-xs font-bold rounded-full">
                     LIVE • {{ match.minute }}'
@@ -197,13 +199,9 @@
 <script setup lang="ts">
 import { generateRandomUUID } from "~/utilities/generate-random-uuid";
 
-const DefaultSidebarLeft = defineAsyncComponent(
-  () => import("~/components/default/sidebar-left.vue")
-);
-const DefaultBreadcrumb = defineAsyncComponent(
-  () => import("~/components/default/breadcrumb.vue")
-);
-
+useHead({
+  title: "KasiPlay | Matches",
+});
 definePageMeta({
   layout: "default",
 });

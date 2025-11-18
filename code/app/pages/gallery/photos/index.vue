@@ -1,0 +1,3 @@
+<template>
+    Photos page
+</template>

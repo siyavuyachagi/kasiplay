@@ -122,8 +122,8 @@ interface AccountLinks {
 }
 
 const accountLinks: AccountLinks[] = [
-  { label: "Profile", icon: "lucide:user", url: "/account/profile" },
-  { label: "Preferences", icon: "lucide:settings", url: "/preferences" },
+  { label: "User account", icon: "lucide:user", url: "/account/profile" },
+  // { label: "Preferences", icon: "lucide:settings", url: "/preferences" },
 ];
 
 const userOrganizations = ref([

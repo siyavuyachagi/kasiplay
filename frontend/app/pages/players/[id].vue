@@ -10,14 +10,14 @@
 
       <!-- Player Header -->
       <div
-        class="bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl p-6 text-white shadow-sm">
+        class="bg-linear-to-br from-blue-600 to-purple-700 rounded-2xl p-6 text-white shadow-sm">
         <div class="flex flex-col md:flex-row items-center gap-6">
           <!-- Player Photo -->
           <div
             class="w-40 h-40 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0 relative">
             <icon name="lucide:user" size="100" class="text-white" />
             <div
-              class="absolute bottom-2 right-2 w-14 h-14 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center border-2 border-white">
+              class="absolute bottom-2 right-2 w-14 h-14 rounded-lg bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center border-2 border-white">
               <span class="text-2xl font-bold">{{ player.number }}</span>
             </div>
           </div>
@@ -139,7 +139,7 @@
                   :key="highlight.id"
                   class="flex items-start space-x-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                   <div
-                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center flex-shrink-0">
+                    class="w-10 h-10 rounded-lg bg-linear-to-br from-yellow-400 to-yellow-600 flex items-center justify-center flex-shrink-0">
                     <icon name="lucide:trophy" size="20" class="text-white" />
                   </div>
                   <div>
@@ -450,7 +450,7 @@
                   :key="trophy.id"
                   class="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                   <div
-                    class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center flex-shrink-0">
+                    class="w-12 h-12 rounded-lg bg-linear-to-br from-yellow-400 to-yellow-600 flex items-center justify-center flex-shrink-0">
                     <icon name="lucide:trophy" size="24" class="text-white" />
                   </div>
                   <div class="flex-1">

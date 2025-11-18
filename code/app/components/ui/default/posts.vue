@@ -1,6 +1,5 @@
 <template>
-  <article
-    v-for="post in feedPosts"
+  <article v-for="post in feedPosts"
     :key="post.id"
     class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
     <div class="p-3 sm:p-4">
@@ -160,7 +159,7 @@
       </div>
       <button
         class="text-xs text-blue-600 dark:text-blue-400 hover:underline mt-2">
-        View all {{ post.comments }} comments
+        View more comments
       </button>
     </div>
   </article>

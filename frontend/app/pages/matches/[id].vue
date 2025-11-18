@@ -20,7 +20,7 @@
 
       <!-- Match Header -->
       <div
-        class="bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl p-6 text-white shadow-sm">
+        class="bg-linear-to-br from-blue-600 to-purple-700 rounded-2xl p-6 text-white shadow-sm">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center space-x-2">
             <span

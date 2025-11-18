@@ -1,263 +1,310 @@
 <template>
   <div class="lg:grid lg:grid-cols-12 lg:gap-6">
-    <!-- Left Sidebar (30%) -->
-    <aside class="hidden lg:block lg:col-span-3 xl:col-span-4 space-y-4 sticky top-20 h-fit">
-      <!-- Navigation Widget -->
-      <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-        <div class="p-3 bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700">
-          <h3 class="font-semibold text-sm text-gray-900 dark:text-white">Navigation</h3>
+    <!-- Left Sidebar (25%) -->
+    <div class="hidden lg:block lg:col-span-3 space-y-4 sticky top-20 h-fit">
+      <UiDefaultSidebarLeft />
+    </div>
+
+    <!-- Center Feed (50%) -->
+    <div class="lg:col-span-9 mb-6 lg:mb-0 space-y-4">
+      <!-- Breadcrumb  -->
+      <UiDefaultBreadcrumb :crumbs="breadcrumbs" />
+
+      <div class="space-y-4">
+        <!-- Page Header -->
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            Matches
+          </h1>
+          <p class="text-gray-600 dark:text-gray-400">
+            Follow all the latest fixtures and results
+          </p>
         </div>
-        <nav class="p-3 space-y-1">
-          <a href="#" class="flex items-center space-x-3 px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
-            <icon name="lucide:home" size="20" />
-            <span class="font-medium text-sm">Home</span>
-          </a>
-          <a href="#" class="flex items-center space-x-3 px-3 py-2 text-gray-900 dark:text-white bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <icon name="lucide:calendar" size="20" />
-            <span class="font-medium text-sm">Matches</span>
-          </a>
-          <a href="#" class="flex items-center space-x-3 px-3 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
-            <icon name="lucide:users" size="20" />
-            <span class="font-medium text-sm">Teams</span>
-          </a>
-        </nav>
-      </div>
 
-      <!-- Today's Fixtures -->
-      <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-        <div class="p-3 bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700">
-          <h3 class="font-semibold text-sm text-gray-900 dark:text-white">Today's Fixtures</h3>
+        <!-- Filters -->
+        <div class="flex flex-wrap gap-4">
+          <select
+            v-model="selectedStatus"
+            class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
+            <option value="all">All Matches</option>
+            <option value="live">Live</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="completed">Completed</option>
+          </select>
+
+          <select
+            v-model="selectedCompetition"
+            class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
+            <option value="all">All Competitions</option>
+            <option value="kpl">Kasi Premier League</option>
+            <option value="cup">Nedbank Cup</option>
+            <option value="mtn8">MTN8</option>
+          </select>
+
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search competitions, teams..."
+            class="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 placeholder-gray-400 dark:placeholder-gray-500" />
         </div>
-        <div class="p-3 space-y-3">
-          <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-medium text-gray-900 dark:text-white">Pirates</span>
-              <span class="text-xs text-gray-500 dark:text-gray-400">vs</span>
-              <span class="text-xs font-medium text-gray-900 dark:text-white">Chiefs</span>
-            </div>
-            <div class="text-center">
-              <div class="text-sm font-bold text-blue-600 dark:text-blue-400">15:00</div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">FNB Stadium</div>
-            </div>
-          </div>
-          <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-medium text-gray-900 dark:text-white">Sundowns</span>
-              <span class="text-xs text-gray-500 dark:text-gray-400">vs</span>
-              <span class="text-xs font-medium text-gray-900 dark:text-white">SuperSport</span>
-            </div>
-            <div class="text-center">
-              <div class="text-sm font-bold text-blue-600 dark:text-blue-400">19:30</div>
-              <div class="text-xs text-gray-500 dark:text-gray-400">Loftus Versfeld</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </aside>
 
-    <!-- Main Content (70%) -->
-    <main class="lg:col-span-9 xl:col-span-8 space-y-4">
-      <!-- Page Header -->
-      <div>
-        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Matches</h1>
-        <p class="text-gray-600 dark:text-gray-400">Follow all the latest fixtures and results</p>
-      </div>
-
-      <!-- Filters -->
-      <div class="flex flex-wrap gap-4">
-        <select class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
-          <option>All Matches</option>
-          <option>Live</option>
-          <option>Upcoming</option>
-          <option>Completed</option>
-        </select>
-        <select class="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500">
-          <option>All Competitions</option>
-          <option>KPL</option>
-          <option>Cup</option>
-        </select>
-        <input 
-          type="text" 
-          placeholder="Search matches..."
-          class="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <!-- Live Matches Section -->
-      <div>
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-          <span class="relative flex h-3 w-3 mr-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-          </span>
-          Live Now
-        </h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <!-- Live Match Card -->
-          <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg transition-shadow cursor-pointer">
-            <div class="flex items-center justify-between mb-3">
-              <span class="px-2 py-1 bg-red-500 text-white text-xs font-bold rounded-full">
-                LIVE • 67'
+        <div class="space-y-6">
+          <!-- Live Matches -->
+          <div v-if="liveMatches.length">
+            <h2
+              class="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+              <span class="relative flex h-3 w-3 mr-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span
+                  class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
               </span>
-              <span class="text-sm text-gray-500 dark:text-gray-400">KPL</span>
+              Live Now
+            </h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div
+                v-for="match in liveMatches"
+                :key="match.id"
+                class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg transition-shadow cursor-pointer">
+                <NuxtLink :to="`/matches/live/${match.id}`" class="flex items-center justify-between mb-3">
+                  <span
+                    class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white text-xs font-bold rounded-full">
+                    LIVE • {{ match.minute }}'
+                  </span>
+                  <span class="text-sm text-gray-500 dark:text-gray-400">{{
+                    match.competition
+                  }}</span>
+                </NuxtLink>
+
+                <div class="flex items-center justify-between">
+                  <div class="text-center flex-1">
+                    <div
+                      class="w-12 h-12 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
+                      <icon
+                        name="lucide:shield"
+                        size="24"
+                        class="text-gray-400" />
+                    </div>
+                    <p
+                      class="font-semibold text-gray-900 dark:text-white text-sm">
+                      {{ match.homeTeam }}
+                    </p>
+                  </div>
+
+                  <div class="text-center flex-1">
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">
+                      {{ match.homeScore }} - {{ match.awayScore }}
+                    </p>
+                  </div>
+
+                  <div class="text-center flex-1">
+                    <div
+                      class="w-12 h-12 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
+                      <icon
+                        name="lucide:shield"
+                        size="24"
+                        class="text-gray-400" />
+                    </div>
+                    <p
+                      class="font-semibold text-gray-900 dark:text-white text-sm">
+                      {{ match.awayTeam }}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div class="flex items-center justify-between">
-              <div class="text-center flex-1">
-                <div class="w-12 h-12 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
-                  <icon name="lucide:shield" size="24" class="text-gray-400" />
+          <!-- Upcoming & Recent Matches -->
+          <div
+            v-for="section in matchSections"
+            :key="section.title"
+            class="space-y-4">
+            <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+              {{ section.title }}
+            </h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div
+                v-for="match in section.matches"
+                :key="match.id"
+                class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg transition-shadow cursor-pointer">
+                <div class="flex items-center justify-between mb-2">
+                  <span
+                    class="text-sm font-medium text-blue-600 dark:text-blue-400"
+                    >{{ match.competition }}</span
+                  >
+                  <span class="text-xs text-gray-500 dark:text-gray-400">
+                    {{ match.date || "" }}
+                    {{ match.time ? "• " + match.time : "" }}
+                  </span>
                 </div>
-                <p class="font-semibold text-gray-900 dark:text-white text-sm">Orlando Pirates</p>
-              </div>
 
-              <div class="text-center flex-1">
-                <p class="text-2xl font-bold text-gray-900 dark:text-white">2 - 1</p>
-                <button class="mt-2 px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-xs font-medium rounded-lg transition-colors">
-                  Watch Live
-                </button>
-              </div>
+                <div class="flex items-center justify-between">
+                  <div class="text-center flex-1">
+                    <div
+                      class="w-10 h-10 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
+                      <icon
+                        name="lucide:shield"
+                        size="20"
+                        class="text-gray-400" />
+                    </div>
+                    <p
+                      class="font-semibold text-gray-900 dark:text-white text-sm">
+                      {{ match.homeTeam }}
+                    </p>
+                  </div>
 
-              <div class="text-center flex-1">
-                <div class="w-12 h-12 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
-                  <icon name="lucide:shield" size="24" class="text-gray-400" />
+                  <div class="text-center flex-1">
+                    <p class="text-gray-500 dark:text-gray-400 font-bold">VS</p>
+                  </div>
+
+                  <div class="text-center flex-1">
+                    <div
+                      class="w-10 h-10 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
+                      <icon
+                        name="lucide:shield"
+                        size="20"
+                        class="text-gray-400" />
+                    </div>
+                    <p
+                      class="font-semibold text-gray-900 dark:text-white text-sm">
+                      {{ match.awayTeam }}
+                    </p>
+                  </div>
                 </div>
-                <p class="font-semibold text-gray-900 dark:text-white text-sm">Kaizer Chiefs</p>
+
+                <div
+                  class="mt-2 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                  <div class="flex items-center">
+                    <icon name="lucide:map-pin" size="14" class="mr-1" />
+                    {{ match.venue || "" }}
+                  </div>
+                  <NuxtLink
+                    :to="`/matches/${match.id}`"
+                    class="text-blue-600 dark:text-blue-400 font-medium hover:underline">
+                    View Details
+                  </NuxtLink>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Upcoming Matches -->
-      <div>
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Upcoming Fixtures</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <!-- Match Card 1 -->
-          <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg transition-shadow cursor-pointer">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm font-medium text-blue-600 dark:text-blue-400">KPL</span>
-              <span class="text-xs text-gray-500 dark:text-gray-400">Nov 15 • 15:00</span>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="text-center flex-1">
-                <div class="w-10 h-10 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
-                  <icon name="lucide:shield" size="20" class="text-gray-400" />
-                </div>
-                <p class="font-semibold text-gray-900 dark:text-white text-sm">Sundowns</p>
-              </div>
-
-              <div class="text-center flex-1">
-                <p class="text-gray-500 dark:text-gray-400 font-bold">VS</p>
-              </div>
-
-              <div class="text-center flex-1">
-                <div class="w-10 h-10 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
-                  <icon name="lucide:shield" size="20" class="text-gray-400" />
-                </div>
-                <p class="font-semibold text-gray-900 dark:text-white text-sm">SuperSport</p>
-              </div>
-            </div>
-
-            <div class="mt-2 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-              <div class="flex items-center">
-                <icon name="lucide:map-pin" size="14" class="mr-1" />
-                Loftus Versfeld
-              </div>
-              <a href="#" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">
-                View Details
-              </a>
-            </div>
-          </div>
-
-          <!-- Match Card 2 -->
-          <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg transition-shadow cursor-pointer">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm font-medium text-blue-600 dark:text-blue-400">Cup</span>
-              <span class="text-xs text-gray-500 dark:text-gray-400">Nov 18 • 19:30</span>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="text-center flex-1">
-                <div class="w-10 h-10 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
-                  <icon name="lucide:shield" size="20" class="text-gray-400" />
-                </div>
-                <p class="font-semibold text-gray-900 dark:text-white text-sm">AmaZulu</p>
-              </div>
-
-              <div class="text-center flex-1">
-                <p class="text-gray-500 dark:text-gray-400 font-bold">VS</p>
-              </div>
-
-              <div class="text-center flex-1">
-                <div class="w-10 h-10 mx-auto bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-2">
-                  <icon name="lucide:shield" size="20" class="text-gray-400" />
-                </div>
-                <p class="font-semibold text-gray-900 dark:text-white text-sm">Golden Arrows</p>
-              </div>
-            </div>
-
-            <div class="mt-2 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-              <div class="flex items-center">
-                <icon name="lucide:map-pin" size="14" class="mr-1" />
-                Moses Mabhida
-              </div>
-              <a href="#" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">
-                View Details
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Recent Results -->
-      <div>
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Recent Results</h2>
-        <div class="space-y-3">
-          <!-- Result Card -->
-          <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm font-medium text-purple-600 dark:text-purple-400">KPL</span>
-              <span class="text-xs text-gray-500 dark:text-gray-400">Nov 1, 2025</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <div class="text-center flex-1">
-                <p class="font-semibold text-gray-900 dark:text-white">Orlando Pirates</p>
-              </div>
-              <div class="text-center flex-1">
-                <div class="flex items-center justify-center space-x-3">
-                  <span class="text-2xl font-bold text-green-600 dark:text-green-400">3</span>
-                  <span class="text-gray-400">-</span>
-                  <span class="text-2xl font-bold text-gray-900 dark:text-white">1</span>
-                </div>
-              </div>
-              <div class="text-center flex-1">
-                <p class="font-semibold text-gray-900 dark:text-white">Kaizer Chiefs</p>
-              </div>
-            </div>
-            <div class="mt-2 flex items-center justify-between text-xs">
-              <div class="text-gray-500 dark:text-gray-400 flex items-center">
-                <icon name="lucide:map-pin" size="12" class="mr-1" />
-                FNB Stadium
-              </div>
-              <a href="#" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">
-                View Details
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Load More -->
-      <button class="w-full py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-        Load More
-      </button>
-    </main>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { generateRandomUUID } from "~/utilities/generate-random-uuid";
+
+const UiDefaultSidebarLeft = defineAsyncComponent(
+  () => import("~/components/ui/default/sidebar-left.vue")
+);
+const UiDefaultBreadcrumb = defineAsyncComponent(
+  () => import("~/components/ui/default/breadcrumb.vue")
+);
+
 definePageMeta({
-  layout: 'default'
-})
+  layout: "default",
+});
+
+const breadcrumbs = [{ label: "Matches", route: "/matches", active: true }];
+const selectedStatus = ref("all");
+const selectedCompetition = ref("all");
+const searchQuery = ref("");
+const router = useRouter();
+
+const liveMatches = ref([
+  {
+    id: generateRandomUUID(),
+    homeTeam: "Orlando Pirates",
+    awayTeam: "Kaizer Chiefs",
+    homeScore: 2,
+    awayScore: 1,
+    minute: "67",
+    competition: "Kasi Premier League",
+  },
+]);
+
+const upcomingMatches = ref([
+  {
+    id: generateRandomUUID(),
+    homeTeam: "Mamelodi Sundowns",
+    awayTeam: "SuperSport United",
+    date: "Nov 3, 2025",
+    time: "15:00",
+    venue: "Loftus Versfeld Stadium",
+    competition: "Kasi Premier League",
+  },
+  {
+    id: generateRandomUUID(),
+    homeTeam: "AmaZulu FC",
+    awayTeam: "Golden Arrows",
+    date: "Nov 4, 2025",
+    time: "19:30",
+    venue: "Moses Mabhida Stadium",
+    competition: "Nedbank Cup",
+  },
+  {
+    id: generateRandomUUID(),
+    homeTeam: "Cape Town City",
+    awayTeam: "Stellenbosch FC",
+    date: "Nov 5, 2025",
+    time: "15:00",
+    venue: "Cape Town Stadium",
+    competition: "Kasi Premier League",
+  },
+]);
+
+const recentMatches = ref([
+  {
+    id: generateRandomUUID(),
+    homeTeam: "Moroka Swallows",
+    awayTeam: "Chippa United",
+    homeScore: 3,
+    awayScore: 1,
+    date: "Oct 30, 2025",
+    time: "17:00",
+    venue: "Dobsonville Stadium",
+    competition: "Kasi Premier League",
+  },
+  {
+    id: generateRandomUUID(),
+    homeTeam: "TS Galaxy",
+    awayTeam: "Maritzburg United",
+    homeScore: 1,
+    awayScore: 1,
+    date: "Oct 29, 2025",
+    time: "15:00",
+    venue: "Mbombela Stadium",
+    competition: "Nedbank Cup",
+  },
+  {
+    id: generateRandomUUID(),
+    homeTeam: "Kaizer Chiefs",
+    awayTeam: "Orlando Pirates",
+    homeScore: 2,
+    awayScore: 2,
+    date: "Nov 01, 2025",
+    time: "18:30",
+    venue: "FNB Stadium",
+    competition: "Soweto Derby",
+  },
+  {
+    id: generateRandomUUID(),
+    homeTeam: "Mamelodi Sundowns",
+    awayTeam: "SuperSport United",
+    homeScore: 1,
+    awayScore: 0,
+    date: "Nov 02, 2025",
+    time: "20:00",
+    venue: "Loftus Versfeld",
+    competition: "PSL",
+  },
+]);
+
+const matchSections = [
+  { title: "Upcoming", matches: upcomingMatches.value },
+  { title: "Recent Results", matches: recentMatches.value },
+];
 </script>

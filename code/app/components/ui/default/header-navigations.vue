@@ -6,7 +6,7 @@
         <!-- Left: Logo & Menu Toggle -->
         <div class="flex items-center space-x-3">
           <button
-            @click="console.log('Open left-side')"
+            @click="mobileSidebars.toggleLeftSidebar()"
             class="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
             <Icon
               name="lucide:menu"
@@ -71,7 +71,7 @@
           <UiDefaultMessagesCounterDropdown />
 
           <button
-            @click="console.log('open right sidebar')"
+            @click="mobileSidebars.toggleRightSidebar()"
             class="lg:hidden flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
             <Icon
               name="lucide:panel-right"
@@ -119,8 +119,9 @@ const UiDefaultMessagesCounterDropdown = defineAsyncComponent(
 const UiDefaultUserAccountDropdown = defineAsyncComponent(
   () => import("~/components/ui/default/dropdowns/user-account-dropdown.vue")
 );
-// const layoutStore = useFrontendLayoutStore();
 
+
+const mobileSidebars = useMobileSidebars();
 const themeStore = useThemeStore();
 const mobileSearchOpen = ref(false);
 // const router = useRouter();

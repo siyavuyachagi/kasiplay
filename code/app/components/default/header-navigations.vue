@@ -65,10 +65,10 @@
           </ClientOnly>
 
           <!-- Notifications  -->
-          <UiDefaultNotificationsCounterDropdown />
+          <DefaultNotificationsCounterDropdown />
 
           <!-- Messages -->
-          <UiDefaultMessagesCounterDropdown />
+          <DefaultMessagesCounterDropdown />
 
           <button
             @click="mobileSidebars.toggleRightSidebar()"
@@ -80,7 +80,7 @@
           </button>
 
           <!-- User account -->
-          <UiDefaultUserAccountDropdown />
+          <DefaultUserAccountDropdown />
         </div>
       </div>
 
@@ -110,16 +110,16 @@
 </template>
 
 <script setup lang="ts">
-const UiDefaultNotificationsCounterDropdown = defineAsyncComponent(
-  () => import("~/components/ui/default/dropdowns/notifications-counter-dropdown.vue")
+const DefaultNotificationsCounterDropdown = defineAsyncComponent(
+  () =>
+    import("~/components/default/dropdowns/notifications-counter-dropdown.vue")
 );
-const UiDefaultMessagesCounterDropdown = defineAsyncComponent(
-  () => import("~/components/ui/default/dropdowns/messages-counter-dropdown.vue")
+const DefaultMessagesCounterDropdown = defineAsyncComponent(
+  () => import("~/components/default/dropdowns/messages-counter-dropdown.vue")
 );
-const UiDefaultUserAccountDropdown = defineAsyncComponent(
-  () => import("~/components/ui/default/dropdowns/user-account-dropdown.vue")
+const DefaultUserAccountDropdown = defineAsyncComponent(
+  () => import("~/components/default/dropdowns/user-account-dropdown.vue")
 );
-
 
 const mobileSidebars = useMobileSidebars();
 const themeStore = useThemeStore();

@@ -58,12 +58,12 @@
     </div>
 
     <!-- Modals -->
-    <UiDefaultCreateTextPostModal />
-    <UiDefaultCreatePhotosPostModal />
-    <UiDefaultCreateVideosPostModal />
-    <UiDefaultCreatePollPostModal />
-    <UiDefaultCreateStatsPostModal />
-    <UiDefaultCreateEventPostModal />
+    <DefaultCreateTextPostModal />
+    <DefaultCreatePhotosPostModal />
+    <DefaultCreateVideosPostModal />
+    <DefaultCreatePollPostModal />
+    <DefaultCreateStatsPostModal />
+    <DefaultCreateEventPostModal />
   </div>
 </template>
 
@@ -71,22 +71,22 @@
 const { openModal } = useCreatePost();
 
 // Import modals
-const UiDefaultCreateTextPostModal = defineAsyncComponent(
-  () => import("~/components/ui/default/modals/create-text-post-modal.vue")
+const DefaultCreateTextPostModal = defineAsyncComponent(
+  () => import("~/components/default/modals/create-text-post-modal.vue")
 );
-const UiDefaultCreatePhotosPostModal = defineAsyncComponent(
-  () => import("~/components/ui/default/modals/create-photos-post-modal.vue")
+const DefaultCreatePhotosPostModal = defineAsyncComponent(
+  () => import("~/components/default/modals/create-photos-post-modal.vue")
 );
-const UiDefaultCreateVideosPostModal = defineAsyncComponent(
-  () => import("~/components/ui/default/modals/create-videos-post-modal.vue")
+const DefaultCreateVideosPostModal = defineAsyncComponent(
+  () => import("~/components/default/modals/create-videos-post-modal.vue")
 );
-const UiDefaultCreatePollPostModal = defineAsyncComponent(
-  () => import("~/components/ui/default/modals/create-poll-post-modal.vue")
+const DefaultCreatePollPostModal = defineAsyncComponent(
+  () => import("~/components/default/modals/create-poll-post-modal.vue")
 );
-const UiDefaultCreateStatsPostModal = defineAsyncComponent(
-  () => import("~/components/ui/default/modals/create-stats-post-modal.vue")
+const DefaultCreateStatsPostModal = defineAsyncComponent(
+  () => import("~/components/default/modals/create-stats-post-modal.vue")
 );
-const UiDefaultCreateEventPostModal = defineAsyncComponent(
-  () => import("~/components/ui/default/modals/create-event-post-modal.vue")
+const DefaultCreateEventPostModal = defineAsyncComponent(
+  () => import("~/components/default/modals/create-event-post-modal.vue")
 );
 </script>

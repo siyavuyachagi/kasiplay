@@ -2,57 +2,57 @@
   <div class="lg:grid lg:grid-cols-12 lg:gap-6">
     <!-- Left Sidebar (25%) -->
     <div class="hidden lg:block lg:col-span-3 space-y-4 sticky top-20 h-fit">
-      <UiDefaultSidebarLeft />
+      <DefaultSidebarLeft />
     </div>
 
     <!-- Center Feed (50%) -->
     <div class="lg:col-span-6 mb-6 lg:mb-0 space-y-4">
       <!-- Breadcrumb  -->
-      <UiDefaultBreadcrumb :crumbs="breadcrumbs" />
+      <DefaultBreadcrumb :crumbs="breadcrumbs" />
 
       <div class="space-y-4">
         <!-- Create Post -->
-        <UiDefaultCreatePost />
+        <DefaultCreatePost />
 
         <!-- Filter Tabs -->
-        <UiDefaultFilterPosts />
+        <DefaultFilterPosts />
 
         <!-- Posts -->
-        <UiDefaultPosts />
+        <DefaultPosts />
 
         <!-- Load More Posts -->
-        <UiDefaultLoadMorePostsButton />
+        <DefaultLoadMorePostsButton />
       </div>
     </div>
 
     <!-- Right Sidebar (25%) -->
     <div class="hidden lg:block lg:col-span-3 space-y-4 sticky top-20 h-fit">
-      <UiDefaultSidebarRight />
+      <DefaultSidebarRight />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const UiDefaultSidebarLeft = defineAsyncComponent(
-  () => import("~/components/ui/default/sidebar-left.vue")
+const DefaultSidebarLeft = defineAsyncComponent(
+  () => import("~/components/default/sidebar-left.vue")
 );
-const UiDefaultBreadcrumb = defineAsyncComponent(
-  () => import("~/components/ui/default/breadcrumb.vue")
+const DefaultBreadcrumb = defineAsyncComponent(
+  () => import("~/components/default/breadcrumb.vue")
 );
-const UiDefaultCreatePost = defineAsyncComponent(
-  () => import("~/components/ui/default/create-post.vue")
+const DefaultCreatePost = defineAsyncComponent(
+  () => import("~/components/default/create-post.vue")
 );
-const UiDefaultFilterPosts = defineAsyncComponent(
-  () => import("~/components/ui/default/filter-posts.vue")
+const DefaultFilterPosts = defineAsyncComponent(
+  () => import("~/components/default/filter-posts.vue")
 );
-const UiDefaultPosts = defineAsyncComponent(
-  () => import("~/components/ui/default/posts.vue")
+const DefaultPosts = defineAsyncComponent(
+  () => import("~/components/default/posts.vue")
 );
-const UiDefaultLoadMorePostsButton = defineAsyncComponent(
-  () => import("~/components/ui/default/buttons/load-more-posts-button.vue")
+const DefaultLoadMorePostsButton = defineAsyncComponent(
+  () => import("~/components/default/buttons/load-more-posts-button.vue")
 );
-const UiDefaultSidebarRight = defineAsyncComponent(
-  () => import("~/components/ui/default/sidebar-right.vue")
+const DefaultSidebarRight = defineAsyncComponent(
+  () => import("~/components/default/sidebar-right.vue")
 );
 
 definePageMeta({

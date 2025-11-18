@@ -127,19 +127,24 @@ export default defineNuxtConfig({
       pathPrefix: false, // ⛔ disables folder-based prefixes
     },
     {
-      path: '~/components/ui/account',
+      path: '~/components/account',
       pathPrefix: false,
-      prefix: "UiAccount",
+      prefix: "Account",
     },
     {
-      path: '~/components/ui/dashboard',
+      path: '~/components/dashboard',
       pathPrefix: false,
-      prefix: "UiDashboard", // enables 'Dashboard' prefix for components in this folder
+      prefix: "Dashboard", // enables 'Dashboard' prefix for components in this folder
     },
     {
-      path: '~/components/ui/default',
+      path: '~/components/default',
       pathPrefix: false,
-      prefix: "UiDefault",
+      prefix: "Default",
+    },
+    {
+      path: '~/components/ui',
+      pathPrefix: false,
+      prefix: "Ui",
     }
   ],
 })

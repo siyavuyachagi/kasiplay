@@ -2,13 +2,13 @@
   <div class="lg:grid lg:grid-cols-12 lg:gap-6">
     <!-- Left Sidebar (25%) -->
     <div class="hidden lg:block lg:col-span-3 space-y-4 sticky top-20 h-fit">
-      <UiDefaultSidebarLeft />
+      <DefaultSidebarLeft />
     </div>
 
     <!-- Center Feed (50%) -->
     <div class="lg:col-span-9 mb-6 lg:mb-0 space-y-4">
       <!-- Breadcrumb  -->
-      <UiDefaultBreadcrumb :crumbs="breadcrumbs" />
+      <DefaultBreadcrumb :crumbs="breadcrumbs" />
 
       <div class="space-y-4">
         <!-- Page Header -->
@@ -197,11 +197,11 @@
 <script setup lang="ts">
 import { generateRandomUUID } from "~/utilities/generate-random-uuid";
 
-const UiDefaultSidebarLeft = defineAsyncComponent(
-  () => import("~/components/ui/default/sidebar-left.vue")
+const DefaultSidebarLeft = defineAsyncComponent(
+  () => import("~/components/default/sidebar-left.vue")
 );
-const UiDefaultBreadcrumb = defineAsyncComponent(
-  () => import("~/components/ui/default/breadcrumb.vue")
+const DefaultBreadcrumb = defineAsyncComponent(
+  () => import("~/components/default/breadcrumb.vue")
 );
 
 definePageMeta({

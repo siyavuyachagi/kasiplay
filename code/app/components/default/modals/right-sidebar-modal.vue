@@ -9,7 +9,7 @@
       leave-from-class="translate-x-0"
       leave-to-class="translate-x-full">
       <aside
-        v-if="mobileSidebars.isRightSidebarOpen"
+        v-if="isRightSidebarOpen"
         class="fixed top-0 bottom-0 right-0 w-80 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 z-50 lg:hidden">
         <div class="h-full overflow-y-auto scrollbar-hide">
           <div class="p-4 space-y-4 pb-20">
@@ -18,20 +18,20 @@
               class="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800 z-10">
               <h3 class="font-bold text-gray-900 dark:text-white">Info</h3>
               <button
-                @click="mobileSidebars.toggleRightSidebar()"
+                @click="toggleRightSidebar()"
                 class="p-2 flex hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-lg transition-colors">
                 <Icon name="lucide:x" size="20" />
               </button>
             </div>
 
             <!-- Today's Fixtures - Collapsible -->
-            <UiDefaultDailyFixturesCard />
+            <DefaultDailyFixturesCard />
 
             <!-- League Table - Collapsible -->
-            <UiDefaultLeagueStandingsCard />
+            <DefaultLeagueStandingsCard />
 
             <!-- Who to Follow - Collapsible -->
-            <UiDefaultFollowSuggestionsCard />
+            <DefaultFollowSuggestionsCard />
           </div>
         </div>
       </aside>
@@ -46,23 +46,23 @@
       leave-from-class="opacity-100"
       leave-to-class="opacity-0">
       <div
-        v-if="mobileSidebars.isRightSidebarOpen"
-        @click="mobileSidebars.toggleRightSidebar()"
+        v-if="isRightSidebarOpen"
+        @click="toggleRightSidebar()"
         class="fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
     </Transition>
   </Teleport>
 </template>
 
 <script setup lang="ts">
-const UiDefaultDailyFixturesCard = defineAsyncComponent(
-  () => import("~/components/ui/default/cards/daily-fixtures-card.vue")
-);
-const UiDefaultLeagueStandingsCard = defineAsyncComponent(
-  () => import("~/components/ui/default/cards/league-standings-card.vue")
-);
-const UiDefaultFollowSuggestionsCard = defineAsyncComponent(
-  () => import("~/components/ui/default/cards/follow-suggestions-card.vue")
-);
+const {isRightSidebarOpen, toggleRightSidebar} = useMobileSidebars();
 
-const mobileSidebars = useMobileSidebars();
+const DefaultDailyFixturesCard = defineAsyncComponent(
+  () => import("~/components/default/cards/daily-fixtures-card.vue")
+);
+const DefaultLeagueStandingsCard = defineAsyncComponent(
+  () => import("~/components/default/cards/league-standings-card.vue")
+);
+const DefaultFollowSuggestionsCard = defineAsyncComponent(
+  () => import("~/components/default/cards/follow-suggestions-card.vue")
+);
 </script>

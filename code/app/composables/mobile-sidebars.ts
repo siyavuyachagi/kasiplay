@@ -1,24 +1,28 @@
+const isLeftSidebarOpen = useState('leftSidebar', () => false)
+const isRightSidebarOpen = useState('rightSidebar', () => false)
 
 export const useMobileSidebars = () => {
-    const isLeftSidebarOpen = ref(false)
-    const isRightSidebarOpen = ref(false)
 
     const toggleLeftSidebar = () => {
-        isLeftSidebarOpen.value = !isLeftSidebarOpen.value;
-        isRightSidebarOpen.value = false;
-        console.log('Toggled left sidebar:', isLeftSidebarOpen.value);
-    };
+        isLeftSidebarOpen.value = !isLeftSidebarOpen.value
+        isRightSidebarOpen.value = false
+    }
 
     const toggleRightSidebar = () => {
-        isRightSidebarOpen.value = !isRightSidebarOpen.value;
-        isLeftSidebarOpen.value = false;
-        console.log('Toggled right sidebar:', isRightSidebarOpen.value);
-    };
+        isRightSidebarOpen.value = !isRightSidebarOpen.value
+        isLeftSidebarOpen.value = false
+    }
+
+    const closeAllSidebars = () => {
+        isLeftSidebarOpen.value = false
+        isRightSidebarOpen.value = false
+    }
 
     return {
         isLeftSidebarOpen: readonly(isLeftSidebarOpen),
         isRightSidebarOpen: readonly(isRightSidebarOpen),
         toggleLeftSidebar,
         toggleRightSidebar,
-    };
+        closeAllSidebars
+    }
 }

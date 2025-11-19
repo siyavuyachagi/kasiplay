@@ -44,10 +44,11 @@
             </div>
           </div>
         </div>
-        <div
-          class="border-t border-gray-200 dark:border-gray-700 text-center text-sm py-2 text-blue-600 dark:text-blue-400 hover:underline cursor-pointer">
+        <NuxtLink
+          to="/messages"
+          class="block border-t border-gray-200 dark:border-gray-700 text-center text-sm py-2 text-blue-600 dark:text-blue-400 hover:underline">
           View all messages
-        </div>
+        </NuxtLink>
       </div>
     </transition>
   </div>

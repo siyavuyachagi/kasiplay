@@ -53,11 +53,10 @@
         </div>
 
         <!-- Footer -->
-        <div
-          class="border-t border-gray-200 dark:border-gray-700 text-center text-sm py-2 text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
-          @click="router.push('/notifications')">
+        <NuxtLink to="/notifications"
+          class="block border-t border-gray-200 dark:border-gray-700 text-center text-sm py-2 text-blue-600 dark:text-blue-400 hover:underline">
           View all notifications
-        </div>
+        </NuxtLink>
       </div>
     </transition>
   </div>

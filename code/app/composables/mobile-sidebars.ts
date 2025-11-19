@@ -1,5 +1,5 @@
-const isLeftSidebarOpen = useState('leftSidebar', () => false)
-const isRightSidebarOpen = useState('rightSidebar', () => false)
+const isLeftSidebarOpen = useState('left-sidebar', () => false)
+const isRightSidebarOpen = useState('right-sidebar', () => false)
 
 export const useMobileSidebars = () => {
 

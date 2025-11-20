@@ -172,13 +172,13 @@ export const COMPETITION = {
 
 ## 10. Git Rules
 
-* Branch names: `feature/...`, `fix/...`, `refactor/...`
-
-  * Example: `feature/team-creation`
-* Commit format: `feat: add team creation flow`
-* One logical change per commit.
-* Don’t push untested or half-done code to main.
 * Always pull latest before merge.
+* One logical change per commit.
+* Commit rules:
+- When updating documents only i.e → `docs: docs only`
+- When changes does not effect functionality i.e → `chore: maintenance, meta, config`
+- When fixing a bug i.e → `fix: bug fix`
+- When adding new feature i.e → `feat: new feature`
 
 ---
 

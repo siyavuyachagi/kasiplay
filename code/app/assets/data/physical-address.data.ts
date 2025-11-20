@@ -1,4 +1,4 @@
-import type { PhysicalAddress } from "~/types/models/physical-address";
+import type { PhysicalAddress } from "~/types/interfaces/physical-address";
 
 export const addresses: PhysicalAddress[] = [
     {

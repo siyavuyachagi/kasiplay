@@ -108,7 +108,7 @@
 </template>
 
 <script setup lang="ts">
-import type { NavigationItem } from "~/types/models/navigation-item";
+import type { NavigationItem } from "~/types/interfaces/navigation-item";
 
 const authStore = useAuthStore();
 const isAuthenticated = ref(true); // Replace with actual auth check

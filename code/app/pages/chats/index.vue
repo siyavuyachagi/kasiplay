@@ -112,7 +112,7 @@
                   @click="startChatFromOnline(onlineUser)"
                   class="shrink-0 flex flex-col items-center group">
                   <div
-                    class="relative w-11 h-11 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-semibold text-sm group-hover:ring-2 group-hover:ring-blue-400/50 transition-all duration-200">
+                    class="relative w-11 h-11 rounded-full bg-linear-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-semibold text-sm group-hover:ring-2 group-hover:ring-blue-400/50 transition-all duration-200">
                     {{ getUserInitials(onlineUser) }}
                     <div
                       class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></div>
@@ -173,18 +173,18 @@
                   :class="[
                     'w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold',
                     chat.type === 'group'
-                      ? 'bg-gradient-to-br from-purple-500 to-pink-600'
-                      : 'bg-gradient-to-br from-blue-500 to-cyan-600',
+                      ? 'bg-linear-to-br from-purple-500 to-pink-600'
+                      : 'bg-linear-to-br from-blue-500 to-cyan-600',
                   ]">
-                  {{ getUserInitials(chat) }}
+                  {{ getUserInitials(chat.) }}
                 </div>
                 <div
                   v-if="chat.isOnline && chat.type !== 'group'"
                   class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></div>
                 <div
-                  v-if="chat.unreadCount"
-                  class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1.5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
-                  {{ chat.unreadCount > 99 ? "99+" : chat.unreadCount }}
+                  v-if="chat.unreadMessages"
+                  class="absolute -top-1 -right-1 min-w-5 h-5 px-1.5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                  {{ chat.unreadMessages > 99 ? "99+" : chat.unreadMessages }}
                 </div>
               </div>
 
@@ -252,8 +252,8 @@
                   :class="[
                     'w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold',
                     selectedConversation.type === 'group'
-                      ? 'bg-gradient-to-br from-purple-500 to-pink-600'
-                      : 'bg-gradient-to-br from-blue-500 to-purple-600',
+                      ? 'bg-linear-to-br from-purple-500 to-pink-600'
+                      : 'bg-linear-to-br from-blue-500 to-purple-600',
                   ]">
                   {{ selectedConversation.user.initials }}
                 </div>
@@ -420,9 +420,10 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick } from "vue";
 import { useRouter } from "vue-router";
-import type { ApplicationUser } from "~/types/models/application-user";
-import type { Chat } from "~/types/models/chat";
-import type { Message } from "~/types/models/message";
+import { chats } from "~/assets/data/chats.data";
+import type { ApplicationUser } from "~/types/interfaces/application-user";
+import type { Chat } from "~/types/interfaces/chat";
+import type { Message } from "~/types/interfaces/message";
 import { generateRandomUUID } from "~/utilities/generate-random-uuid";
 
 definePageMeta({
@@ -438,13 +439,6 @@ const chatFilters = [
   { label: "Unread", value: "unread", count: 5 },
   { label: "Groups", value: "groups", count: 3 },
 ];
-
-// interface ChatType {
-//   id: string;
-//   label: string;
-//   icon: string;
-//   count?: number;
-// }
 
 interface Tab {
   id: string;
@@ -472,13 +466,6 @@ const showChatOnly = ref(false);
 const isMobile = ref(false);
 const activeTab = ref<"all" | "groups" | "unread">("all");
 const selectedChatType = ref<string>("all");
-
-// Example static data — replace with real data
-// const chatTypes = ref<ChatType[]>([
-//   { id: "all", label: "All", icon: "lucide:message-circle", count: undefined },
-//   { id: "direct", label: "Direct", icon: "lucide:user", count: undefined },
-//   { id: "group", label: "Groups", icon: "lucide:users", count: undefined },
-// ]);
 
 const userGroups = ref<Group[]>([
   // fill from API
@@ -590,560 +577,6 @@ const onlineUsers: ApplicationUser[] = [
   },
 ];
 
-const allConversations = ref<Chat[]>([
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "alice",
-      email: "alice@example.com",
-      firstName: "Alice",
-      lastName: "Johnson",
-      avatarUrl: "https://i.pravatar.cc/150?img=12",
-      isActive: true,
-      roles: ["User"],
-      createdAt: "2025-01-10T12:00:00Z",
-      updatedAt: "2025-01-10T12:00:00Z",
-    },
-    lastMessage: { text: "Hey!", timestamp: "2m ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "u1",
-        senderName: "Alice",
-        text: "Hello!",
-        time: "10:00 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Hi Alice",
-        time: "10:02 AM",
-      },
-    ],
-    unread: 1,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "bob",
-      email: "bob@example.com",
-      firstName: "Bob",
-      lastName: "Smith",
-      avatarUrl: null,
-      isActive: true,
-      roles: ["User"],
-      createdAt: "2025-01-11T08:10:00Z",
-      updatedAt: "2025-01-11T08:10:00Z",
-    },
-    lastMessage: { text: "Are we still meeting?", timeLabel: "5m ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "You available later?",
-        time: "09:00 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u2",
-        senderName: "Bob",
-        text: "Are we still meeting?",
-        time: "09:05 AM",
-      },
-    ],
-    unread: 1,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "ceejay",
-      email: "ceejay@example.com",
-      firstName: "CeeJay",
-      lastName: "Chagi",
-      avatarUrl: "https://i.pravatar.cc/150?img=68",
-      isActive: true,
-      roles: ["Admin"],
-      createdAt: "2025-01-12T10:00:00Z",
-      updatedAt: "2025-01-12T10:00:00Z",
-    },
-    lastMessage: { text: "Fix pushed.", timeLabel: "10m ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "u3",
-        senderName: "CeeJay",
-        text: "I found the bug.",
-        time: "08:30 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Nice, push the fix.",
-        time: "08:32 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u3",
-        senderName: "CeeJay",
-        text: "Fix pushed.",
-        time: "08:40 AM",
-      },
-    ],
-    unread: 0,
-    verified: true,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "thabo",
-      email: "thabo@example.com",
-      firstName: "Thabo",
-      lastName: "Mokoena",
-      avatarUrl: null,
-      isActive: false,
-      roles: ["User"],
-      createdAt: "2025-01-15T09:10:00Z",
-      updatedAt: "2025-01-15T09:10:00Z",
-    },
-    lastMessage: { text: "Thanks bro.", timeLabel: "1h ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Sent it.",
-        time: "07:00 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u4",
-        senderName: "Thabo",
-        text: "Thanks bro.",
-        time: "07:01 AM",
-      },
-    ],
-    unread: 0,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "lerato",
-      email: "lerato@example.com",
-      firstName: "Lerato",
-      lastName: "Dlamini",
-      avatarUrl: "https://i.pravatar.cc/150?img=33",
-      isActive: true,
-      roles: ["User"],
-      createdAt: "2025-01-20T14:12:00Z",
-      updatedAt: "2025-01-20T14:12:00Z",
-    },
-    lastMessage: { text: "😂😂😂", timeLabel: "3m ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "u5",
-        senderName: "Lerato",
-        text: "Look at this meme",
-        time: "02:15 PM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "😂😂",
-        time: "02:16 PM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u5",
-        senderName: "Lerato",
-        text: "😂😂😂",
-        time: "02:17 PM",
-      },
-    ],
-    unread: 1,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "sindi",
-      email: "sindi@example.com",
-      firstName: "Sindisiwe",
-      lastName: "Zulu",
-      avatarUrl: "https://i.pravatar.cc/150?img=49",
-      isActive: true,
-      roles: ["Moderator"],
-      createdAt: "2025-01-21T16:00:00Z",
-      updatedAt: "2025-01-21T16:00:00Z",
-    },
-    lastMessage: { text: "I'll check it.", timeLabel: "15m ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Review this PR?",
-        time: "12:00 PM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u6",
-        senderName: "Sindisiwe",
-        text: "I'll check it.",
-        time: "12:15 PM",
-      },
-    ],
-    unread: 0,
-    verified: true,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "jason",
-      email: "jason@example.com",
-      firstName: "Jason",
-      lastName: "Reed",
-      avatarUrl: null,
-      isActive: false,
-      roles: ["User"],
-      createdAt: "2025-01-22T11:10:00Z",
-      updatedAt: "2025-01-22T11:10:00Z",
-    },
-    lastMessage: { text: "Sent!", timeLabel: "20m ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "u7",
-        senderName: "Jason",
-        text: "Check your email.",
-        time: "09:40 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Got it?",
-        time: "09:41 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u7",
-        senderName: "Jason",
-        text: "Sent!",
-        time: "09:45 AM",
-      },
-    ],
-    unread: 0,
-    verified: false,
-  },
-
-  // ------------------------
-  // 8 MORE — MANUALLY DONE
-  // ------------------------
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "kevin",
-      email: "kevin@example.com",
-      firstName: "Kevin",
-      lastName: "Miller",
-      avatarUrl: "https://i.pravatar.cc/150?img=21",
-      isActive: true,
-      roles: ["User"],
-      createdAt: "2025-01-23T09:00:00Z",
-      updatedAt: "2025-01-23T09:00:00Z",
-    },
-    lastMessage: { text: "Done.", timeLabel: "1h ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Deploy now?",
-        time: "08:00 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u8",
-        senderName: "Kevin",
-        text: "Done.",
-        time: "08:30 AM",
-      },
-    ],
-    unread: 0,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "nadia",
-      email: "nadia@example.com",
-      firstName: "Nadia",
-      lastName: "Khan",
-      avatarUrl: null,
-      isActive: true,
-      roles: ["User"],
-      createdAt: "2025-01-24T11:30:00Z",
-      updatedAt: "2025-01-24T11:30:00Z",
-    },
-    lastMessage: { text: "I'll be there.", timeLabel: "10m ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Confirming 3PM?",
-        time: "11:00 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u9",
-        senderName: "Nadia",
-        text: "I'll be there.",
-        time: "11:20 AM",
-      },
-    ],
-    unread: 0,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "patrick",
-      email: "patrick@example.com",
-      firstName: "Patrick",
-      lastName: "Moyo",
-      avatarUrl: "https://i.pravatar.cc/150?img=41",
-      isActive: false,
-      roles: ["User"],
-      createdAt: "2025-01-25T07:30:00Z",
-      updatedAt: "2025-01-25T07:30:00Z",
-    },
-    lastMessage: { text: "Cool.", timeLabel: "3h ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "u10",
-        senderName: "Patrick",
-        text: "Morning.",
-        time: "07:00 AM",
-      },
-      { id: generateRandomUUID(), sender: "me", text: "Yo.", time: "07:05 AM" },
-      {
-        id: generateRandomUUID(),
-        sender: "u10",
-        senderName: "Patrick",
-        text: "Cool.",
-        time: "07:10 AM",
-      },
-    ],
-    unread: 0,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "maria",
-      email: "maria@example.com",
-      firstName: "Maria",
-      lastName: "Lopez",
-      avatarUrl: "https://i.pravatar.cc/150?img=35",
-      isActive: true,
-      roles: ["User"],
-      createdAt: "2025-01-26T10:00:00Z",
-      updatedAt: "2025-01-26T10:00:00Z",
-    },
-    lastMessage: { text: "Sounds good.", timeLabel: "1h ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Let's schedule.",
-        time: "09:00 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u11",
-        senderName: "Maria",
-        text: "Sounds good.",
-        time: "09:05 AM",
-      },
-    ],
-    unread: 0,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "brian",
-      email: "brian@example.com",
-      firstName: "Brian",
-      lastName: "Ncube",
-      avatarUrl: null,
-      isActive: true,
-      roles: ["Moderator"],
-      createdAt: "2025-01-26T12:00:00Z",
-      updatedAt: "2025-01-26T12:00:00Z",
-    },
-    lastMessage: { text: "Later.", timeLabel: "30m ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "u12",
-        senderName: "Brian",
-        text: "Ping me when free.",
-        time: "11:00 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Later.",
-        time: "11:30 AM",
-      },
-    ],
-    unread: 0,
-    verified: true,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "sasha",
-      email: "sasha@example.com",
-      firstName: "Sasha",
-      lastName: "Ivanova",
-      avatarUrl: "https://i.pravatar.cc/150?img=52",
-      isActive: false,
-      roles: ["User"],
-      createdAt: "2025-01-27T11:45:00Z",
-      updatedAt: "2025-01-27T11:45:00Z",
-    },
-    lastMessage: { text: "Let me know.", timeLabel: "4h ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Need help?",
-        time: "07:40 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u13",
-        senderName: "Sasha",
-        text: "Let me know.",
-        time: "07:45 AM",
-      },
-    ],
-    unread: 0,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "david",
-      email: "david@example.com",
-      firstName: "David",
-      lastName: "Nkosi",
-      avatarUrl: null,
-      isActive: true,
-      roles: ["User"],
-      createdAt: "2025-01-28T13:00:00Z",
-      updatedAt: "2025-01-28T13:00:00Z",
-    },
-    lastMessage: { text: "Safe.", timeLabel: "20m ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "u14",
-        senderName: "David",
-        text: "Heading out.",
-        time: "12:40 PM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Safe.",
-        time: "12:41 PM",
-      },
-    ],
-    unread: 0,
-    verified: false,
-  },
-
-  {
-    id: generateRandomUUID(),
-    type: "direct",
-    user: {
-      id: generateRandomUUID(),
-      username: "olivia",
-      email: "olivia@example.com",
-      firstName: "Olivia",
-      lastName: "Daniels",
-      avatarUrl: "https://i.pravatar.cc/150?img=9",
-      isActive: false,
-      roles: ["User"],
-      createdAt: "2025-01-29T09:30:00Z",
-      updatedAt: "2025-01-29T09:30:00Z",
-    },
-    lastMessage: { text: "Perfect.", timeLabel: "2h ago" },
-    messages: [
-      {
-        id: generateRandomUUID(),
-        sender: "me",
-        text: "Let's finalize this.",
-        time: "07:10 AM",
-      },
-      {
-        id: generateRandomUUID(),
-        sender: "u15",
-        senderName: "Olivia",
-        text: "Perfect.",
-        time: "07:15 AM",
-      },
-    ],
-    unread: 0,
-    verified: false,
-  },
-]);
-
-
 const friendRequests = ref<ApplicationUser[]>([
   {
     id: generateRandomUUID(),
@@ -1185,15 +618,15 @@ const chatTabs = ref<Tab[]>([
     id: "unread",
     label: "Unread",
     badge: computed(
-      () => allConversations.value.filter((c) => c.unread > 0).length
+      () => chats.value.filter((c) => c.unreadMessages > 0).length
     ).value,
   },
   { id: "groups", label: "Groups", badge: undefined },
 ]);
 
 // Computed: filter conversations based on chat type + search + activeTab
-const filteredConversations = computed(() => {
-  let convs = allConversations.value;
+const filteredChats = computed(() => {
+  let convs = chats.value;
 
   // Filter by chat type (all / direct / group)
   if (selectedChatType.value !== "all") {
@@ -1202,7 +635,7 @@ const filteredConversations = computed(() => {
 
   // Filter by active tab (unread, groups, all)
   if (activeTab.value === "unread") {
-    convs = convs.filter((c) => c.unread > 0);
+    convs = convs.filter((c) => c.unreadMessages > 0);
   } else if (activeTab.value === "groups") {
     convs = convs.filter((c) => c.type === "group");
   }
@@ -1242,7 +675,7 @@ function openCreateGroup() {
 }
 
 // When the user clicks on a group or conversation in the list
-function selectConversation(conv: Chat) {
+function selectChat(conv: Chat) {
   selectedConversation.value = conv;
 }
 

@@ -46,6 +46,14 @@
 * Use **UPPER_SNAKE_CASE** for constants.
 
   * `API_BASE_URL`, `MAX_TEAM_SIZE`
+  - Usage:
+```typescript
+export const COMPETITION = {
+  LEAGUE: 'league',
+  CUP: 'cup',
+  KNOCKOUT: 'knockout'
+}
+````
 
 ### Types & Interfaces
 

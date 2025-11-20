@@ -1,4 +1,4 @@
-import type { Chat } from "~/types/models/chat";
+import type { Chat } from "~/types/interfaces/chat";
 import { generateRandomUUID } from "~/utilities/generate-random-uuid";
 
 export const chats = ref<Chat[]>([

@@ -1,54 +1,53 @@
 export const USER_PERMISSIONS = {
-  // OWNER
+  // SYSTEM
   CREATE_SYSTEM: 'create:system',
-  EDIT_SYSTEM: 'edit:system',
-  VIEW_SYSTEM: 'view:system',
+  READ_SYSTEM: 'read:system',
+  UPDATE_SYSTEM: 'update:system',
   DELETE_SYSTEM: 'delete:system',
 
+  // USER
   CREATE_USER: 'create:user',
-  EDIT_USER: 'edit:user',
+  READ_USER: 'read:user',
+  UPDATE_USER: 'update:user',
   DELETE_USER: 'delete:user',
-  VIEW_USER: 'view:user',
 
+  // FEDEERATION
   CREATE_FEDERATION: 'create:federation',
-  EDIT_FEDERATION: 'edit:federation',
+  READ_FEDERATION: 'read:federation',
+  UPDATE_FEDERATION: 'update:federation',
   DELETE_FEDERATION: 'delete:federation',
-  VIEW_FEDERATION: 'view:federation',
 
+  // COMPETITION 
+  CREATE_COMPETITION: 'create:competition',
+  READ_COMPETITION: 'read:competition',
+  UPDATE_COMPETITION: 'update:competition',
+  DELETE_COMPETITION: 'delete:competition',
+
+  // CLUB 
   CREATE_CLUB: 'create:club',
-  EDIT_CLUB: 'edit:club',
+  READ_CLUB: 'read:club',
+  UPDATE_CLUB: 'update:club',
   DELETE_CLUB: 'delete:club',
-  VIEW_CLUB: 'view:club',
 
-  VIEW_ANALYTICS: 'view:analytics',
-  CONFIGURE_SETTINGS: 'edit:settings',
+  // TEAM 
+  CREATE_TEAM: 'create:team',
+  READ_TEAM: 'read:team',
+  UPDATE_TEAM: 'update:team',
+  DELETE_TEAM: 'delete:team',
 
-  // ADMINISTRATOR
-  APPROVE_CLUB: 'approve:club',
-  MODERATE_CONTENT: 'moderate:content',
-  MANAGE_USER_ROLES: 'manage:user_roles',
+  // MATCH 
+  CREATE_MATCH: 'create:match',
+  READ_MATCH: 'read:match',
+  UPDATE_MATCH: 'update:match',
+  DELETE_MATCH: 'delete:match',
 
-  // OFFICIAL
-  OFFICIATE_MATCH: 'officiate:match',  // referee
-  COACH_TEAM: 'coach:team',            // coach
-  MANAGE_TRAINING: 'manage:training',
-  SCOUT_PLAYERS: 'scout:players',
-  ASSESS_PLAYER: 'assess:player',
-  SCHEDULE_MATCH: 'schedule:match',
-  MANAGE_SQUAD: 'manage:squad',
-
-  // PLAYER
-  VIEW_PERSONAL_STATS: 'view:personal_stats',
-  EDIT_PROFILE: 'edit:profile',
+  // CONTENT 
   CREATE_CONTENT: 'create:content',
-  JOIN_TEAM: 'join:team',
-  VIEW_TEAM_STATS: 'view:team_stats',
+  READ_CONTENT: 'read:content',
+  UPDATE_CONTENT: 'update:content',
+  DELETE_CONTENT: 'delete:content',
 
-  // GENERAL/FAN
-  ENGAGE_CONTENT: 'engage:content',
-  FOLLOW_TEAMS: 'follow:teams',
-  VIEW_PUBLIC_STATS: 'view:public_stats',
+  // OTHER
 } as const;
 
 export type UserPermission = typeof USER_PERMISSIONS[keyof typeof USER_PERMISSIONS];
-

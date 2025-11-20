@@ -1,61 +1,150 @@
 import { USER_PERMISSIONS, type UserPermission } from "./user-permissions";
 
+
 export const USER_ROLES = {
-    Owner: 'Owner',
-    Administrator: 'Administrator',
-    Official: 'Official',
-    Player: 'Player',
-    General: 'General', // Regular users
+    OWNER: 'owner',
+    ADMINISTRATOR: 'administrator',
+    OFFICIAL: 'official',
+    PLAYER: 'player',
+    GENERAL: 'general', // Regular users
 } as const;
 
 export type UserRole = typeof USER_ROLES[keyof typeof USER_ROLES];
 
 export const ROLE_DEFAULT_PERMISSIONS: Record<UserRole, UserPermission[]> = {
-    Owner: [
-        USER_PERMISSIONS.MANAGE_SYSTEM,
-        USER_PERMISSIONS.MANAGE_USERS,
-        USER_PERMISSIONS.MANAGE_FEDERATIONS,
-        USER_PERMISSIONS.MANAGE_CLUBS,
-        USER_PERMISSIONS.VIEW_ANALYTICS,
-        USER_PERMISSIONS.CONFIGURE_SETTINGS,
-    ],
+    owner: [
+        // SYSTEM
+        USER_PERMISSIONS.CREATE_SYSTEM,
+        USER_PERMISSIONS.READ_SYSTEM,
+        USER_PERMISSIONS.UPDATE_SYSTEM,
+        USER_PERMISSIONS.DELETE_SYSTEM,
 
-    Administrator: [
-        USER_PERMISSIONS.APPROVE_CLUBS,
-        USER_PERMISSIONS.MANAGE_ORGANIZATIONS,
-        USER_PERMISSIONS.MODERATE_CONTENT,
-        USER_PERMISSIONS.MANAGE_USER_ROLES,
-    ],
+        // USER
+        USER_PERMISSIONS.CREATE_USER,
+        USER_PERMISSIONS.READ_USER,
+        USER_PERMISSIONS.UPDATE_USER,
+        USER_PERMISSIONS.DELETE_USER,
 
-    Official: [
-        USER_PERMISSIONS.OFFICIATE_MATCH,
-        USER_PERMISSIONS.COACH_TEAM,
-        USER_PERMISSIONS.MANAGE_TRAINING,
-        USER_PERMISSIONS.SCOUT_PLAYERS,
-        USER_PERMISSIONS.ASSESS_PLAYER,
-        USER_PERMISSIONS.SCHEDULE_MATCH,
-        USER_PERMISSIONS.MANAGE_SQUAD,
-    ],
+        // FEDERATION
+        USER_PERMISSIONS.CREATE_FEDERATION,
+        USER_PERMISSIONS.READ_FEDERATION,
+        USER_PERMISSIONS.UPDATE_FEDERATION,
+        USER_PERMISSIONS.DELETE_FEDERATION,
 
-    Player: [
-        USER_PERMISSIONS.VIEW_PERSONAL_STATS,
-        USER_PERMISSIONS.EDIT_PROFILE,
+        // COMPETITION
+        USER_PERMISSIONS.CREATE_COMPETITION,
+        USER_PERMISSIONS.READ_COMPETITION,
+        USER_PERMISSIONS.UPDATE_COMPETITION,
+        USER_PERMISSIONS.DELETE_COMPETITION,
+
+        // CLUB
+        USER_PERMISSIONS.CREATE_CLUB,
+        USER_PERMISSIONS.READ_CLUB,
+        USER_PERMISSIONS.UPDATE_CLUB,
+        USER_PERMISSIONS.DELETE_CLUB,
+
+        // TEAM
+        USER_PERMISSIONS.CREATE_TEAM,
+        USER_PERMISSIONS.READ_TEAM,
+        USER_PERMISSIONS.UPDATE_TEAM,
+        USER_PERMISSIONS.DELETE_TEAM,
+
+        // MATCH
+        USER_PERMISSIONS.CREATE_MATCH,
+        USER_PERMISSIONS.READ_MATCH,
+        USER_PERMISSIONS.UPDATE_MATCH,
+        USER_PERMISSIONS.DELETE_MATCH,
+
+        // CONTENT
         USER_PERMISSIONS.CREATE_CONTENT,
-        USER_PERMISSIONS.JOIN_TEAM,
-        USER_PERMISSIONS.VIEW_TEAM_STATS,
+        USER_PERMISSIONS.READ_CONTENT,
+        USER_PERMISSIONS.UPDATE_CONTENT,
+        USER_PERMISSIONS.DELETE_CONTENT,
     ],
 
-    General: [
-        USER_PERMISSIONS.ENGAGE_CONTENT,
-        USER_PERMISSIONS.FOLLOW_TEAMS,
-        USER_PERMISSIONS.VIEW_PUBLIC_STATS,
+    administrator: [
+        // USERS (limited)
+        USER_PERMISSIONS.READ_USER,
+        USER_PERMISSIONS.UPDATE_USER,
+
+        // FEDERATION
+        USER_PERMISSIONS.CREATE_FEDERATION,
+        USER_PERMISSIONS.READ_FEDERATION,
+        USER_PERMISSIONS.UPDATE_FEDERATION,
+
+        // COMPETITION
+        USER_PERMISSIONS.CREATE_COMPETITION,
+        USER_PERMISSIONS.READ_COMPETITION,
+        USER_PERMISSIONS.UPDATE_COMPETITION,
+
+        // CLUB
+        USER_PERMISSIONS.CREATE_CLUB,
+        USER_PERMISSIONS.READ_CLUB,
+        USER_PERMISSIONS.UPDATE_CLUB,
+
+        // TEAM
+        USER_PERMISSIONS.CREATE_TEAM,
+        USER_PERMISSIONS.READ_TEAM,
+        USER_PERMISSIONS.UPDATE_TEAM,
+
+        // MATCH (management but not deletion)
+        USER_PERMISSIONS.CREATE_MATCH,
+        USER_PERMISSIONS.READ_MATCH,
+        USER_PERMISSIONS.UPDATE_MATCH,
+
+        // CONTENT moderation
+        USER_PERMISSIONS.READ_CONTENT,
+        USER_PERMISSIONS.UPDATE_CONTENT,
+        USER_PERMISSIONS.DELETE_CONTENT,
+    ],
+
+    official: [
+        // TEAM operations (lineups, training)
+        USER_PERMISSIONS.READ_TEAM,
+        USER_PERMISSIONS.UPDATE_TEAM,
+
+        // MATCH operations (referees/coaches/scouts)
+        USER_PERMISSIONS.READ_MATCH,
+        USER_PERMISSIONS.UPDATE_MATCH,
+
+        // CONTENT (post match reports, announcements)
+        USER_PERMISSIONS.CREATE_CONTENT,
+        USER_PERMISSIONS.READ_CONTENT,
+    ],
+
+    player: [
+        // TEAM visibility
+        USER_PERMISSIONS.READ_TEAM,
+
+        // PLAYER PROFILE
+        USER_PERMISSIONS.READ_USER,
+        USER_PERMISSIONS.UPDATE_USER,
+
+        // MATCH participation
+        USER_PERMISSIONS.READ_MATCH,
+
+        // CONTENT
+        USER_PERMISSIONS.CREATE_CONTENT,
+        USER_PERMISSIONS.READ_CONTENT,
+    ],
+
+    general: [
+        // BASIC READ ACCESS
+        USER_PERMISSIONS.READ_CLUB,
+        USER_PERMISSIONS.READ_TEAM,
+        USER_PERMISSIONS.READ_COMPETITION,
+        USER_PERMISSIONS.READ_MATCH,
+        USER_PERMISSIONS.READ_CONTENT,
+
+        // CAN POST & INTERACT
+        USER_PERMISSIONS.CREATE_CONTENT,
     ],
 };
 
 export const ROLE_BADGES: Record<UserRole, { bg: string; text: string }> = {
-    Owner: { bg: 'bg-gray-100', text: 'text-gray-800' },          // top-level admin
-    Administrator: { bg: 'bg-blue-100', text: 'text-blue-700' },  // manages federations/clubs
-    Official: { bg: 'bg-yellow-100', text: 'text-yellow-700' },   // referee, coach, etc.
-    Player: { bg: 'bg-green-100', text: 'text-green-600' },       // athletes
-    General: { bg: 'bg-orange-100', text: 'text-orange-600' },    // fans / general users
+    owner: { bg: 'bg-gray-100', text: 'text-gray-800' },          // top-level admin
+    administrator: { bg: 'bg-blue-100', text: 'text-blue-700' },  // manages federations/clubs
+    official: { bg: 'bg-yellow-100', text: 'text-yellow-700' },   // referee, coach, etc.
+    player: { bg: 'bg-green-100', text: 'text-green-600' },       // athletes
+    general: { bg: 'bg-orange-100', text: 'text-orange-600' },    // fans / general users
 };

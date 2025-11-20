@@ -22,7 +22,7 @@
 ## System Architecture
 
 ### Tech Stack
-- **Framework**: Nuxt 3 (Vue.js)
+- **Framework**: Nuxtjs 4 (Vue.js)
 - **Styling**: Tailwind CSS 4.0 (via @tailwindcss/vite)
 - **State Management**: Pinia
 - **Icons**: Nuxt Icon (Lucide icons)
@@ -388,5 +388,3 @@ class="flex items-center space-x-2"
 - TypeScript
 
 ---
-
-*Last Updated: October 25, 2025*

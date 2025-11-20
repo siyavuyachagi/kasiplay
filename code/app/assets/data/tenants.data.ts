@@ -1,4 +1,4 @@
-import type { Tenant } from "~/types/models/tenant";
+import type { Tenant } from "~/types/interfaces/tenant";
 
 export const sampleTenants: Tenant[] = [
     {

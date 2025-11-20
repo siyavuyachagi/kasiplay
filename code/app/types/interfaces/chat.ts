@@ -12,7 +12,7 @@ export interface Chat {
     messages: Message[];  // all messages in this conversation
     lastMessage: Message;
 
-    unreadMessagesCounter: number;       // number of unread messages
+    unreadMessages: number;       // number of unread messages
     verified?: boolean;   // if this conversation is verified (optional)
 
     // metadata

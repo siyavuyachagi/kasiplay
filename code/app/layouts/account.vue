@@ -11,7 +11,10 @@
             <button
               @click="toggleAccountSidebar"
               class="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-              <Icon name="lucide:menu" size="24" class="text-gray-700 dark:text-gray-300" />
+              <Icon
+                name="lucide:menu"
+                size="24"
+                class="text-gray-700 dark:text-gray-300" />
             </button>
 
             <NuxtLink
@@ -99,7 +102,9 @@
               <!-- Close Button -->
               <div
                 class="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-700">
-                <h3 class="font-bold text-gray-900 dark:text-white">Account Menu</h3>
+                <h3 class="font-bold text-gray-900 dark:text-white">
+                  Account Menu
+                </h3>
                 <button
                   @click="closeAccountSidebar"
                   class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-lg transition-colors">
@@ -147,11 +152,12 @@
 </template>
 
 <script setup lang="ts">
-import type { NavigationItem } from "~/types/models/navigation-item";
+import type { NavigationItem } from "~/types/interfaces/navigation-item";
 
 const themeStore = useThemeStore();
 const route = useRoute();
-const { isAccountSidebarOpen, toggleAccountSidebar, closeAccountSidebar } = useAccountSidebar();
+const { isAccountSidebarOpen, toggleAccountSidebar, closeAccountSidebar } =
+  useAccountSidebar();
 
 const navigationItems: NavigationItem[] = [
   { label: "Profile", url: "/account/profile", icon: "lucide:user" },
@@ -180,7 +186,10 @@ const isActive = (path: string) => {
 };
 
 // Close sidebar on route change
-watch(() => route.path, () => {
-  closeAccountSidebar();
-});
+watch(
+  () => route.path,
+  () => {
+    closeAccountSidebar();
+  }
+);
 </script>

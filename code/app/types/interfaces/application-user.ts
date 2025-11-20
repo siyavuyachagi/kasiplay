@@ -27,6 +27,7 @@ export interface ApplicationUser {
 
   // Profile
   bio?: string;
+  physicalAddressId?: string;
   physicalAddress?: PhysicalAddress;
   socialLinks?: SocialLink[]
 

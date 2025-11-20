@@ -32,10 +32,10 @@
           </div>
 
           <!-- Right Actions -->
-          <div class="flex items-center space-x-2">
+          <div class="flex items-center justify-center space-x-2">
             <button
               @click="themeStore.toggleTheme()"
-              class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+              class="flex justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
               <Icon
                 v-if="themeStore.isDark"
                 name="lucide:sun"
@@ -44,11 +44,11 @@
               <Icon v-else name="lucide:moon" size="20" class="text-gray-600" />
             </button>
 
-            <NuxtLink
-              to="/"
-              class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-              Back to Home
-            </NuxtLink>
+            <button
+              class="flex justify-center px-4 gap-x-2 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+              <Icon name="lucide:log-out" size="20" />
+              Logout
+            </button>
           </div>
         </div>
       </div>
@@ -152,7 +152,7 @@
 </template>
 
 <script setup lang="ts">
-import type { NavigationItem } from "~/types/interfaces/navigation-item";
+import type { NavigationItem } from "~/types/ui/navigation-item";
 
 const themeStore = useThemeStore();
 const route = useRoute();
@@ -160,7 +160,7 @@ const { isAccountSidebarOpen, toggleAccountSidebar, closeAccountSidebar } =
   useAccountSidebar();
 
 const navigationItems: NavigationItem[] = [
-  { label: "Profile", url: "/account/profile", icon: "lucide:user" },
+  { label: "Profile", url: "/account", icon: "lucide:user" },
   { label: "Edit Profile", url: "/account/edit", icon: "lucide:edit" },
   { label: "Settings", url: "/account/settings", icon: "lucide:settings" },
   { label: "Preferences", url: "/account/preferences", icon: "lucide:sliders" },

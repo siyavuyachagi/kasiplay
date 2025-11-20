@@ -176,7 +176,8 @@
                       ? 'bg-linear-to-br from-purple-500 to-pink-600'
                       : 'bg-linear-to-br from-blue-500 to-cyan-600',
                   ]">
-                  {{ getUserInitials(chat.) }}
+                  <!-- {{ getUserInitials() }} -->
+                    {{ `CI` }}
                 </div>
                 <div
                   v-if="chat.isOnline && chat.type !== 'group'"
@@ -420,10 +421,12 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick } from "vue";
 import { useRouter } from "vue-router";
+import { users } from "~/assets/data/application-users.data";
 import { chats } from "~/assets/data/chats.data";
 import type { ApplicationUser } from "~/types/interfaces/application-user";
 import type { Chat } from "~/types/interfaces/chat";
 import type { Message } from "~/types/interfaces/message";
+import type { NavigationItem } from "~/types/ui/navigation-item";
 import { generateRandomUUID } from "~/utilities/generate-random-uuid";
 
 definePageMeta({
@@ -439,12 +442,6 @@ const chatFilters = [
   { label: "Unread", value: "unread", count: 5 },
   { label: "Groups", value: "groups", count: 3 },
 ];
-
-interface Tab {
-  id: string;
-  label: string;
-  badge?: number;
-}
 
 interface Group {
   id: string;
@@ -473,109 +470,8 @@ const userGroups = ref<Group[]>([
   { id: "g2", name: "Gamers", initials: "GM", members: 12 },
 ]);
 
-const onlineUsers: ApplicationUser[] = [
-  {
-    id: "u1",
-    username: "alice",
-    email: "alice@example.com",
-    firstName: "Alice",
-    lastName: "Johnson",
-    avatarUrl: "https://i.pravatar.cc/150?img=5",
-    isActive: true,
-    roles: ["User"],
-    createdAt: "2025-02-10T12:00:00Z",
-    updatedAt: "2025-02-10T12:00:00Z",
-  },
-  {
-    id: "u2",
-    username: "bob",
-    email: "bob@example.com",
-    firstName: "Bob",
-    lastName: "Smith",
-    // avatarUrl: null,
-    isActive: true,
-    roles: ["User"],
-    createdAt: "2025-02-10T12:00:00Z",
-    updatedAt: "2025-02-10T12:00:00Z",
-  },
-
-  // -----------------------------
-  // 6 NEW USERS WITH RANDOM AVATARS
-  // -----------------------------
-
-  {
-    id: "u3",
-    username: "ceejay",
-    email: "ceejay@example.com",
-    firstName: "CeeJay",
-    lastName: "Chagi",
-    avatarUrl: "https://i.pravatar.cc/150?img=68",
-    isActive: true,
-    roles: ["Admin"],
-    createdAt: "2025-02-10T12:00:00Z",
-    updatedAt: "2025-02-10T12:00:00Z",
-  },
-  {
-    id: "u4",
-    username: "lerato",
-    email: "lerato@example.com",
-    firstName: "Lerato",
-    lastName: "Dlamini",
-    // avatarUrl: null,
-    isActive: true,
-    roles: ["User"],
-    createdAt: "2025-02-10T12:00:00Z",
-    updatedAt: "2025-02-10T12:00:00Z",
-  },
-  {
-    id: "u5",
-    username: "kagiso",
-    email: "kagiso@example.com",
-    firstName: "Kagiso",
-    lastName: "Molefe",
-    avatarUrl: "https://i.pravatar.cc/150?img=14",
-    isActive: true,
-    roles: ["Moderator"],
-    createdAt: "2025-02-10T12:00:00Z",
-    updatedAt: "2025-02-10T12:00:00Z",
-  },
-  {
-    id: "u6",
-    username: "thabo",
-    email: "thabo@example.com",
-    firstName: "Thabo",
-    lastName: "Mokoena",
-    // avatarUrl: null,
-    isActive: true,
-    roles: ["User"],
-    createdAt: "2025-02-10T12:00:00Z",
-    updatedAt: "2025-02-10T12:00:00Z",
-  },
-  {
-    id: "u7",
-    username: "sindi",
-    email: "sindi@example.com",
-    firstName: "Sindisiwe",
-    lastName: "Zulu",
-    avatarUrl: "https://i.pravatar.cc/150?img=32",
-    isActive: true,
-    roles: ["User"],
-    createdAt: "2025-02-10T12:00:00Z",
-    updatedAt: "2025-02-10T12:00:00Z",
-  },
-  {
-    id: "u8",
-    username: "jason",
-    email: "jason@example.com",
-    firstName: "Jason",
-    lastName: "Reed",
-    // avatarUrl: null,
-    isActive: true,
-    roles: ["User"],
-    createdAt: "2025-02-10T12:00:00Z",
-    updatedAt: "2025-02-10T12:00:00Z",
-  },
-];
+const onlineUsers = users.filter((x) => x.isOnline);
+console.log("Online uers: ", onlineUsers);
 
 const friendRequests = ref<ApplicationUser[]>([
   {
@@ -612,16 +508,15 @@ const popularGroups = ref<Group[]>([
   { id: "g4", name: "Casual Gamers", initials: "CG", members: 45 },
 ]);
 
-const chatTabs = ref<Tab[]>([
-  { id: "all", label: "All", badge: undefined },
+const chatTabs = ref<NavigationItem[]>([
+  { label: "All", counter: undefined },
   {
-    id: "unread",
     label: "Unread",
-    badge: computed(
+    counter: computed(
       () => chats.value.filter((c) => c.unreadMessages > 0).length
     ).value,
   },
-  { id: "groups", label: "Groups", badge: undefined },
+  { label: "Groups", counter: undefined },
 ]);
 
 // Computed: filter conversations based on chat type + search + activeTab

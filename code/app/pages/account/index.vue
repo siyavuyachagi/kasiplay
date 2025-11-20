@@ -9,106 +9,111 @@
       <div
         class="h-32 sm:h-48 bg-linear-to-r from-blue-500 to-purple-600 relative">
         <button
-          class="absolute flex justify-center top-4 right-4 p-2 bg-black/30 hover:bg-black/50 rounded-lg text-white transition-colors">
+          class="cover-image-btn absolute flex justify-center top-4 right-4 p-2 bg-black/30 hover:bg-black/50 rounded-lg text-white transition-colors">
           <Icon name="lucide:camera" size="20" />
         </button>
       </div>
 
       <!-- Profile Info -->
       <div class="px-6 pb-6">
-        <div class="flex flex-col sm:flex-row sm:items-end sm:space-x-6">
+        <div class="flex flex-col sm:flex-row sm:space-x-6">
           <!-- Avatar -->
-          <div class="relative mt-16 sm:mt-20">
-            <div
-              class="w-32 h-32 rounded-full border-4 border-white dark:border-gray-800 bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-              SC
+          <div class="-mt-16 sm:-mt-20 shrink-0">
+            <div class="relative w-32 h-32">
+              <NuxtImg
+                src="https://i.pravatar.cc/300"
+                alt="Profile Picture"
+                class="w-32 h-32 rounded-full border-4 border-white dark:border-gray-800 shadow-lg object-cover" />
+
+              <!-- Camera Button -->
+              <button
+                class="absolute bottom-1 right-1 flex p-2 bg-blue-600 hover:bg-blue-700 rounded-full text-white shadow-lg transition-colors">
+                <Icon name="lucide:camera" size="16" />
+              </button>
             </div>
-            <button
-              class="absolute flex justify-center bottom-2 right-2 p-2 bg-blue-600 hover:bg-blue-700 rounded-full text-white shadow-lg transition-colors">
-              <Icon name="lucide:camera" size="16" />
-            </button>
           </div>
 
-          <!-- User Info -->
-          <div class="flex-1 mt-4 sm:mt-0 sm:pb-4">
-            <div
-              class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <div class="flex items-center justify-center space-x-2">
-                  <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-                    {{ profile.name }}
-                  </h2>
-                  <Icon
-                    name="lucide:badge-check"
-                    size="18"
-                    class="text-blue-500" />
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mt-1">
-                  @{{ profile.username }}
-                </p>
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full">
+            <!-- Left: Name and Username -->
+            <div class="flex flex-col">
+              <div class="flex items-center space-x-2">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+                  {{ profile.name }}
+                </h2>
+                <Icon
+                  name="lucide:badge-check"
+                  size="18"
+                  class="text-blue-500" />
               </div>
-              <NuxtLink
-                to="/account/edit"
-                class="mt-4 sm:mt-0 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors inline-flex items-center space-x-2">
-                <Icon name="lucide:edit" size="18" />
-                <span>Edit Profile</span>
-              </NuxtLink>
+              <p class="text-gray-500/20 dark:text-gray-400 -mt-0.5">
+                @{{ profile.username }}
+              </p>
             </div>
 
-            <!-- Bio -->
-            <p class="text-gray-700 dark:text-gray-300 mt-4">
-              {{ profile.bio }}
-            </p>
+            <!-- Right: Edit Profile Button -->
+            <NuxtLink
+              to="/account/edit"
+              class="mt-4 w-full sm:w-auto sm:mt-0 sm:ml-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors inline-flex items-center justify-center space-x-2">
+              <Icon name="lucide:edit" size="18" />
+              <span>Edit Profile</span>
+            </NuxtLink>
+          </div>
+        </div>
 
-            <!-- Meta Info -->
-            <div
-              class="flex flex-wrap gap-4 mt-4 text-sm text-gray-600 dark:text-gray-400">
-              <div class="flex items-center space-x-2">
-                <Icon name="lucide:map-pin" size="16" />
-                <span>{{ profile.location }}</span>
+        <!-- User Info -->
+        <div class="flex-1 mt-4 sm:mt-0">
+          <!-- Bio -->
+          <p class="text-gray-700 dark:text-gray-300 mt-4">
+            {{ profile.bio }}
+          </p>
+
+          <!-- Meta Info -->
+          <div
+            class="flex flex-wrap gap-4 mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <div class="flex items-center space-x-2">
+              <Icon name="lucide:map-pin" size="16" />
+              <span>{{ profile.location }}</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <Icon name="lucide:calendar" size="16" />
+              <span>Joined {{ profile.joinDate }}</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <Icon name="lucide:link" size="16" />
+              <a
+                :href="profile.website"
+                target="_blank"
+                class="text-blue-600 dark:text-blue-400 hover:underline">
+                {{ profile.website }}
+              </a>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div
+            class="flex space-x-6 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div>
+              <div class="text-2xl font-bold text-gray-900 dark:text-white">
+                {{ profile.following }}
               </div>
-              <div class="flex items-center space-x-2">
-                <Icon name="lucide:calendar" size="16" />
-                <span>Joined {{ profile.joinDate }}</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <Icon name="lucide:link" size="16" />
-                <a
-                  :href="profile.website"
-                  target="_blank"
-                  class="text-blue-600 dark:text-blue-400 hover:underline">
-                  {{ profile.website }}
-                </a>
+              <div class="text-sm text-gray-500 dark:text-gray-400">
+                Following
               </div>
             </div>
-
-            <!-- Stats -->
-            <div
-              class="flex space-x-6 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-              <div>
-                <div class="text-2xl font-bold text-gray-900 dark:text-white">
-                  {{ profile.following }}
-                </div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">
-                  Following
-                </div>
+            <div>
+              <div class="text-2xl font-bold text-gray-900 dark:text-white">
+                {{ profile.followers }}
               </div>
-              <div>
-                <div class="text-2xl font-bold text-gray-900 dark:text-white">
-                  {{ profile.followers }}
-                </div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">
-                  Followers
-                </div>
+              <div class="text-sm text-gray-500 dark:text-gray-400">
+                Followers
               </div>
-              <div>
-                <div class="text-2xl font-bold text-gray-900 dark:text-white">
-                  {{ profile.posts }}
-                </div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">
-                  Posts
-                </div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-gray-900 dark:text-white">
+                {{ profile.posts }}
               </div>
+              <div class="text-sm text-gray-500 dark:text-gray-400">Posts</div>
             </div>
           </div>
         </div>

@@ -42,15 +42,6 @@ export default defineNuxtConfig({
       "/404",
       "/500"
     ],
-    // include: [
-    //   '/',
-    //   '/clubs',
-    //   '/tournaments',
-    //   '/about',
-    //   '/contact',
-    //   '/privacy',
-    //   '/terms'
-    // ],
     defaults: {
       changefreq: 'weekly',
       priority: 0.7,

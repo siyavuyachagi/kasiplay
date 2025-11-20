@@ -42,11 +42,11 @@ KasiPlay is a modern SaaS platform designed to streamline sports team management
 - **Azure** - Cloud hosting and services
 
 ### Frontend
-- **Vue.js 3** - Progressive JavaScript framework
 - **Nuxt.js** - Vue.js application framework
 - **TypeScript** - Type-safe JavaScript
 - **Tailwind CSS v4** - Utility-first CSS framework
 - **Nuxt Icons** - (`@nuxt/icon` plugin) Has so many modern icon libraries
+- **Other modules:** `@nuxt/icon`, `@nuxt/image`, `@pinia/nuxt`, `@nuxtjs/sitemap`
 
 ### Features
 - **Composition API** - Modern Vue.js development

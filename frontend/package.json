@@ -1,6 +1,6 @@
 {
   "name": "kasiplay.frontend",
-  "description": "",
+  "description": "KasiPlay - Modern SaaS platform streamlining sports team management from grassroots to professional level. Features player registration, squad management, match scheduling, real-time messaging, performance analytics, and public content sharing. Multi-tenant architecture supporting federations, clubs, and their staff. Built with Nuxt.js 4 (Vue 3)",
   "type": "module",
   "private": true,
   "scripts": {

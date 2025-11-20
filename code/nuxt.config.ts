@@ -67,7 +67,7 @@ export default defineNuxtConfig({
       },
       title: "Kasiplay | Your Ultimate Sport Entertainment",
       meta: [
-        { name: "description", content: "Kasiplay - Your Ultimate Entertainment Hub" },
+        { name: "description", content: "Kasiplay - Your Ultimate Sport Entertainment Hub" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { charset: "utf-8" },
         { name: "theme-color", content: "#000000" },

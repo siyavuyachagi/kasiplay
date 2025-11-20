@@ -1,11 +1,11 @@
-import type { Club } from "./Club";
-import type { GoverningBody } from "./GoverningBody";
-import type { MatchRecord } from "./MatchRecord";
+import type { Club } from "./club";
+import type { Federation } from "./federation";
+import type { MatchRecord } from "./match-record";
 
 export interface Competition {
     id: string;
-    governingBodyId: string;
-    governingBody?: GoverningBody;
+    federationId: string;
+    federation?: Federation;
     name: string;
     season: string;
     start: Date;

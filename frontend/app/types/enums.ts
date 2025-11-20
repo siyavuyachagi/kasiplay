@@ -145,41 +145,8 @@ export enum InjurySeverity {
 
 
 //#region M
-export enum MatchCardType {
-  YELLOW_CARD = "yellow_card",
-  RED_CARD = "red_card"
-}
-export enum MatchEventType {
-  KICK_OFF = "kick_off",
-  GOAL = "goal",
-  FOUL = "foul",
-  SUBSTITUTION = "substitution",
-  INJURY = "injury",
-  OFFSIDE = "offside",
-  PENALTY_AWARDED = "penalty_awarded",
-  PENALTY_MISSED = "penalty_missed",
-  PENALTY_SCORED = "penalty_scored",
-  OWN_GOAL = "own_goal",
-  CORNER = "corner",
-  FREE_KICK = "free_kick",
-  THROW_IN = "throw_in",
-  GOAL_KICK = "goal_kick",
-  SAVE = "save",           // goalkeeper save
-  YELLOW_CARD = "yellow_card", // sometimes separated from FOUL/CARD
-  RED_CARD = "red_card",
-  HALF_TIME = "half_time",
-  FULL_TIME = "full_time",
-  EXTRA_TIME_START = "extra_time_start",
-  EXTRA_TIME_END = "extra_time_end",
-  PENALTY_SHOOTOUT_START = "penalty_shootout_start",
-  PENALTY_SHOOTOUT_END = "penalty_shootout_end",
-  VIDEO_ASSIST_DECISION = "var_decision", // VAR/Video review events
-}
 
-export enum MatchLegs {
-  SINGLE_LEG = 'single-leg',           // 1 game decides winner
-  TWO_LEG = 'two-leg',                 // Home & away (aggregate)
-}
+
 
 export enum MatchResult { //Optional until match is COMPLETED
   WIN = "win",
@@ -188,20 +155,7 @@ export enum MatchResult { //Optional until match is COMPLETED
   FORFEIT = "forfeit"
 }
 
-export enum MatchStatus {
-  SCHEDULED = 'scheduled',
-  LIVE = 'live',
-  COMPLETED = 'completed',
-  POSTPONED = 'postponed',
-  CANCELLED = 'cancelled',
-  ABANDONED = 'abandoned'
-}
 
-export enum MatchType {
-  LEAGUE = 'league',
-  CUP = 'cup',
-  FRIENDLY = 'friendly',
-}
 //#endregion
 
 //#region O
@@ -241,28 +195,6 @@ export enum PaymentFrequency {
   YEARLY = "yearly",
 }
 
-export enum PlayerPosition {
-  GOALKEEPER = 'GK',
-  RIGHT_BACK = 'RB',
-  LEFT_BACK = 'LB',
-  CENTER_BACK = 'CB',
-  DEFENSIVE_MIDFIELDER = 'CDM',
-  CENTRAL_MIDFIELDER = 'CM',
-  ATTACKING_MIDFIELDER = 'CAM',
-  RIGHT_WINGER = 'RW',
-  LEFT_WINGER = 'LW',
-  STRIKER = 'ST',
-  CENTER_FORWARD = 'CF'
-}
-
-export enum PlayerStatus {
-  ACTIVE = 'active',
-  INJURED = 'injured',
-  SUSPENDED = 'suspended',
-  LOANED_OUT = 'loaned_out',
-  RETIRED = 'retired',
-  RELEASED = 'released'
-}
 
 export enum PlayerTransferType {
   PURCHASE = 'purchase',

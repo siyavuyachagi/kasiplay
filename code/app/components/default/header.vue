@@ -4,7 +4,7 @@
     <DefaultHeaderNavigations />
 
     <!-- Live Match Banner -->
-    <DefaultLiveMatchBanner />
+    <!-- <DefaultLiveMatchBanner /> -->
   </header>
 </template>
 

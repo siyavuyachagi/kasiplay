@@ -1,5 +1,7 @@
 import type { Club } from "./club";
 import type { Competition } from "./competition";
+import type { CupRound } from "./cup-round";
+import type { Team } from "./team";
 
 export interface Fixture {
     id: string;
@@ -7,18 +9,19 @@ export interface Fixture {
     competitionId: string;
     competition?: Competition;
 
-    homeClubId: string;
-    homeClub?: Club;
+    homeTeamId: string;
+    homeTeam?: Team;
 
-    awayClubId: string;
-    awayClub?: Club;
+    awayTeamId: string;
+    awayTeam?: Team;
 
-    date: Date;
+    matchDate: string | Date;
     venue?: string;
 
     // Context info
     matchday?: number;   // useful in leagues (e.g. Matchday 1)
     cupRoundId?: string;      // useful in cups/tournaments (e.g. "Quarterfinal")
+    cupRound?: CupRound
 
     // System metadata
     createdAt: Date;

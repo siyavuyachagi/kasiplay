@@ -67,22 +67,8 @@ export enum ContractType {
   SHORT_TERM_ENGAGEMENT = "short_term_engagement"
 }
 
-export enum CupBracketStyle {
-  TRADITIONAL = 'traditional',          // Vertical progression
-  MIRRORED = 'mirrored',               // Left/right converging to center
-  LADDER = 'ladder'                    // Step-ladder format
-}
 
-export enum CupFormat {
-  SINGLE_ELIMINATION = 'single-elimination',
-  DOUBLE_ELIMINATION = 'double-elimination',
-}
 
-export enum CupRoundBracketSide {
-  RIGHT = "right",
-  LEFT = "left",
-  CENTER = "center"
-}
 //#endregion
 
 

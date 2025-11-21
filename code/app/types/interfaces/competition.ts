@@ -8,13 +8,13 @@ export interface Competition {
     federation?: Federation;
     name: string;
     season: string;
-    start: Date;
-    end?: Date;
-    matchRecords: MatchRecord[];
+    startDate: string | Date;
+    endDate?: string | Date;
+    matchRecords?: MatchRecord[];
     winnerClubId?: string;
     winnerClub?: Club;
-    
+
     // System metadata 
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string | Date;
+    updatedAt: string | Date;
 }

@@ -1,22 +1,19 @@
 import type { ApplicationUser } from "./application-user";
 import type { Club } from "./club";
-import type { Comment } from "./comment";
 import type { Federation } from "./federation";
+import type { Post } from "./post";
 
-export interface Post {
+export interface Comment {
     id: string;
 
-    authorId: string;
+    // FK's
+    postId: string;
+    post?: Post;
+
     author: Federation | Club | ApplicationUser;
-    
     content: string;
-    hashTags?: string[];
-    
-    likes: number | ApplicationUser[];
-    comments: Comment[];
-    shares: number | ApplicationUser[];
 
     // metadata
     createdAt: string | Date;
-    updatedAt?: string | Date;
+    updatedAt: string | Date;
 }

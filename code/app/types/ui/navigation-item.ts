@@ -1,4 +1,5 @@
 export interface NavigationItem {
+    key?: string | number;
     label: string;
     url?: string;
     isActive?: boolean;

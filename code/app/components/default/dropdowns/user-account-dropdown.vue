@@ -128,7 +128,7 @@ const userOrganizations: NavigationItem[] = [
 ];
 
 const user = ref({
-  name: "John Doe",
+  name: "Siyavuya Chagi",
   avatar: "/images/avatar.jpg",
 });
 

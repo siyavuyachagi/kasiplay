@@ -5,7 +5,7 @@
       'fixed lg:static',
       'top-0 bottom-0 right-0 lg:top-auto lg:bottom-auto',
       'w-80 lg:w-auto',
-      'bg-white dark:bg-gray-800 lg:bg-transparent',
+      'lg:bg-transparent',
       'border-l lg:border-0 border-gray-200 dark:border-gray-700',
       'transition-transform duration-300 lg:transition-none',
       isOpen

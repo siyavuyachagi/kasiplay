@@ -14,7 +14,7 @@
           <a href="/privacy" class="hover:underline">Privacy</a>
         </div>
         <p class="text-xs text-gray-400 dark:text-gray-500">
-          © {{ new Date().getFullYear() }} KasiPlay - Kinetic Studios
+          © 2025 - {{ new Date().getFullYear() }} KasiPlay - Kinetic Studios
         </p>
       </div>
     </div>

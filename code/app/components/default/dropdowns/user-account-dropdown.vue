@@ -122,9 +122,9 @@ const accountLinks: NavigationItem[] = [
 ];
 
 const userOrganizations: NavigationItem[] = [
-  { label: "SAF Association", url: "/saf-assoc" },
-  { label: "Home Brothers FC", url: "/home-brothers-fc" },
-  { label: "Orlando Pirates FC", url: "/orlando.pirate.club" },
+  { label: "SAF Association", url: "/dashboard" },
+  { label: "Home Brothers FC", url: "/dashboard" },
+  { label: "Orlando Pirates FC", url: "/dashboard" },
 ];
 
 const user = ref({

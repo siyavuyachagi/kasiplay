@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Header -->
-    <UiDashboardHeader @toggle-sidebar="toggleSidebar" />
+    <DashboardHeader @toggle-sidebar="toggleSidebar" />
     
     <!-- Main Layout with Sidebar -->
     <div class="flex">
       <!-- Sidebar -->
-      <UiDashboardSidebar :is-mobile-open="isSidebarOpen" @close="closeSidebar" />
+      <DashboardSidebar :is-mobile-open="isSidebarOpen" @close="closeSidebar" />
       
       <!-- Main Content -->
       <main class="flex-1 w-full lg:w-auto p-6">
@@ -15,7 +15,7 @@
     </div>
     
     <!-- Footer -->
-    <UiDashboardFooter />
+    <DashboardFooter />
   </div>
 </template>
 
